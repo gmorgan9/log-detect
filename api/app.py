@@ -88,22 +88,34 @@ def logout():
     # Redirect the user to the login page
     return redirect('https://logdetect.morganserver.com/core/entry/login')
 
-def insert_snort_alert(data):
-    # connection = create_db_connection()
-    cursor = conn.cursor()
-    # query = """
-    #     INSERT INTO snort_alerts (seconds, action, class, dir, dst_addr, dst_ap, dst_port, eth_dst,
-    #                               eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls,
-    #                               pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service,
-    #                               sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len,
-    #                               tcp_seq, tcp_win, tos, ttl, vlan, timestamp)
-    #     VALUES (%(seconds)s, %(action)s, %(class)s, %(dir)s, %(dst_addr)s, %(dst_ap)s, %(dst_port)s, %(eth_dst)s,
-    #             %(eth_len)s, %(eth_src)s, %(eth_type)s, %(gid)s, %(iface)s, %(ip_id)s, %(ip_len)s, %(msg)s, %(mpls)s,
-    #             %(pkt_gen)s, %(pkt_len)s, %(pkt_num)s, %(priority)s, %(proto)s, %(rev)s, %(rule)s, %(service)s,
-    #             %(sid)s, %(src_addr)s, %(src_ap)s, %(src_port)s, %(tcp_ack)s, %(tcp_flags)s, %(tcp_len)s,
-    #             %(tcp_seq)s, %(tcp_win)s, %(tos)s, %(ttl)s, %(vlan)s, %(timestamp)s)
-    # """
+# def insert_snort_alert(data):
+#     # connection = create_db_connection()
+#     cursor = conn.cursor()
+#     # query = """
+#     #     INSERT INTO snort_alerts (seconds, action, class, dir, dst_addr, dst_ap, dst_port, eth_dst,
+#     #                               eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls,
+#     #                               pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service,
+#     #                               sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len,
+#     #                               tcp_seq, tcp_win, tos, ttl, vlan, timestamp)
+#     #     VALUES (%(seconds)s, %(action)s, %(class)s, %(dir)s, %(dst_addr)s, %(dst_ap)s, %(dst_port)s, %(eth_dst)s,
+#     #             %(eth_len)s, %(eth_src)s, %(eth_type)s, %(gid)s, %(iface)s, %(ip_id)s, %(ip_len)s, %(msg)s, %(mpls)s,
+#     #             %(pkt_gen)s, %(pkt_len)s, %(pkt_num)s, %(priority)s, %(proto)s, %(rev)s, %(rule)s, %(service)s,
+#     #             %(sid)s, %(src_addr)s, %(src_ap)s, %(src_port)s, %(tcp_ack)s, %(tcp_flags)s, %(tcp_len)s,
+#     #             %(tcp_seq)s, %(tcp_win)s, %(tos)s, %(ttl)s, %(vlan)s, %(timestamp)s)
+#     # """
 
+#     query = """
+#         INSERT INTO alerts (seconds, action, class, timestamp)
+#         VALUES (%(seconds)s, %(action)s, %(class)s, %(timestamp)s)
+#     """
+#     cursor.execute(query, data)
+#     conn.commit()
+#     cursor.close()
+#     conn.close()
+
+def insert_snort_alert(data, conn):
+    cursor = conn.cursor()
+    
     query = """
         INSERT INTO alerts (seconds, action, class, timestamp)
         VALUES (%(seconds)s, %(action)s, %(class)s, %(timestamp)s)
@@ -111,7 +123,6 @@ def insert_snort_alert(data):
     cursor.execute(query, data)
     conn.commit()
     cursor.close()
-    conn.close()
 
 
 # SNORT ALERTS
@@ -123,7 +134,7 @@ def process_snort_alerts():
         with open('/var/log/snort/alert_json.txt', 'r') as file:
             alerts = json.load(file)
 
-        # connection = create_db_connection()
+        # connection = create_db_connection()  # Assuming you have a function to create the database connection
 
         for alert in alerts:
             insert_snort_alert(alert, conn)
@@ -133,6 +144,7 @@ def process_snort_alerts():
         return 'Snort alert data added to the database.', 200
     except Exception as e:
         return str(e), 400
+
 
 
 if __name__ == '__main__':
