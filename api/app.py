@@ -44,6 +44,32 @@ conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin1
 #     return jsonify(result)
 
 # format: [[1,"63724","garrett","test","garrett","morgan",0,1,"Fri, 12 May 2023 04:29:27 GMT","pending",1]]
+# @app.route('/api/data', methods=['GET'])
+# def get_data():
+#     # Fetch data from the database
+#     cur = conn.cursor()
+#     cur.execute("SELECT * FROM users;")
+#     data = cur.fetchall()
+#     cur.close()
+
+#     # Convert the data to a list of dictionaries
+#     result = []
+#     for row in data:
+#         account_type = "admin" if row[6] == 1 else "standard"
+#         capitalized_f_name = row[4].capitalize()
+#         capitalized_l_name = row[5].capitalize()
+#         full_name = capitalized_f_name + ' ' + capitalized_l_name
+#         result.append({
+#             'id': row[1],
+#             'name': full_name,
+#             'username': row[2],
+#             'account_type': account_type,
+#             'status': row[9]
+#         })
+
+#     # Return the data as JSON
+#     return jsonify(result)
+
 @app.route('/api/data', methods=['GET'])
 def get_data():
     # Fetch data from the database
@@ -67,8 +93,34 @@ def get_data():
             'status': row[9]
         })
 
-    # Return the data as JSON
-    return jsonify(result)
+    # Generate HTML table markup
+    table_html = '<table class="table table-striped mx-auto" style="width: 98%;">'
+    table_html += '<thead>'
+    table_html += '<tr>'
+    table_html += '<th class="text-center" style="width: 1px !important;" scope="col"></th>'
+    table_html += '<th class=" col-sm-1" scope="col">ID</th>'
+    table_html += '<th class="" scope="col">Name</th>'
+    table_html += '<th class="" scope="col">Username</th>'
+    table_html += '<th class="" scope="col">Account Type</th>'
+    table_html += '<th class="" scope="col">Status</th>'
+    table_html += '</tr>'
+    table_html += '</thead>'
+    table_html += '<tbody>'
+    for row in result:
+        table_html += '<tr>'
+        table_html += '<td class="text-center">'
+        table_html += '<a class="text-decoration-none text-secondary" href=""><i class="bi bi-eye"></i></a>'
+        table_html += '</td>'
+        table_html += f'<td class=""><a class="text-decoration-none" href="">#{row["id"]}</a></td>'
+        table_html += f'<td>{row["name"]}</td>'
+        table_html += f'<td>{row["username"]}</td>'
+        table_html += f'<td>{row["account_type"]}</td>'
+        table_html += f'<td><span class="badge text-bg-primary">{row["status"]}</span></td>'
+        table_html += '</tr>'
+    table_html += '</tbody>'
+    table_html += '</table>'
+
+    return table_html
 
 @app.route('/api/login', methods=['POST'])
 def login():
