@@ -113,17 +113,110 @@ def logout():
 #     cursor.close()
 #     conn.close()
 
+import json
+
+json_data = '''
+{
+  "seconds": 1684013469,
+  "action": "allow",
+  "class": "Attempt to login by a known username and password",
+  "dir": "C2S",
+  "dst_addr": "192.168.1.183",
+  "dst_ap": "192.168.1.183:22",
+  "dst_port": 22,
+  "eth_dst": "06:B0:F8:9F:00:B7",
+  "eth_len": 78,
+  "eth_src": "A4:83:E7:5B:F5:9F",
+  "eth_type": "0x800",
+  "gid": 1,
+  "iface": "eth0",
+  "ip_id": 0,
+  "ip_len": 44,
+  "msg": "SSH Login Attempt",
+  "mpls": 0,
+  "pkt_gen": "raw",
+  "pkt_len": 64,
+  "pkt_num": 5263650,
+  "priority": 3,
+  "proto": "TCP",
+  "rev": 0,
+  "rule": "1:1000001:0",
+  "service": "unknown",
+  "sid": 1000001,
+  "src_addr": "192.168.1.185",
+  "src_ap": "192.168.1.185:61172",
+  "src_port": 61172,
+  "tcp_ack": 0,
+  "tcp_flags": "******S*",
+  "tcp_len": 44,
+  "tcp_seq": 2522252635,
+  "tcp_win": 65535,
+  "tos": 0,
+  "ttl": 64,
+  "vlan": 0,
+  "timestamp": "05/13-21:31:09.052870"
+}
+'''
+
+data = json.loads(json_data)
+
+
 @app.route('/snort-alerts', methods=['POST'])
 def receive_snort_alerts():
-    data = request.json  # Parse the JSON data sent from the client
-    insert_snort_alert(data)  # Insert the data into the PostgreSQL database
-    return "Snort alerts received and stored successfully!"
+    # Define the cursor to execute PostgreSQL commands
+    cur = conn.cursor()
+
+    # Open the Snort alerts file and read each line
+    with open('snort_alerts.json', 'r') as f:
+        for line in f:
+            # Parse the JSON data
+            data = json.loads(line)
+    
+            # Extract the required fields from the JSON data
+            seconds = data['seconds']
+            action = data['action']
+            class_ = data['class']
+            dir_ = data['dir']
+            dst_addr = data['dst_addr']
+            dst_ap = data['dst_ap']
+            dst_port = data['dst_port']
+            eth_dst = data['eth_dst']
+            eth_len = data['eth_len']
+            eth_src = data['eth_src']
+            eth_type = data['eth_type']
+            gid = data['gid']
+            iface = data['iface']
+            ip_id = data['ip_id']
+            ip_len = data['ip_len']
+            msg = data['msg']
+            mpls = data['mpls']
+            pkt_gen = data['pkt_gen']
+            pkt_len = data['pkt_len']
+            pkt_num = data['pkt_num']
+            priority = data['priority']
+            proto = data['proto']
+            rev = data['rev']
+            rule = data['rule']
+            service = data['service']
+            sid = data['sid']
+            src_addr = data['src_addr']
+            src_ap = data['src_ap']
+            src_port = data['src_port']
+            tcp_ack = data['tcp_ack']
+            tcp_flags = data['tcp_flags']
+            tcp_len = data['tcp_len']
+            tcp_seq = data['tcp_seq']
+            tcp_win = data['tcp_win']
+            tos = data['tos']
+            ttl = data['ttl']
+            vlan = data['vlan']
+            timestamp = data['timestamp']
 
 def insert_snort_alert(data):
     # Create an SQL INSERT statement
     insert_query = """
         INSERT INTO alerts (seconds, action, class, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, timestamp)
-        VALUES (%(seconds)s, %(action)s, %(class)s, %(dir)s, %(dst_addr)s, %(dst_ap)s, %(dst_port)s, %(eth_dst)s, %(eth_len)s, %(eth_src)s, %(eth_type)s, %(gid)s, %(iface)s, %(ip_id)s, %(ip_len)s, %(msg)s, %(mpls)s, %(pkt_gen)s, %(pkt_len)s, %(pkt_num)s, %(priority)s, %(proto)s, %(rev)s, %(rule)s, %(service)s, %(sid)s, %(src_addr)s, %(src_ap)s, %(src_port)s, %(tcp_ack)s, %(tcp_flags)s, %(tcp_len)s, %(tcp_seq)s, %(tcp_win)s, %(tos)s, %(ttl)s, %(vlan)s, %(timestamp)s)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
 
     # Execute the INSERT statement
