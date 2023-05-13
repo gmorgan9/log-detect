@@ -56,11 +56,12 @@ def get_data():
     result = []
     for row in data:
         account_type = "admin" if row[6] == 1 else "standard"
-        full_name = row[4] + ' ' + row[5]
-        capitalized_full_name = full_name.capitalize()
+        capitalized_f_name = row[4].capitalize()
+        capitalized_l_name = row[5].capitalize()
+        full_name = capitalized_f_name + ' ' + capitalized_l_name
         result.append({
             'id': row[1],
-            'name': capitalized_full_name,
+            'name': full_name,
             'username': row[2],
             'account_type': account_type,
             'status': row[9]
