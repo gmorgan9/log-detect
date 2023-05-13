@@ -169,37 +169,38 @@
       </table>
       
       <script>
-          // Fetch data from the API and populate the table
-          fetch('https://ld-api.morganserver.com/api/data')
-              .then(response => response.json())
-              .then(data => {
-                  const tableBody = document.getElementById('data-table-body');
-      
-                  // Clear existing table rows
-                  tableBody.innerHTML = '';
-      
-                  // Iterate over the data and create table rows
-                  data.forEach(row => {
-                      const tr = document.createElement('tr');
-                      tr.innerHTML = `
-                          <td class="text-center">
-                              <a class="text-decoration-none text-secondary" href=""><i class="bi bi-eye"></i></a>
-                          </td>
-                          <td class="">
-                              <a class="text-decoration-none" href="">#${row.id}</a>
-                          </td>
-                          <td>${row.name}</td>
-                          <td>${row.username}</td>
-                          <td>${row.account_type}</td>
-                          <td><span class="badge text-bg-primary">${row.status}</span></td>
-                      `;
-                      tableBody.appendChild(tr);
-                  });
-              })
-              .catch(error => {
-                  console.error('Error fetching data:', error);
-              });
-      </script>
+        // Fetch data from the API and populate the table
+        fetch('https://ld-api.morganserver.com/api/data')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('data-table-body');
+    
+                // Clear existing table rows
+                tableBody.innerHTML = '';
+    
+                // Iterate over the data and create table rows
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td class="text-center">
+                            <a class="text-decoration-none text-secondary" href=""><i class="bi bi-eye"></i></a>
+                        </td>
+                        <td class="">
+                            <a class="text-decoration-none" href="">#${row.id}</a>
+                        </td>
+                        <td>${row.name}</td>
+                        <td>${row.username}</td>
+                        <td>${row.account_type}</td>
+                        <td><span class="badge text-bg-primary">${row.status}</span></td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
+    
       
   
      
