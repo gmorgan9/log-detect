@@ -113,6 +113,23 @@ def logout():
 #     cursor.close()
 #     conn.close()
 
+import requests
+
+data = {
+    "seconds": "1234",
+    "action": "alert",
+    "class": "web-application-attack",
+    "timestamp": "2022-05-13 14:30:00"
+}
+
+url = "http://ld-api.morganserver.com/snort-alerts"
+headers = {"Content-Type": "application/json"}
+
+response = requests.post(url, headers=headers, data=json.dumps(data))
+
+print(response.status_code)
+print(response.text)
+
 def insert_snort_alert(data, conn):
     cursor = conn.cursor()
 
