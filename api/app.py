@@ -30,7 +30,7 @@ def get_data():
     cur.close()
 
     # Return the data as JSON
-    return render_template('https://logdetect.morganserver.com/heart/admin/', users=data)
+    return jsonify(users=data)
 
 @app.route('/api/login', methods=['POST'])
 def login():
