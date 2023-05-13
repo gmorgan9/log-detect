@@ -10,6 +10,17 @@ Session(app)
 
 conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
 
+# @app.route('/api/data', methods=['GET'])
+# def get_data():
+#     # Fetch data from the database
+#     cur = conn.cursor()
+#     cur.execute("SELECT * FROM users;")
+#     data = cur.fetchall()
+#     cur.close()
+
+#     # Return the data as JSON
+#     return jsonify(data)
+
 @app.route('/api/data', methods=['GET'])
 def get_data():
     # Fetch data from the database
@@ -18,19 +29,19 @@ def get_data():
     data = cur.fetchall()
     cur.close()
 
-    # Return the data as JSON
-    return jsonify(data)
+    # Convert the data to a list of dictionaries
+    result = []
+    for row in data:
+        result.append({
+            'id': row[0],
+            'name': row[1],
+            'username': row[2],
+            'account_type': row[3],
+            'status': row[4]
+        })
 
-@app.route('/api/users', methods=['GET'])
-def get_data():
-    # Fetch data from the database
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM users;")
-    data = cur.fetchall()
-    cur.close()
-
     # Return the data as JSON
-    return jsonify(users=data)
+    return jsonify(result)
 
 @app.route('/api/login', methods=['POST'])
 def login():
