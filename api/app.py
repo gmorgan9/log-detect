@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, redirect, session
+from flask import Flask, request, jsonify, redirect, session, render_template
 import psycopg2
 from flask_session import Session
 
@@ -20,6 +20,17 @@ def get_data():
 
     # Return the data as JSON
     return jsonify(data)
+
+@app.route('/api/users', methods=['GET'])
+def get_data():
+    # Fetch data from the database
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users;")
+    data = cur.fetchall()
+    cur.close()
+
+    # Return the data as JSON
+    return render_template('users.html', users=data)
 
 @app.route('/api/login', methods=['POST'])
 def login():
