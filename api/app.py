@@ -62,8 +62,8 @@ def get_data():
             'status': row[4]
         })
 
-    # Render the HTML template with the data
-    return render_template('users.html', users=result)
+    # Return the data as JSON
+    return jsonify(result)
 
 @app.route('/api/login', methods=['POST'])
 def login():
