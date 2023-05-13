@@ -43,6 +43,7 @@ conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin1
 #     # Return the data as JSON
 #     return jsonify(result)
 
+# format: [[1,"63724","garrett","test","garrett","morgan",0,1,"Fri, 12 May 2023 04:29:27 GMT","pending",1]]
 @app.route('/api/data', methods=['GET'])
 def get_data():
     # Fetch data from the database
@@ -54,12 +55,13 @@ def get_data():
     # Convert the data to a list of dictionaries
     result = []
     for row in data:
+        account_type = "admin" if row[6] == 1 else "standard"
         result.append({
-            'id': row[0],
-            'name': row[1],
+            'id': row[1],
+            'name': row[4] + row[5],
             'username': row[2],
-            'account_type': row[3],
-            'status': row[4]
+            'account_type': account_type,
+            'status': row[9]
         })
 
     # Return the data as JSON
