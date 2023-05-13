@@ -46,7 +46,7 @@ conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin1
 @app.route('/table', methods=['GET'])
 def display_table():
     # Retrieve data from the API endpoint
-    response = requests.get(url='http://localhost:5000/api/data')
+    response = requests.get(url='http://ld-api.morganserver.com/api/data')
     data = response.json()
 
     # Render the data in an HTML table
