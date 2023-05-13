@@ -170,11 +170,18 @@
         
         <script>
           // Fetch data from the API
-          fetch('https://ld-api.morganserver.com/api/data')
-            .then(response => response.json())
-            .then(data => {
-              // Assuming the API response is an array of objects
-              var apiData = data;
+  fetch('https://ld-api.morganserver.com/api/data')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('API Data:', data);
+
+      // Assuming the API response is an array of objects
+      var apiData = data;
         
               var tableBody = document.getElementById('table-body');
               apiData.forEach(function (item) {
