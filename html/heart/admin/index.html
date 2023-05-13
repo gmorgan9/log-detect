@@ -166,7 +166,7 @@
       </table>
   
       <script>
-          fetch('/api/data')
+          fetch('https://ld-api.morganserver.com/api/data')
               .then(response => response.json())
               .then(data => {
                   const tableBody = document.querySelector('#myTable tbody');
