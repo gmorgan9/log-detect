@@ -21,36 +21,27 @@ conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin1
 #     # Return the data as JSON
 #     return jsonify(data)
 
-# @app.route('/api/data', methods=['GET'])
-# def get_data():
-#     # Fetch data from the database
-#     cur = conn.cursor()
-#     cur.execute("SELECT * FROM users;")
-#     data = cur.fetchall()
-#     cur.close()
+@app.route('/api/data', methods=['GET'])
+def get_data():
+    # Fetch data from the database
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users;")
+    data = cur.fetchall()
+    cur.close()
 
-#     # Convert the data to a list of dictionaries
-#     result = []
-#     for row in data:
-#         result.append({
-#             'id': row[0],
-#             'name': row[1],
-#             'username': row[2],
-#             'account_type': row[3],
-#             'status': row[4]
-#         })
+    # Convert the data to a list of dictionaries
+    result = []
+    for row in data:
+        result.append({
+            'id': row[0],
+            'name': row[1],
+            'username': row[2],
+            'account_type': row[3],
+            'status': row[4]
+        })
 
-#     # Return the data as JSON
-#     return jsonify(result)
-
-@app.route('/table', methods=['GET'])
-def display_table():
-    # Retrieve data from the API endpoint
-    response = requests.get(url='http://ld-api.morganserver.com/api/data')
-    data = response.json()
-
-    # Render the data in an HTML table
-    return render_template('table.html', users=data)
+    # Return the data as JSON
+    return jsonify(result)
 
 @app.route('/api/login', methods=['POST'])
 def login():
