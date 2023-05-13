@@ -169,54 +169,63 @@
         </table>
         
         <script>
-          // Assuming you have fetched the API data and stored it in a variable called 'apiData'
-          var apiData = [{"account_type":"standard","id":"63724","name":"Garrett Morgan","status":"pending","username":"garrett"}];
+          // Fetch data from the API
+          fetch('https://ld-api.morganserver.com/api/data')
+            .then(response => response.json())
+            .then(data => {
+              // Assuming the API response is an array of objects
+              var apiData = data;
         
-          var tableBody = document.getElementById('table-body');
-          apiData.forEach(function (item) {
-            var row = document.createElement('tr');
+              var tableBody = document.getElementById('table-body');
+              apiData.forEach(function (item) {
+                var row = document.createElement('tr');
         
-            var viewCell = document.createElement('td');
-            viewCell.className = 'text-center';
-            var viewLink = document.createElement('a');
-            viewLink.className = 'text-decoration-none text-secondary';
-            viewLink.href = ''; // Add the appropriate URL for viewing details
-            var viewIcon = document.createElement('i');
-            viewIcon.className = 'bi bi-eye';
-            viewLink.appendChild(viewIcon);
-            viewCell.appendChild(viewLink);
-            row.appendChild(viewCell);
+                var viewCell = document.createElement('td');
+                viewCell.className = 'text-center';
+                var viewLink = document.createElement('a');
+                viewLink.className = 'text-decoration-none text-secondary';
+                viewLink.href = ''; // Add the appropriate URL for viewing details
+                var viewIcon = document.createElement('i');
+                viewIcon.className = 'bi bi-eye';
+                viewLink.appendChild(viewIcon);
+                viewCell.appendChild(viewLink);
+                row.appendChild(viewCell);
         
-            var idCell = document.createElement('td');
-            var idLink = document.createElement('a');
-            idLink.className = 'text-decoration-none';
-            idLink.href = ''; // Add the appropriate URL for the ID
-            idLink.textContent = '#' + item.id;
-            idCell.appendChild(idLink);
-            row.appendChild(idCell);
+                var idCell = document.createElement('td');
+                var idLink = document.createElement('a');
+                idLink.className = 'text-decoration-none';
+                idLink.href = ''; // Add the appropriate URL for the ID
+                idLink.textContent = '#' + item.id;
+                idCell.appendChild(idLink);
+                row.appendChild(idCell);
         
-            var nameCell = document.createElement('td');
-            nameCell.textContent = item.name;
-            row.appendChild(nameCell);
+                var nameCell = document.createElement('td');
+                nameCell.textContent = item.name;
+                row.appendChild(nameCell);
         
-            var usernameCell = document.createElement('td');
-            usernameCell.textContent = item.username;
-            row.appendChild(usernameCell);
+                var usernameCell = document.createElement('td');
+                usernameCell.textContent = item.username;
+                row.appendChild(usernameCell);
         
-            var accountTypeCell = document.createElement('td');
-            accountTypeCell.textContent = item.account_type;
-            row.appendChild(accountTypeCell);
+                var accountTypeCell = document.createElement('td');
+                accountTypeCell.textContent = item.account_type;
+                row.appendChild(accountTypeCell);
         
-            var statusCell = document.createElement('td');
-            var statusSpan = document.createElement('span');
-            statusSpan.className = 'badge text-bg-primary';
-            statusSpan.textContent = item.status;
-            statusCell.appendChild(statusSpan);
-            row.appendChild(statusCell);
+                var statusCell = document.createElement('td');
+                var statusSpan = document.createElement('span');
+                statusSpan.className = 'badge text-bg-primary';
+                statusSpan.textContent = item.status;
+                statusCell.appendChild(statusSpan);
+                row.appendChild(statusCell);
         
-            tableBody.appendChild(row);
-          });
+                tableBody.appendChild(row);
+              });
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
         </script>
+        
         
 
     </div>
