@@ -116,9 +116,13 @@ def logout():
 def insert_snort_alert(data, conn):
     cursor = conn.cursor()
     
+    # query = """
+    #     INSERT INTO alerts (seconds, action, class, timestamp)
+    #     VALUES (%(seconds)s, %(action)s, %(class)s, %(timestamp)s)
+    # """
     query = """
         INSERT INTO alerts (seconds, action, class, timestamp)
-        VALUES (%(seconds)s, %(action)s, %(class)s, %(timestamp)s)
+        VALUES ('1234', 'asdf', 'sdf', 'asdf')
     """
     cursor.execute(query, data)
     conn.commit()
