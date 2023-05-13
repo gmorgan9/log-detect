@@ -95,32 +95,37 @@ import json
 def insert_alert():
     # Read the JSON data from the file
     with open('/var/log/snort/alert_json.txt', 'r') as file:
-        json_data = json.load(file)
+        for line in file:
+            try:
+                json_data = json.loads(line)
 
-    # Extract the data from the JSON object
-    seconds = json_data['seconds']
-    action = json_data['action']
-    class_name = json_data['class']
-    # Extract other fields as needed
+                # Extract the data from the JSON object
+                seconds = json_data['seconds']
+                action = json_data['action']
+                class_name = json_data['class']
+                # Extract other fields as needed
 
+                # Create a cursor object to interact with the database
+                cursor = conn.cursor()
 
-    # Create a cursor object to interact with the database
-    cursor = conn.cursor()
+                # Define the SQL query to insert the data into the database
+                insert_query = "INSERT INTO alerts (seconds, action, class_name) VALUES (%s, %s, %s)"
 
-    # Define the SQL query to insert the data into the database
-    insert_query = "INSERT INTO alerts (seconds, action, class_name) VALUES (%s, %s, %s)"
+                # Execute the SQL query with the data
+                cursor.execute(insert_query, (seconds, action, class_name))
 
-    # Execute the SQL query with the data
-    cursor.execute(insert_query, (seconds, action, class_name))
+                # Commit the changes to the database
+                conn.commit()
 
-    # Commit the changes to the database
-    conn.commit()
+                # Close the cursor and database connection
+                cursor.close()
+                conn.close()
 
-    # Close the cursor and database connection
-    cursor.close()
-    conn.close()
+            except json.JSONDecodeError:
+                # Handle JSON decoding errors if any
+                continue
 
-    return 'Alert inserted into the database'
+    return 'Alerts inserted into the database'
 
 
 
