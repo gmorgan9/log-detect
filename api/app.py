@@ -115,18 +115,15 @@ def logout():
 
 def insert_snort_alert(data, conn):
     cursor = conn.cursor()
-    
-    # query = """
-    #     INSERT INTO alerts (seconds, action, class, timestamp)
-    #     VALUES (%(seconds)s, %(action)s, %(class)s, %(timestamp)s)
-    # """
+
     query = """
         INSERT INTO alerts (seconds, action, class, timestamp)
-        VALUES ('1234', 'asdf', 'sdf', 'asdf')
+        VALUES (%(seconds)s, %(action)s, %(class)s, %(timestamp)s)
     """
     cursor.execute(query, data)
     conn.commit()
     cursor.close()
+
 
 
 # SNORT ALERTS
@@ -137,8 +134,6 @@ def process_snort_alerts():
     try:
         with open('/var/log/snort/alert_json.txt', 'r') as file:
             alerts = json.load(file)
-
-        # connection = create_db_connection()  # Assuming you have a function to create the database connection
 
         for alert in alerts:
             insert_snort_alert(alert, conn)
