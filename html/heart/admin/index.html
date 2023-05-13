@@ -151,7 +151,7 @@
             </tr>
           </tbody>
         </table> -->
-        <table class="table table-striped mx-auto" style="width: 98%;">
+        <table id="user-table" class="table table-striped mx-auto" style="width: 98%;">
           <thead>
               <tr>
                   <th class="text-center" style="width: 1px !important;" scope="col"></th>
@@ -162,24 +162,63 @@
                   <th class="" scope="col">Status</th>
               </tr>
           </thead>
-          <tbody>
-              {% for user in users %}
-              <tr>
-                  <td class="text-center">
-                      <a class="text-decoration-none text-secondary" href=""><i class="bi bi-eye"></i></a>
-                  </td>
-                  <td class="">
-                      <a class="text-decoration-none" href="">{{ user['id'] }}</a>
-                  </td>
-                  <td>{{ user['name'] }}</td>
-                  <td>{{ user['username'] }}</td>
-                  <td>{{ user['account_type'] }}</td>
-                  <td><span class="badge text-bg-primary">{{ user['status'] }}</span></td>
-              </tr>
-              {% endfor %}
-          </tbody>
+          <tbody></tbody>
       </table>
       
+      <script>
+          // Fetch data from the API
+          fetch('/api/data')
+              .then(response => response.json())
+              .then(data => {
+                  const userTable = document.getElementById('user-table');
+                  const tbody = userTable.querySelector('tbody');
+      
+                  // Populate data into the HTML table
+                  data.forEach(user => {
+                      const row = document.createElement('tr');
+      
+                      const viewCell = document.createElement('td');
+                      const viewLink = document.createElement('a');
+                      viewLink.className = 'text-decoration-none text-secondary';
+                      viewLink.href = '';
+                      const eyeIcon = document.createElement('i');
+                      eyeIcon.className = 'bi bi-eye';
+                      viewLink.appendChild(eyeIcon);
+                      viewCell.appendChild(viewLink);
+                      row.appendChild(viewCell);
+      
+                      const idCell = document.createElement('td');
+                      const idLink = document.createElement('a');
+                      idLink.className = 'text-decoration-none';
+                      idLink.href = '';
+                      idLink.innerText = '#' + user.id;
+                      idCell.appendChild(idLink);
+                      row.appendChild(idCell);
+      
+                      const nameCell = document.createElement('td');
+                      nameCell.innerText = user.name;
+                      row.appendChild(nameCell);
+      
+                      const usernameCell = document.createElement('td');
+                      usernameCell.innerText = user.username;
+                      row.appendChild(usernameCell);
+      
+                      const accountTypeCell = document.createElement('td');
+                      accountTypeCell.innerText = user.account_type;
+                      row.appendChild(accountTypeCell);
+      
+                      const statusCell = document.createElement('td');
+                      const statusSpan = document.createElement('span');
+                      statusSpan.className = 'badge text-bg-primary';
+                      statusSpan.innerText = user.status;
+                      statusCell.appendChild(statusSpan);
+                      row.appendChild(statusCell);
+      
+                      tbody.appendChild(row);
+                  });
+              })
+              .catch(error => console.error(error));
+      </script>
       
 
     </div>
