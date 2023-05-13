@@ -1,0 +1,28 @@
+<table class="table table-striped mx-auto" style="width: 98%;">
+    <thead>
+        <tr>
+            <th class="text-center" style="width: 1px !important;" scope="col"></th>
+            <th class="col-sm-1" scope="col">ID</th>
+            <th class="" scope="col">Name</th>
+            <th class="" scope="col">Username</th>
+            <th class="" scope="col">Account Type</th>
+            <th class="" scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td class="text-center">
+                <a class="text-decoration-none text-secondary" href=""><i class="bi bi-eye"></i></a>
+            </td>
+            <td class="">
+                <a class="text-decoration-none" href="">{{ user['id'] }}</a>
+            </td>
+            <td>{{ user['name'] }}</td>
+            <td>{{ user['username'] }}</td>
+            <td>{{ user['account_type'] }}</td>
+            <td><span class="badge text-bg-primary">{{ user['status'] }}</span></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
