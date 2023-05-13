@@ -125,7 +125,7 @@
         </div>
         
         <!-- Users Table -->
-        <table class="table table-striped mx-auto" style="width: 98%;">
+        <!-- <table class="table table-striped mx-auto" style="width: 98%;">
           <thead>
             <tr>
               <th class="text-center" style="width: 1px !important;" scope="col"></th>
@@ -150,7 +150,30 @@
               <td><span class="badge text-bg-primary">Pending</span></td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
+        <table class="table table-striped mx-auto" style="width: 98%;">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Username</th>
+                  <th>Account Type</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for user in users %}
+                  <tr>
+                      <td>{{ user[0] }}</td>
+                      <td>{{ user[1] }}</td>
+                      <td>{{ user[2] }}</td>
+                      <td>{{ user[3] }}</td>
+                      <td>{{ user[4] }}</td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      
 
     </div>
      
