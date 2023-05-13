@@ -179,26 +179,6 @@
   })
   .then(data => {
     console.log('API Data:', data);
-
-    // Assuming the API response is an array of objects
-    var apiData = data;
-
-    // Process the apiData and display it in the table
-    displayDataInTable(apiData);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-
-function displayDataInTable(data) {
-  // Get the table body element
-  var tableBody = document.getElementById('table-body');
-
-  // Clear any existing rows
-  tableBody.innerHTML = '';
-
- 
-
         
               var tableBody = document.getElementById('table-body');
               apiData.forEach(function (item) {
