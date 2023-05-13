@@ -122,7 +122,7 @@ def receive_snort_alerts():
 def insert_snort_alert(data):
     # Create an SQL INSERT statement
     insert_query = """
-        INSERT INTO snort_alerts (seconds, action, class, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, timestamp)
+        INSERT INTO alerts (seconds, action, class, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, timestamp)
         VALUES (%(seconds)s, %(action)s, %(class)s, %(dir)s, %(dst_addr)s, %(dst_ap)s, %(dst_port)s, %(eth_dst)s, %(eth_len)s, %(eth_src)s, %(eth_type)s, %(gid)s, %(iface)s, %(ip_id)s, %(ip_len)s, %(msg)s, %(mpls)s, %(pkt_gen)s, %(pkt_len)s, %(pkt_num)s, %(priority)s, %(proto)s, %(rev)s, %(rule)s, %(service)s, %(sid)s, %(src_addr)s, %(src_ap)s, %(src_port)s, %(tcp_ack)s, %(tcp_flags)s, %(tcp_len)s, %(tcp_seq)s, %(tcp_win)s, %(tos)s, %(ttl)s, %(vlan)s, %(timestamp)s)
     """
 
