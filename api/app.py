@@ -171,7 +171,7 @@ def receive_snort_alerts():
         for line in f:
             # Parse the JSON data
             data = json.loads(line)
-    
+
             # Extract the required fields from the JSON data
             seconds = data['seconds']
             action = data['action']
@@ -215,8 +215,8 @@ def receive_snort_alerts():
 def insert_snort_alert(data):
     # Create an SQL INSERT statement
     insert_query = """
-        INSERT INTO alerts (seconds, action, class, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, timestamp)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        INSERT INTO alerts (seconds)
+        VALUES (%(seconds)s)
     """
 
     # Execute the INSERT statement
