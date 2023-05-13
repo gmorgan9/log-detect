@@ -1,0 +1,212 @@
+<!-- TEMPLATE -->
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap Links -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+    <!-- Boostrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+
+    <!-- BarChart Links -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/@adminkit/core@latest/dist/css/app.css"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+    <!-- Page Title -->
+    <title>Alerts | LogDetect</title>
+</head>
+<body>
+
+    <!-- START REDIRECTION -->
+    <!-- <script>window.location.href = '/core/entry/login/'; </script> -->
+    <!-- END REDIRECTION -->
+
+    <!-- Start Navigation -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+          <!-- Start Logo Link -->
+              <a class="navbar-brand fs-3 ps-3" href="#"><i class="bi bi-fingerprint"></i> LogDetect</a>
+          <!-- End Logo Link -->
+
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <!-- Start Links -->
+          <ul class="navbar-nav ms-auto mb-2 me-3 mb-lg-0">
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/core/home/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/core/alerts/">Alerts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/core/sensors/">Sensors</a>
+            </li>
+            <!-- Only show admin page if user is adm account -->
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/heart/admin/">Admin</a>
+            </li>
+            <li class="nav-item">
+              <form action="https://ld-api.morganserver.com/api/logout" method="POST" class="d-inline">
+                <button type="submit" class="nav-link btn btn-link">Logout</button>
+              </form>
+            </li>
+            
+            <button id="sun1" class="btn mode-button hide">
+              <i id="sunButton" class="bi bi-brightness-high-fill"></i>
+            </button>
+            
+            <button id="moon" class="btn mode-button active">
+              <i id="moonButton" class="bi bi-moon-fill"></i>
+            </button>
+          </ul>
+          <!-- End Links -->
+
+          <!-- <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form> -->
+        </div>
+      </div>
+    </nav>
+    <!-- End Navigation -->
+
+    <div class="container-fluid content mt-4">
+        <h1 class="mb-2">Alerts</h1>
+
+
+
+        <div class="float-start d-flex mt-3">
+          <a class="text-decoration-none text-secondary" onclick="reloadPage()" style="font-size: 16px;" href="">
+              <i class="bi bi-arrow-clockwise"></i>
+          </a>
+          &nbsp;&nbsp;
+          <p class="text-secondary" style="font-size: 14px;">
+            5 alerts (Page 1 of 1)
+          </p>
+      </div>
+
+
+
+        <div class="row">
+          <table class="table table-striped mx-auto" style="width: 98%;">
+            <thead>
+              <tr>
+                <th class="text-center" style="width: 1px !important;" scope="col"></th>
+                <th class=" col-sm-1" scope="col">ID</th>
+                <th class="" scope="col">Status</th>
+                <th class="" scope="col">Summary</th>
+                <th class="" scope="col">Alert Type</th>
+                <th class="" scope="col">Priority</th>
+                <th class="" scope="col">Updated</th>
+                <th class="" scope="col">Requested</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center">
+                  <a class="text-decoration-none text-secondary" href=""><i class="bi bi-eye"></i></a>
+                </td>
+                <td class="">
+                  <a class="text-decoration-none" href="">#152456</a>
+                </td>
+                <td class=""><span class="badge text-bg-primary">Pending</span></td>
+                <td>Attempt to login by a known username and password</td>
+                <td>SSH Login Attempt</td>
+                <td>Normal</td>
+                <td>1 minute ago</td>
+                <td>Today 10:01</td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                  <a class="text-decoration-none text-secondary" href=""><i class="bi bi-eye"></i></a>
+                </td>
+                <td class="">
+                  <a class="text-decoration-none" href="">#152456</a>
+                </td>
+                <td class=""><span class="badge text-bg-secondary">Solved</span></td>
+                <td>Attempt to login by a known username and password</td>
+                <td>SSH Login Attempt</td>
+                <td>Normal</td>
+                <td>1 minute ago</td>
+                <td>Today 10:01</td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                  <a class="text-decoration-none text-secondary" href=""><i class="bi bi-eye"></i></a>
+                </td>
+                <td class="">
+                  <a class="text-decoration-none" href="">#152456</a>
+                </td>
+                <td class=""><span class="badge text-bg-secondary">Solved</span></td>
+                <td>Attempt to login by a known username and password</td>
+                <td>SSH Login Attempt</td>
+                <td>Normal</td>
+                <td>1 minute ago</td>
+                <td>Today 10:01</td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                  <a class="text-decoration-none text-secondary" href=""><i class="bi bi-eye"></i></a>
+                </td>
+                <td class="">
+                  <a class="text-decoration-none" href="">#152456</a>
+                </td>
+                <td class=""><span class="badge text-bg-danger">Open</span></td>
+                <td>Attempt to login by a known username and password</td>
+                <td>SSH Login Attempt</td>
+                <td>Normal</td>
+                <td>1 minute ago</td>
+                <td>Today 10:01</td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                  <a class="text-decoration-none text-secondary" href=""><i class="bi bi-eye"></i></a>
+                </td>
+                <td class="">
+                  <a class="text-decoration-none" href="">#152456</a>
+                </td>
+                <td class=""><span class="badge text-bg-danger">Open</span></td>
+                <td>Attempt to login by a known username and password</td>
+                <td>SSH Login Attempt</td>
+                <td>High</td>
+                <td>45 minutes ago</td>
+                <td>Today 10:01</td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                  <a class="text-decoration-none text-secondary" href=""><i class="bi bi-eye"></i></a>
+                </td>
+                <td class="">
+                  <a class="text-decoration-none" href="">#152456</a>
+                </td>
+                <td class=""><span class="badge text-bg-danger">Open</span></td>
+                <td>Attempt to login by a known username and password</td>
+                <td>SSH Login Attempt</td>
+                <td>Normal</td>
+                <td>Apr 26, 2023</td>
+                <td>Apr 23, 2023</td>
+              </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <script src="../../assets/scripts/script.js"></script>
+    <script src="../../assets/scripts/reload.js"></script>
+</body>
+</html>

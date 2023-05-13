@@ -1,0 +1,8 @@
+version: '3'
+services:
+  nginx:
+    image: nginx
+    ports:
+      - 82:80
+    volumes:
+      - ./html/log-detect:/usr/share/nginx/html

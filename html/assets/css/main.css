@@ -1,0 +1,85 @@
+@media only screen and (max-width: 900px) {
+  .stats-row {
+    flex-direction: column;
+  }
+  .pew-pew {
+    width: 100% !important;
+    margin-bottom: 15px !important;
+    padding-left: 0px !important;
+  }
+  #barGraph {
+    width: 100% !important;
+    height: 400px;
+  }
+  .graph-container {
+    border: 1px solid #ccc;
+    width: 100% !important; 
+    margin-bottom: 15px !important;
+  }
+}
+
+
+
+.stats-row {
+  display: flex;
+}
+.content {
+    width: 98%;
+}
+
+#barGraph {
+  width: 100%;
+  height: 398px;
+}
+.graph-container {
+  width: 100%; 
+  height: 400px;
+}
+.graph-container.border {
+  border: 1px solid #ccc;
+}
+.graph-container.border1 {
+  border: 1px solid #2c3035;
+}
+  
+  
+  .bar {
+    width: 50%;
+    background-color: rgb(47, 86, 123);
+    display: inline-block;
+    vertical-align: bottom;
+  }
+
+  .total-alerts {
+    font-weight: bold;
+  }
+
+  .custom-card {
+    height: 150px; 
+  }
+  
+  .custom-card-number {
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icons {
+    font-size: 50px;
+  }
+  .mode-button {
+    border: none;
+    border-radius: 100%;
+    padding: 12px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-left: 1px;
+  }
+  .mode-button.active {
+    display: inline-block;
+  }
+  .mode-button.hide {
+    display: none;
+  }
+  
