@@ -112,7 +112,7 @@ def insert_snort_alert(data):
 # SNORT ALERTS
 import json
 
-@app.route('/snort-alerts', methods=['POST'])
+@app.route('/snort-alerts', methods=['POST', 'GET'])
 def process_snort_alerts():
     try:
         with open('/var/log/snort/alert_json.txt', 'r') as file:
