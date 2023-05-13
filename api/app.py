@@ -113,54 +113,23 @@ def logout():
 #     cursor.close()
 #     conn.close()
 
-import json
-import requests
-
-data = {
-    "seconds": "1234",
-    "action": "alert",
-    "class": "web-application-attack",
-    "timestamp": "2022-05-13 14:30:00"
-}
-
-url = "http://ld-api.morganserver.com/snort-alerts"
-headers = {"Content-Type": "application/json"}
-
-response = requests.post(url, headers=headers, data=json.dumps(data))
-
-print(response.status_code)
-print(response.text)
-
-def insert_snort_alert(data, conn):
-    cursor = conn.cursor()
-
-    query = """
-        INSERT INTO alerts (seconds, action, class, timestamp)
-        VALUES (%(seconds)s, %(action)s, %(class)s, %(timestamp)s)
-    """
-    cursor.execute(query, data)
-    conn.commit()
-    cursor.close()
-
-
-
-# SNORT ALERTS
-import json
-
 @app.route('/snort-alerts', methods=['POST'])
-def process_snort_alerts():
-    try:
-        with open('/var/log/snort/alert_json.txt', 'r') as file:
-            alerts = json.load(file)
+def receive_snort_alerts():
+    data = request.json  # Parse the JSON data sent from the client
+    insert_snort_alert(data)  # Insert the data into the PostgreSQL database
+    return "Snort alerts received and stored successfully!"
 
-        for alert in alerts:
-            insert_snort_alert(alert, conn)
+def insert_snort_alert(data):
+    # Create an SQL INSERT statement
+    insert_query = """
+        INSERT INTO snort_alerts (seconds, action, class, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, timestamp)
+        VALUES (%(seconds)s, %(action)s, %(class)s, %(dir)s, %(dst_addr)s, %(dst_ap)s, %(dst_port)s, %(eth_dst)s, %(eth_len)s, %(eth_src)s, %(eth_type)s, %(gid)s, %(iface)s, %(ip_id)s, %(ip_len)s, %(msg)s, %(mpls)s, %(pkt_gen)s, %(pkt_len)s, %(pkt_num)s, %(priority)s, %(proto)s, %(rev)s, %(rule)s, %(service)s, %(sid)s, %(src_addr)s, %(src_ap)s, %(src_port)s, %(tcp_ack)s, %(tcp_flags)s, %(tcp_len)s, %(tcp_seq)s, %(tcp_win)s, %(tos)s, %(ttl)s, %(vlan)s, %(timestamp)s)
+    """
 
-        conn.close()
-
-        return 'Snort alert data added to the database.', 200
-    except Exception as e:
-        return str(e), 400
+    # Execute the INSERT statement
+    with conn.cursor() as cursor:
+        cursor.execute(insert_query, data)
+        conn.commit()
 
 
 
