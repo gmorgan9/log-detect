@@ -25,7 +25,7 @@ def get_data():
     # Convert the data to a list of dictionaries
     result = []
     for row in data:
-        account_type = "admin" if row[6] == 1 else "standard"
+        account_type = "Admin" if row[6] == 1 else "Standard"
         capitalized_f_name = row[4].capitalize()
         capitalized_l_name = row[5].capitalize()
         full_name = capitalized_f_name + ' ' + capitalized_l_name
