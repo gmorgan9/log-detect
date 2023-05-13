@@ -152,57 +152,74 @@
           </tbody>
         </table> -->
 
-        <table id="data-table" class="table table-striped mx-auto" style="width: 98%;">
+        <table class="table table-striped mx-auto" style="width: 98%;">
           <thead>
-              <tr>
-                  <th class="text-center" style="width: 1px !important;" scope="col"></th>
-                  <th class="col-sm-1" scope="col">ID</th>
-                  <th class="" scope="col">Name</th>
-                  <th class="" scope="col">Username</th>
-                  <th class="" scope="col">Account Type</th>
-                  <th class="" scope="col">Status</th>
-              </tr>
+            <tr>
+              <th class="text-center" style="width: 1px !important;" scope="col"></th>
+              <th class="col-sm-1" scope="col">ID</th>
+              <th class="" scope="col">Name</th>
+              <th class="" scope="col">Username</th>
+              <th class="" scope="col">Account Type</th>
+              <th class="" scope="col">Status</th>
+            </tr>
           </thead>
-          <tbody id="data-table-body">
-              <!-- Table rows will be populated dynamically -->
+          <tbody id="table-body">
+            <!-- Data will be dynamically added here -->
           </tbody>
-      </table>
-      
-      <script>
-        // Fetch data from the API and populate the table
-        fetch('https://ld-api.morganserver.com/api/data')
-            .then(response => response.json())
-            .then(data => {
-                const tableBody = document.getElementById('data-table-body');
-    
-                // Clear existing table rows
-                tableBody.innerHTML = '';
-    
-                // Iterate over the data and create table rows
-                data.forEach(row => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td class="text-center">
-                            <a class="text-decoration-none text-secondary" href=""><i class="bi bi-eye"></i></a>
-                        </td>
-                        <td class="">
-                            <a class="text-decoration-none" href="">#${row.id}</a>
-                        </td>
-                        <td>${row.name}</td>
-                        <td>${row.username}</td>
-                        <td>${row.account_type}</td>
-                        <td><span class="badge text-bg-primary">${row.status}</span></td>
-                    `;
-                    tableBody.appendChild(tr);
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    </script>
-    
-      
-  
+        </table>
+        
+        <script>
+          // Assuming you have fetched the API data and stored it in a variable called 'apiData'
+          var apiData = [{"account_type":"standard","id":"63724","name":"Garrett Morgan","status":"pending","username":"garrett"}];
+        
+          var tableBody = document.getElementById('table-body');
+          apiData.forEach(function (item) {
+            var row = document.createElement('tr');
+        
+            var viewCell = document.createElement('td');
+            viewCell.className = 'text-center';
+            var viewLink = document.createElement('a');
+            viewLink.className = 'text-decoration-none text-secondary';
+            viewLink.href = ''; // Add the appropriate URL for viewing details
+            var viewIcon = document.createElement('i');
+            viewIcon.className = 'bi bi-eye';
+            viewLink.appendChild(viewIcon);
+            viewCell.appendChild(viewLink);
+            row.appendChild(viewCell);
+        
+            var idCell = document.createElement('td');
+            var idLink = document.createElement('a');
+            idLink.className = 'text-decoration-none';
+            idLink.href = ''; // Add the appropriate URL for the ID
+            idLink.textContent = '#' + item.id;
+            idCell.appendChild(idLink);
+            row.appendChild(idCell);
+        
+            var nameCell = document.createElement('td');
+            nameCell.textContent = item.name;
+            row.appendChild(nameCell);
+        
+            var usernameCell = document.createElement('td');
+            usernameCell.textContent = item.username;
+            row.appendChild(usernameCell);
+        
+            var accountTypeCell = document.createElement('td');
+            accountTypeCell.textContent = item.account_type;
+            row.appendChild(accountTypeCell);
+        
+            var statusCell = document.createElement('td');
+            var statusSpan = document.createElement('span');
+            statusSpan.className = 'badge text-bg-primary';
+            statusSpan.textContent = item.status;
+            statusCell.appendChild(statusSpan);
+            row.appendChild(statusCell);
+        
+            tableBody.appendChild(row);
+          });
+        </script>
+        
+
+    </div>
      
     <script src="../../assets/scripts/script.js"></script>
 </body>
