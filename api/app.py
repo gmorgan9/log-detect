@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify, redirect, session, render_template
 import psycopg2
 from flask_session import Session
+from flask_cors import CORS
+from flask_cors import cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config['SESSION_TYPE'] = 'filesystem'
 app.secret_key = '6d5b6348fad22778e627f12fe5084bab06a4b830804814d1'  # Replace with your secret key
 Session(app)
@@ -10,41 +13,8 @@ Session(app)
 
 conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
 
-# @app.route('/api/data', methods=['GET'])
-# def get_data():
-#     # Fetch data from the database
-#     cur = conn.cursor()
-#     cur.execute("SELECT * FROM users;")
-#     data = cur.fetchall()
-#     cur.close()
-
-#     # Return the data as JSON
-#     return jsonify(data)
-
-# @app.route('/api/data', methods=['GET'])
-# def get_data():
-#     # Fetch data from the database
-#     cur = conn.cursor()
-#     cur.execute("SELECT * FROM users;")
-#     data = cur.fetchall()
-#     cur.close()
-
-#     # Convert the data to a list of dictionaries
-#     result = []
-#     for row in data:
-#         result.append({
-#             'id': row[0],
-#             'name': row[1],
-#             'username': row[2],
-#             'account_type': row[3],
-#             'status': row[4]
-#         })
-
-#     # Return the data as JSON
-#     return jsonify(result)
-
-# format: [[1,"63724","garrett","test","garrett","morgan",0,1,"Fri, 12 May 2023 04:29:27 GMT","pending",1]]
 @app.route('/api/data', methods=['GET'])
+@cross_origin()
 def get_data():
     # Fetch data from the database
     cur = conn.cursor()
