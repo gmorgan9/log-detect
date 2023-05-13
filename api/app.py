@@ -110,14 +110,25 @@ def insert_snort_alert(data):
 
 
 # SNORT ALERTS
+import json
+
 @app.route('/snort-alerts', methods=['POST'])
 def process_snort_alerts():
     try:
-        data = request.get_json()
-        insert_snort_alert(data)
+        with open('/var/log/snort/alert_json.txt', 'r') as file:
+            alerts = json.load(file)
+
+        # connection = create_db_connection()
+
+        for alert in alerts:
+            insert_snort_alert(alert, conn)
+
+        conn.close()
+
         return 'Snort alert data added to the database.', 200
     except Exception as e:
         return str(e), 400
+
 
 if __name__ == '__main__':
     app.run(host="192.168.1.183")
