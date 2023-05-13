@@ -152,61 +152,9 @@
           </tbody>
         </table> -->
 
-        <table id="user-table" class="table table-striped mx-auto" style="width: 98%;">
-          <thead>
-              <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Username</th>
-                  <th>Account Type</th>
-                  <th>Status</th>
-              </tr>
-          </thead>
-          <tbody>
-          </tbody>
-      </table>
-  </div>
-
-  <script>
-      // Fetch data from the API
-      fetch('https://ld-api.morganserver.com/api/data')
-          .then(response => response.json())
-          .then(data => {
-              const userTable = document.getElementById('user-table');
-              const tbody = userTable.querySelector('tbody');
-
-              // Clear the table body
-              tbody.innerHTML = '';
-
-              // Populate data into the HTML table
-              data.forEach(user => {
-                  const row = document.createElement('tr');
-
-                  const idCell = document.createElement('td');
-                  idCell.textContent = user.id;
-                  row.appendChild(idCell);
-
-                  const nameCell = document.createElement('td');
-                  nameCell.textContent = user.name;
-                  row.appendChild(nameCell);
-
-                  const usernameCell = document.createElement('td');
-                  usernameCell.textContent = user.username;
-                  row.appendChild(usernameCell);
-
-                  const accountTypeCell = document.createElement('td');
-                  accountTypeCell.textContent = user.account_type;
-                  row.appendChild(accountTypeCell);
-
-                  const statusCell = document.createElement('td');
-                  statusCell.textContent = user.status;
-                  row.appendChild(statusCell);
-
-                  tbody.appendChild(row);
-              });
-          })
-          .catch(error => console.error(error));
-  </script>
+        <div id="dynamic-table-container">
+          {{ table_html|safe }}
+      </div>
 
     </div>
      

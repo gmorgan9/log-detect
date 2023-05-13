@@ -120,7 +120,10 @@ def get_data():
     table_html += '</tbody>'
     table_html += '</table>'
 
-    return table_html
+    # return table_html
+    # Return the index.html template with the table HTML
+    return render_template('index.html', table_html=table_html)
+
 
 @app.route('/api/login', methods=['POST'])
 def login():
