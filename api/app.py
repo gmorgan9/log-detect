@@ -90,14 +90,12 @@ def logout():
 
 import json
 
-# Endpoint to handle the JSON data and insert it into the PostgreSQL database
+# Endpoint to handle the JSON data from the file and insert it into the PostgreSQL database
 @app.route('/insert_alert', methods=['POST'])
 def insert_alert():
-
+    # Read the JSON data from the file
     with open('/var/log/snort/alert_json.txt', 'r') as file:
         json_data = json.load(file)
-    # Get the JSON data from the request
-    json_data = request.get_json()
 
     # Extract the data from the JSON object
     seconds = json_data['seconds']
