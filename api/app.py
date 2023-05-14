@@ -43,6 +43,36 @@ def get_data():
     # Return the data as JSON
     return jsonify(result)
 
+
+@app.route('/api/alerts', methods=['GET'])
+@cross_origin()
+def get_data():
+    # Fetch data from the database
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM alerts;")
+    data = cur.fetchall()
+    cur.close()
+
+    # Convert the data to a list of dictionaries
+    # result = []
+    # for row in data:
+    #     # account_type = "Admin" if row[6] == 1 else "Standard"
+    #     # capitalized_f_name = row[4].capitalize()
+    #     # capitalized_l_name = row[5].capitalize()
+    #     # full_name = capitalized_f_name + ' ' + capitalized_l_name
+    #     result.append({
+    #         'id': row[1],
+    #         'name': full_name,
+    #         'username': row[2],
+    #         'account_type': account_type,
+    #         'status': row[9]
+    #     })
+
+    # Return the data as JSON
+    return jsonify(data)
+
+
+
 @app.route('/api/login', methods=['POST'])
 def login():
     # Get the form data

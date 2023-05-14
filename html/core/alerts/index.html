@@ -106,9 +106,7 @@
       </div>
 
 
-
-        <div class="row">
-          <table class="table table-striped mx-auto" style="width: 98%;">
+        <!-- <table class="table table-striped mx-auto" style="width: 98%;">
             <thead>
               <tr>
                 <th class="text-center" style="width: 1px !important;" scope="col"></th>
@@ -137,7 +135,91 @@
                 <td>Today 10:01</td>
               </tr>
             </tbody>
+        </table> -->
+
+        <table class="table table-striped mx-auto" style="width: 98%;">
+          <thead>
+            <tr>
+              <th class="text-center" style="width: 1px !important;" scope="col"></th>
+              <th class="col-sm-1" scope="col">ID</th>
+              <th class="" scope="col">Status</th>
+              <th class="" scope="col">Summary</th>
+              <th class="" scope="col">Alert Type</th>
+              <th class="" scope="col">Priority</th>
+              <th class="" scope="col">Updated</th>
+              <th class="" scope="col">Requested</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
         </table>
+        
+        <script>
+          // Fetch data from the API
+          fetch('https://ld-api.morganserver.com/api/alerts')
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then(data => {
+              console.log('API Data:', data);
+        
+              var tableBody = document.getElementById('table-body');
+              data.forEach(function (item) {
+                var row = document.createElement('tr');
+        
+                var viewCell = document.createElement('td');
+                viewCell.className = 'text-center';
+                var viewLink = document.createElement('a');
+                viewLink.className = 'text-decoration-none text-secondary';
+                viewLink.href = ''; // Add the appropriate URL for viewing details
+                var viewIcon = document.createElement('i');
+                viewIcon.className = 'bi bi-eye';
+                viewLink.appendChild(viewIcon);
+                viewCell.appendChild(viewLink);
+                row.appendChild(viewCell);
+        
+                var idCell = document.createElement('td');
+                var idLink = document.createElement('a');
+                idLink.className = 'text-decoration-none';
+                idLink.href = ''; // Add the appropriate URL for the ID
+                idLink.textContent = '#' + item.id;
+                idCell.appendChild(idLink);
+                row.appendChild(idCell);
+        
+                var statusCell = document.createElement('td');
+                statusCell.textContent = item.status;
+                row.appendChild(statusCell);
+        
+                var summaryCell = document.createElement('td');
+                summaryCell.textContent = item.summary;
+                row.appendChild(summaryCell);
+        
+                var alertTypeCell = document.createElement('td');
+                alertTypeCell.textContent = item.alert_type;
+                row.appendChild(alertTypeCell);
+        
+                var priorityCell = document.createElement('td');
+                priorityCell.textContent = item.priority;
+                row.appendChild(priorityCell);
+        
+                var updatedCell = document.createElement('td');
+                updatedCell.textContent = item.updated;
+                row.appendChild(updatedCell);
+        
+                var requestedCell = document.createElement('td');
+                requestedCell.textContent = item.requested;
+                row.appendChild(requestedCell);
+        
+                tableBody.appendChild(row);
+              });
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        </script>
+        
 
     </div>
 
