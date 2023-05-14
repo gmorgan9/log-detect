@@ -169,8 +169,15 @@
       
               // Event listener for the eye icon click
               viewLink.addEventListener('click', function () {
-                logNotes.textContent = item.description;
-                logNotes.textContent = item.priority;
+                logNotes.innerHTML = ''; // Clear any existing content
+              
+                var descriptionElement = document.createElement('p');
+                descriptionElement.textContent = "Description: " + item.description;
+                logNotes.appendChild(descriptionElement);
+              
+                var priorityElement = document.createElement('p');
+                priorityElement.textContent = "Priority: " + item.priority;
+                logNotes.appendChild(priorityElement);
               });
             });
           })
