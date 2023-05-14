@@ -54,19 +54,19 @@ def get_alerts():
     cur.close()
 
     # Convert the data to a list of dictionaries
-    # result = []
-    # for row in data:
-    #     # account_type = "Admin" if row[6] == 1 else "Standard"
-    #     # capitalized_f_name = row[4].capitalize()
-    #     # capitalized_l_name = row[5].capitalize()
-    #     # full_name = capitalized_f_name + ' ' + capitalized_l_name
-    #     result.append({
-    #         'id': row[1],
-    #         'name': full_name,
-    #         'username': row[2],
-    #         'account_type': account_type,
-    #         'status': row[9]
-    #     })
+    result = []
+    for row in data:
+        # account_type = "Admin" if row[6] == 1 else "Standard"
+        # capitalized_f_name = row[4].capitalize()
+        # capitalized_l_name = row[5].capitalize()
+        # full_name = capitalized_f_name + ' ' + capitalized_l_name
+        result.append({
+            'id': row[1]
+            # 'name': full_name,
+            # 'username': row[2],
+            # 'account_type': account_type,
+            # 'status': row[9]
+        })
 
     # Return the data as JSON
     return jsonify(data)
