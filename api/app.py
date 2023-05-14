@@ -111,11 +111,16 @@ def insert_alert():
                 # Create a cursor object to interact with the database
                 cursor = conn.cursor()
 
+
+                from datetime import datetime
+
+                timestamp_str = '05/09-17:50:36.614329'
+                new_timestamp = datetime.strptime(timestamp_str, '%m/%d-%H:%M:%S.%f').strftime('%Y-%m-%d %H:%M:%S.%f')
                 # Define the SQL query to insert the data into the database
                 insert_query = "INSERT INTO alerts (seconds, action, class, timestamp) VALUES (%s, %s, %s, %s)"
 
                 # Execute the SQL query with the data
-                cursor.execute(insert_query, (seconds, action, class_name, timestamp))
+                cursor.execute(insert_query, (seconds, action, class_name, new_timestamp))
 
                 # Commit the changes to the database
                 conn.commit()
