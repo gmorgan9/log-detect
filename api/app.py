@@ -3,6 +3,8 @@ import psycopg2
 from flask_session import Session
 from flask_cors import CORS
 from flask_cors import cross_origin
+from datetime import datetime
+import pytz
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -110,19 +112,19 @@ def insert_alert():
                 # Create a cursor object to interact with the database
                 cursor = conn.cursor()
 
+                # Convert the timestamp to the desired format
+                local_datetime = datetime.strptime(timestamp, '%m/%d-%H:%M:%S.%f').replace(year=datetime.now().year)
+                local_datetime = local_datetime.replace(tzinfo=pytz.UTC)
+                new_timestamp = local_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')
+
                 # Check if the alert with the same timestamp already exists in the database
-                select_query = "SELECT COUNT(*) FROM alerts WHERE timestamp = %s"
+                select_query = "SELECT COUNT(*) FROM alerts WHERE new_timestamp = %s"
                 cursor.execute(select_query, (timestamp,))
                 count = cursor.fetchone()[0]
 
                 if count > 0:
                     # Alert already exists, skip inserting
                     continue
-
-                # Convert the timestamp to the desired format
-                local_datetime = datetime.strptime(timestamp, '%m/%d-%H:%M:%S.%f').replace(year=datetime.now().year)
-                local_datetime = local_datetime.replace(tzinfo=pytz.UTC)
-                new_timestamp = local_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')
 
                 # Define the SQL query to insert the data into the database
                 insert_query = "INSERT INTO alerts (seconds, action, class, timestamp) VALUES (%s, %s, %s, %s)"
