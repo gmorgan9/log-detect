@@ -104,6 +104,7 @@ def insert_alert():
                 seconds = json_data['seconds']
                 action = json_data['action']
                 class_name = json_data['class']
+                timestamp = json_data['timestamp']
                 # Extract other fields as needed
 
                 conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
@@ -111,10 +112,10 @@ def insert_alert():
                 cursor = conn.cursor()
 
                 # Define the SQL query to insert the data into the database
-                insert_query = "INSERT INTO alerts (seconds, action, class) VALUES (%s, %s, %s)"
+                insert_query = "INSERT INTO alerts (seconds, action, class, timestamp) VALUES (%s, %s, %s, %s)"
 
                 # Execute the SQL query with the data
-                cursor.execute(insert_query, (seconds, action, class_name))
+                cursor.execute(insert_query, (seconds, action, class_name, timestamp))
 
                 # Commit the changes to the database
                 conn.commit()
