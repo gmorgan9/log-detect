@@ -80,6 +80,7 @@ def logout():
     if 'username' in session:
         # Update the 'loggedin' status to 0 in the database
         username = session['username']
+        session['logged_in'] = False
         cur = conn.cursor()
         cur.execute("UPDATE users SET loggedin = 0 WHERE username = %s", (username,))
         conn.commit()
