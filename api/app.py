@@ -63,8 +63,7 @@ def get_alerts():
         # capitalized_f_name = row[4].capitalize()
         # capitalized_l_name = row[5].capitalize()
         # full_name = capitalized_f_name + ' ' + capitalized_l_name
-        timestamp_datetime = datetime.datetime.strptime(row[38], '%Y-%m-%d %H:%M:%S.%f')
-        formatted_timestamp = timestamp_datetime.strftime('%Y-%m-%d %H:%M:%S')
+        formatted_timestamp = row[38].strftime('%Y-%m-%d %H:%M:%S')
         result.append({
             'id': row[3],
             'timestamp': formatted_timestamp
