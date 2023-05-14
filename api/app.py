@@ -133,7 +133,7 @@ def insert_alert():
         for line in file:
             try:
                 json_data = json.loads(line)
-
+                print(json_data)
                 # Extract the data from the JSON object
                 # idno = random.randint(100000, 999999)
                 seconds = json_data['seconds']
