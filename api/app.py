@@ -100,7 +100,7 @@ def insert_alert():
                 json_data = json.loads(line)
 
                 # Extract the data from the JSON object
-                id = json_data['id']
+                # id = json_data['id']
                 seconds = json_data['seconds']
                 action = json_data['action']
                 class_name = json_data['class']
@@ -110,7 +110,7 @@ def insert_alert():
                 cursor = conn.cursor()
 
                 # Define the SQL query to insert the data into the database
-                insert_query = "INSERT INTO alerts (id, seconds, action, class_name) VALUES (%s, %s, %s, %s)"
+                insert_query = "INSERT INTO alerts (seconds, action, class_name) VALUES (%s, %s, %s)"
 
                 # Execute the SQL query with the data
                 cursor.execute(insert_query, (id, seconds, action, class_name))
