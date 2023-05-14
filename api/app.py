@@ -145,7 +145,7 @@ def insert_alert():
 
 
                 # Extract other fields as needed
-
+                idno_str = str(idno)
                 conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
                 # Create a cursor object to interact with the database
                 cursor = conn.cursor()
@@ -157,7 +157,7 @@ def insert_alert():
 
                 # Check if the alert with the same timestamp already exists in the database
                 select_query = "SELECT COUNT(*) FROM alerts WHERE timestamp = %s AND idno = %s"
-                cursor.execute(select_query, (new_timestamp, idno,))
+                cursor.execute(select_query, (new_timestamp, idno_str,))
                 count = cursor.fetchone()[0]
 
                 if count > 0:
@@ -168,7 +168,7 @@ def insert_alert():
                 insert_query = "INSERT INTO alerts (idno, seconds, action, class, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, timestamp) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
                 # Execute the SQL query with the data
-                cursor.execute(insert_query, (idno, seconds, action, class_name, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, new_timestamp))
+                cursor.execute(insert_query, (idno_str, seconds, action, class_name, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, new_timestamp))
 
                 # Commit the changes to the database
                 conn.commit()
