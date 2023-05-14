@@ -213,7 +213,7 @@ def insert_alert():
                 # Handle JSON decoding errors if any
                 continue
 
-    return 'Alerts inserted into the database'
+    return json_data
 
 
 
