@@ -54,6 +54,8 @@ def get_alerts():
     data = cur.fetchall()
     cur.close()
 
+    import datetime
+
     # Convert the data to a list of dictionaries
     result = []
     for row in data:
@@ -61,9 +63,11 @@ def get_alerts():
         # capitalized_f_name = row[4].capitalize()
         # capitalized_l_name = row[5].capitalize()
         # full_name = capitalized_f_name + ' ' + capitalized_l_name
+        timestamp_datetime = datetime.datetime.strptime(row[38], '%Y-%m-%d %H:%M:%S.%f')
+        formatted_timestamp = timestamp_datetime.strftime('%Y-%m-%d %H:%M:%S')
         result.append({
             'id': row[3],
-            'timestamp': row[38]
+            'timestamp': formatted_timestamp
             # 'name': full_name,
             # 'username': row[2],
             # 'account_type': account_type,
