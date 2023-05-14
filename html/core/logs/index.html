@@ -193,21 +193,13 @@
                 descriptionCell.textContent = item.description;
                 row.appendChild(descriptionCell);
         
-                var alertTypeCell = document.createElement('td');
-                alertTypeCell.textContent = item.alert_type;
-                row.appendChild(alertTypeCell);
+                var targetCell = document.createElement('td');
+                targetCell.textContent = item.target;
+                row.appendChild(targetCell);
         
                 var priorityCell = document.createElement('td');
                 priorityCell.textContent = item.priority;
                 row.appendChild(priorityCell);
-        
-                var updatedCell = document.createElement('td');
-                updatedCell.textContent = item.updated;
-                row.appendChild(updatedCell);
-        
-                var requestedCell = document.createElement('td');
-                requestedCell.textContent = item.requested;
-                row.appendChild(requestedCell);
         
                 tableBody.appendChild(row);
               });
