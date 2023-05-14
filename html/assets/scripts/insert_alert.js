@@ -6,6 +6,7 @@ function postData() {
       if (response.ok) {
         // Handle successful response
         console.log('Alerts inserted into the database');
+        location.reload(); // Reload the page
       } else {
         // Handle error response
         console.error('Error inserting alerts into the database');
