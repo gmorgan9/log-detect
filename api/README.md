@@ -1,8 +1,11 @@
 # API
 
 # Running with
-392918
+398321
 
 # use
 nohup python3 app.py &
+
+# Forget?
+ps -ef |grep python
 

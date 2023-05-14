@@ -46,7 +46,7 @@ def get_data():
 
 @app.route('/api/alerts', methods=['GET'])
 @cross_origin()
-def get_data():
+def get_alerts():
     # Fetch data from the database
     cur = conn.cursor()
     cur.execute("SELECT * FROM alerts;")
