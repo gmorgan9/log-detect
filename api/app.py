@@ -59,18 +59,19 @@ def get_alerts():
     # Convert the data to a list of dictionaries
     result = []
     for row in data:
-        # account_type = "Admin" if row[6] == 1 else "Standard"
-        # capitalized_f_name = row[4].capitalize()
-        # capitalized_l_name = row[5].capitalize()
-        # full_name = capitalized_f_name + ' ' + capitalized_l_name
+        priority_mapping = {
+            1: "Critical",
+            2: "High",
+            3: "Medium",
+            4: "Low"
+        }
         formatted_timestamp = row[38].strftime('%Y-%m-%dT%H:%M:%S')
+        priority = priority_mapping.get(row[21], "Unknown")
         result.append({
-            'id': row[3],
-            'timestamp': formatted_timestamp
-            # 'name': full_name,
-            # 'username': row[2],
-            # 'account_type': account_type,
-            # 'status': row[9]
+            'description': row[16],
+            'timestamp': formatted_timestamp,
+            'target': row[5],
+            'priority': priority
         })
 
     # Return the data as JSON

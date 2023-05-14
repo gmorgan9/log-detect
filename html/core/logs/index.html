@@ -144,10 +144,9 @@
           <thead>
             <tr>
               <th class="text-center" style="width: 1px !important;" scope="col"></th>
-              <th class="col-sm-1" scope="col">Timestamp</th>
-              <th class="" scope="col">Status</th>
-              <th class="" scope="col">Summary</th>
-              <th class="" scope="col">Alert Type</th>
+              <th class="" scope="col">Timestamp</th>
+              <th class="" scope="col">Description</th>
+              <th class="" scope="col">Target</th>
               <th class="" scope="col">Priority</th>
               <th class="" scope="col">Requested</th>
             </tr>
@@ -190,13 +189,9 @@
                 // idCell.appendChild(idLink);
                 row.appendChild(timeCell);
         
-                var statusCell = document.createElement('td');
-                statusCell.textContent = item.status;
-                row.appendChild(statusCell);
-        
-                var summaryCell = document.createElement('td');
-                summaryCell.textContent = item.summary;
-                row.appendChild(summaryCell);
+                var descriptionCell = document.createElement('td');
+                descriptionCell.textContent = item.description;
+                row.appendChild(descriptionCell);
         
                 var alertTypeCell = document.createElement('td');
                 alertTypeCell.textContent = item.alert_type;
