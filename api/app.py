@@ -133,9 +133,10 @@ def insert_alert():
         for line in file:
             try:
                 json_data = json.loads(line)
-                print(json_data)
+                # print(json_data)
                 # Extract the data from the JSON object
                 # idno = random.randint(100000, 999999)
+                message = json_data
                 seconds = json_data['seconds']
                 action = json_data['action']
                 class_name = json_data['class']
@@ -197,10 +198,10 @@ def insert_alert():
                     continue
 
                 # Define the SQL query to insert the data into the database
-                insert_query = "INSERT INTO logs (seconds, action, class, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, timestamp) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                insert_query = "INSERT INTO logs (seconds, action, class, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, message, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, timestamp) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
                 # Execute the SQL query with the data
-                cursor.execute(insert_query, (seconds, action, class_name, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, new_timestamp))
+                cursor.execute(insert_query, (seconds, action, class_name, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, message, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, new_timestamp))
 
                 # Commit the changes to the database
                 conn.commit()
@@ -213,7 +214,7 @@ def insert_alert():
                 # Handle JSON decoding errors if any
                 continue
 
-    return json_data
+    return 'Alerts inserted into the database'
 
 
 
