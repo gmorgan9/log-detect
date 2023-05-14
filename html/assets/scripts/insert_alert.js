@@ -4,16 +4,14 @@ function postData() {
     })
     .then(response => {
       if (response.ok) {
-        // Handle successful response
         console.log('Alerts inserted into the database');
-        location.reload(); // Reload the page
+        location.reload();
       } else {
-        // Handle error response
         console.error('Error inserting alerts into the database');
+        location.reload();
       }
     })
     .catch(error => {
-      // Handle fetch error
       console.error('Error:', error);
     });
   }
