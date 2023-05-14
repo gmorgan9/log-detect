@@ -62,8 +62,8 @@ def get_alerts():
         # capitalized_l_name = row[5].capitalize()
         # full_name = capitalized_f_name + ' ' + capitalized_l_name
         result.append({
-            'timestamp': row[38],
-            'id': row[3]
+            'id': row[3],
+            'timestamp': row[38]
             # 'name': full_name,
             # 'username': row[2],
             # 'account_type': account_type,

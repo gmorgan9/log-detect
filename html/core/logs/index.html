@@ -144,7 +144,7 @@
           <thead>
             <tr>
               <th class="text-center" style="width: 1px !important;" scope="col"></th>
-              <th class="col-sm-1" scope="col">ID</th>
+              <th class="col-sm-1" scope="col">Timestamp</th>
               <th class="" scope="col">Status</th>
               <th class="" scope="col">Summary</th>
               <th class="" scope="col">Alert Type</th>
@@ -183,11 +183,11 @@
                 row.appendChild(viewCell);
         
                 var idCell = document.createElement('td');
-                var idLink = document.createElement('a');
-                idLink.className = 'text-decoration-none';
-                idLink.href = ''; // Add the appropriate URL for the ID
-                idLink.textContent = '#' + item.id;
-                idCell.appendChild(idLink);
+                // var idLink = document.createElement('a');
+                // idLink.className = 'text-decoration-none';
+                // idLink.href = ''; // Add the appropriate URL for the ID
+                idLink.textContent = item.timestamp;
+                // idCell.appendChild(idLink);
                 row.appendChild(idCell);
         
                 var statusCell = document.createElement('td');
