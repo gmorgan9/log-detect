@@ -113,9 +113,7 @@ def insert_alert():
 
 
                 from datetime import datetime
-
-                timestamp_str = '05/09-17:50:36.614329'
-                new_timestamp = datetime.strptime(timestamp_str, '%m/%d-%H:%M:%S.%f').strftime('%Y-%m-%d %H:%M:%S.%f')
+                new_timestamp = datetime.strptime(timestamp, '%m/%d-%H:%M:%S.%f').strftime('%Y-%m-%d %H:%M:%S.%f')
                 # Define the SQL query to insert the data into the database
                 insert_query = "INSERT INTO alerts (seconds, action, class, timestamp) VALUES (%s, %s, %s, %s)"
 
