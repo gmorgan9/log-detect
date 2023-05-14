@@ -142,7 +142,7 @@
               viewCell.className = '';
               var viewLink = document.createElement('a');
               viewLink.className = 'text-decoration-none text-secondary';
-              viewLink.href = '#'; // Add the appropriate URL for viewing details
+              viewLink.href = ''; // Add the appropriate URL for viewing details
               var viewIcon = document.createElement('i');
               viewIcon.className = 'bi bi-eye';
               viewLink.appendChild(viewIcon);
@@ -170,6 +170,7 @@
               // Event listener for the eye icon click
               viewLink.addEventListener('click', function () {
                 logNotes.textContent = item.description;
+                logNotes.textContent = item.priority;
               });
             });
           })
