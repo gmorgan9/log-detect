@@ -102,10 +102,50 @@ def insert_alert():
                 json_data = json.loads(line)
 
                 # Extract the data from the JSON object
+                # seconds = json_data['seconds']
+                # action = json_data['action']
+                # class_name = json_data['class']
+                # timestamp = json_data['timestamp']
                 seconds = json_data['seconds']
                 action = json_data['action']
                 class_name = json_data['class']
+                dir = json_data['dir']
+                dst_addr = json_data['dst_addr']
+                dst_ap = json_data['dst_ap']
+                dst_port = json_data['dst_port']
+                eth_dst = json_data['eth_dst']
+                eth_len = json_data['eth_len']
+                eth_src = json_data['eth_src']
+                eth_type = json_data['eth_type']
+                gid = json_data['gid']
+                iface = json_data['iface']
+                ip_id = json_data['ip_id']
+                ip_len = json_data['ip_len']
+                msg = json_data['msg']
+                mpls = json_data['mpls']
+                pkt_gen = json_data['pkt_gen']
+                pkt_len = json_data['pkt_len']
+                pkt_num = json_data['pkt_num']
+                priority = json_data['priority']
+                proto = json_data['proto']
+                rev = json_data['rev']
+                rule = json_data['rule']
+                service = json_data['service']
+                sid = json_data['sid']
+                src_addr = json_data['src_addr']
+                src_ap = json_data['src_ap']
+                src_port = json_data['src_port']
+                tcp_ack = json_data['tcp_ack']
+                tcp_flags = json_data['tcp_flags']
+                tcp_len = json_data['tcp_len']
+                tcp_seq = json_data['tcp_seq']
+                tcp_win = json_data['tcp_win']
+                tos = json_data['tos']
+                ttl = json_data['ttl']
+                vlan = json_data['vlan']
                 timestamp = json_data['timestamp']
+
+
                 # Extract other fields as needed
 
                 conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
@@ -127,10 +167,10 @@ def insert_alert():
                     continue
 
                 # Define the SQL query to insert the data into the database
-                insert_query = "INSERT INTO alerts (seconds, action, class, timestamp) VALUES (%s, %s, %s, %s)"
+                insert_query = "INSERT INTO alerts (seconds, action, class, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, timestamp) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
                 # Execute the SQL query with the data
-                cursor.execute(insert_query, (seconds, action, class_name, new_timestamp))
+                cursor.execute(insert_query, (seconds, action, class_name, dir, dst_addr, dst_ap, dst_port, eth_dst, eth_len, eth_src, eth_type, gid, iface, ip_id, ip_len, msg, mpls, pkt_gen, pkt_len, pkt_num, priority, proto, rev, rule, service, sid, src_addr, src_ap, src_port, tcp_ack, tcp_flags, tcp_len, tcp_seq, tcp_win, tos, ttl, vlan, new_timestamp))
 
                 # Commit the changes to the database
                 conn.commit()
