@@ -48,6 +48,7 @@ def get_data():
 @cross_origin()
 def get_alerts():
     # Fetch data from the database
+    conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
     cur = conn.cursor()
     cur.execute("SELECT * FROM alerts;")
     data = cur.fetchall()
