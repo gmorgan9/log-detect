@@ -141,7 +141,7 @@ def insert_alert():
                 # print(json_data)
                 # Extract the data from the JSON object
                 # idno = random.randint(100000, 999999)
-                message = json_data
+                # message = json_data
                 seconds = json_data['seconds']
                 action = json_data['action']
                 class_name = json_data['class']

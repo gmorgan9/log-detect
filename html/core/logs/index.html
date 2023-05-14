@@ -115,66 +115,69 @@
             </table>
           </div>
           <div class="col-4 border" style="border-radius: 5px; padding: 5px;">
-            <p>Log Notes</p>
+            <p id="log-notes">Log Notes</p>
           </div>
         </div>
       </div>
       
-        
-        <script>
-          // Fetch data from the API
-          fetch('https://ld-api.morganserver.com/api/logs')
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-            .then(data => {
-              console.log('API Data:', data);
-        
-              var tableBody = document.getElementById('table-body');
-              data.forEach(function (item) {
-                var row = document.createElement('tr');
-        
-                var viewCell = document.createElement('td');
-                viewCell.className = '';
-                var viewLink = document.createElement('a');
-                viewLink.className = 'text-decoration-none text-secondary';
-                viewLink.href = ''; // Add the appropriate URL for viewing details
-                var viewIcon = document.createElement('i');
-                viewIcon.className = 'bi bi-eye';
-                viewLink.appendChild(viewIcon);
-                viewCell.appendChild(viewLink);
-                row.appendChild(viewCell);
-        
-                var timeCell = document.createElement('td');
-                // var idLink = document.createElement('a');
-                // idLink.className = 'text-decoration-none';
-                // idLink.href = ''; // Add the appropriate URL for the ID
-                timeCell.textContent = item.timestamp;
-                // idCell.appendChild(idLink);
-                row.appendChild(timeCell);
-        
-                var descriptionCell = document.createElement('td');
-                descriptionCell.textContent = item.description;
-                row.appendChild(descriptionCell);
-        
-                var targetCell = document.createElement('td');
-                targetCell.textContent = item.target;
-                row.appendChild(targetCell);
-        
-                var priorityCell = document.createElement('td');
-                priorityCell.textContent = item.priority;
-                row.appendChild(priorityCell);
-        
-                tableBody.appendChild(row);
+      <script>
+        // Fetch data from the API
+        fetch('https://ld-api.morganserver.com/api/logs')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            console.log('API Data:', data);
+      
+            var tableBody = document.getElementById('table-body');
+            var logNotes = document.getElementById('log-notes');
+      
+            data.forEach(function (item) {
+              var row = document.createElement('tr');
+      
+              var viewCell = document.createElement('td');
+              viewCell.className = '';
+              var viewLink = document.createElement('a');
+              viewLink.className = 'text-decoration-none text-secondary';
+              viewLink.href = '#'; // Add the appropriate URL for viewing details
+              var viewIcon = document.createElement('i');
+              viewIcon.className = 'bi bi-eye';
+              viewLink.appendChild(viewIcon);
+              viewCell.appendChild(viewLink);
+              row.appendChild(viewCell);
+      
+              var timeCell = document.createElement('td');
+              timeCell.textContent = item.timestamp;
+              row.appendChild(timeCell);
+      
+              var descriptionCell = document.createElement('td');
+              descriptionCell.textContent = item.description;
+              row.appendChild(descriptionCell);
+      
+              var targetCell = document.createElement('td');
+              targetCell.textContent = item.target;
+              row.appendChild(targetCell);
+      
+              var priorityCell = document.createElement('td');
+              priorityCell.textContent = item.priority;
+              row.appendChild(priorityCell);
+      
+              tableBody.appendChild(row);
+      
+              // Event listener for the eye icon click
+              viewLink.addEventListener('click', function () {
+                logNotes.textContent = item.description;
               });
-            })
-            .catch(error => {
-              console.error('Error:', error);
             });
-        </script>
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      </script>
+      
         
 
     </div>
