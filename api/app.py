@@ -106,6 +106,7 @@ def insert_alert():
                 class_name = json_data['class']
                 # Extract other fields as needed
 
+                conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
                 # Create a cursor object to interact with the database
                 cursor = conn.cursor()
 
