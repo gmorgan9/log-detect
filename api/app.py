@@ -156,7 +156,7 @@ def insert_alert():
                 new_timestamp = local_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')
 
                 # Check if the alert with the same timestamp already exists in the database
-                select_query = "SELECT COUNT(*) FROM alerts WHERE timestamp = %s AND idno = %s"
+                select_query = "SELECT COUNT(*) FROM alerts WHERE timestamp = %s OR idno = %s"
                 cursor.execute(select_query, (new_timestamp, idno_str,))
                 count = cursor.fetchone()[0]
 
