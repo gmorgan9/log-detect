@@ -118,7 +118,7 @@ def insert_alert():
                 # Convert the timestamp to a datetime object in the local time zone
                 local_datetime = datetime.strptime(timestamp, '%m/%d-%H:%M:%S.%f').replace(year=datetime.now().year)
                 local_datetime = local_timezone.localize(local_datetime)
-                new_timestamp = local_datetime.strftime('%m/%d-%H:%M:%S.%f')
+                new_timestamp = local_datetime.strftime('%Y-%m-%d %h:%m:%s')
                 # new_timestamp = datetime.strptime(timestamp, '%m/%d-%H:%M:%S.%f').strftime('%Y-%m-%d %H:%M:%S.%f')
                 # Define the SQL query to insert the data into the database
                 insert_query = "INSERT INTO alerts (seconds, action, class, timestamp) VALUES (%s, %s, %s, %s)"
