@@ -110,7 +110,7 @@ def insert_alert():
                 cursor = conn.cursor()
 
                 # Define the SQL query to insert the data into the database
-                insert_query = "INSERT INTO alerts (seconds, action, class_name) VALUES (%s, %s, %s)"
+                insert_query = "INSERT INTO alerts (seconds, action, class) VALUES (%s, %s, %s)"
 
                 # Execute the SQL query with the data
                 cursor.execute(insert_query, (id, seconds, action, class_name))
