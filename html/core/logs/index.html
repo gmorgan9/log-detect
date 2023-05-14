@@ -182,13 +182,13 @@
                 viewCell.appendChild(viewLink);
                 row.appendChild(viewCell);
         
-                var idCell = document.createElement('td');
+                var timeCell = document.createElement('td');
                 // var idLink = document.createElement('a');
                 // idLink.className = 'text-decoration-none';
                 // idLink.href = ''; // Add the appropriate URL for the ID
-                idLink.textContent = item.timestamp;
+                timeCell.textContent = item.timestamp;
                 // idCell.appendChild(idLink);
-                row.appendChild(idCell);
+                row.appendChild(timeCell);
         
                 var statusCell = document.createElement('td');
                 statusCell.textContent = item.status;
