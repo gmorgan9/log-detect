@@ -70,7 +70,7 @@ def get_alerts():
         })
 
     # Return the data as JSON
-    return jsonify(data)
+    return jsonify(result)
 
 
 
