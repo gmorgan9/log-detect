@@ -113,7 +113,7 @@ def insert_alert():
                 insert_query = "INSERT INTO alerts (seconds, action, class) VALUES (%s, %s, %s)"
 
                 # Execute the SQL query with the data
-                cursor.execute(insert_query, (id, seconds, action, class_name))
+                cursor.execute(insert_query, (seconds, action, class_name))
 
                 # Commit the changes to the database
                 conn.commit()
