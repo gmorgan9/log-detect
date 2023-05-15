@@ -183,7 +183,7 @@ def insert_alert():
 
     if result:
         # Check if the log ID already exists in the alerts table
-        check_query = "SELECT COUNT(*) FROM alerts WHERE id = %s"
+        check_query = "SELECT COUNT(*) FROM alerts WHERE log_id = %s"
         cursor.execute(check_query, (log_id,))
         count = cursor.fetchone()[0]
 
