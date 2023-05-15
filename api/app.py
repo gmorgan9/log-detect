@@ -107,7 +107,7 @@ def get_alerts():
         new_description = "[" + priority + "]Alert: " + row[4]
         result.append({
             'id': row[1],
-            'description': row[4],
+            'description': new_description,
             'timestamp': formatted_timestamp,
             # 'target': row[5],
             'priority': priority,
