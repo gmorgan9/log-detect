@@ -159,10 +159,10 @@
         <script>
 
 const pathSegments = window.location.pathname.split('/');
-const alertId = pathSegments[pathSegments.length - 1];
+const alertId = pathSegments[pathSegments.length -1];
 
 
-        console.log(pathSegments);
+        console.log(alertId);
           // Fetch data from the API
           fetch('https://ld-api.morganserver.com/api/alerts')
             .then(response => {
