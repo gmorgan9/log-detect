@@ -197,10 +197,18 @@ def insert_alert():
 
             # Commit the changes
             conn.commit()
+
+            # Delete the log from the logs table
+            delete_query = "DELETE FROM logs WHERE id = %s"
+            cursor.execute(delete_query, (log_id,))
+
+            # Commit the deletion
+            conn.commit()
+
             cursor.close()
             conn.close()
 
-            return 'Alert inserted into the database'
+            return 'Alert inserted into the database and log deleted'
         else:
             # Log ID already exists in the alerts table, skip insertion
             cursor.close()
@@ -210,6 +218,7 @@ def insert_alert():
         cursor.close()
         conn.close()
         return 'Log ID not found'
+
 
 
 
