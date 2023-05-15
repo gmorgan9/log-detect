@@ -207,16 +207,11 @@
 
               // Get the alert button element
               var alertButton = document.getElementById('alertButton');
-
+                          
               // Add a click event listener to the button
-              alertButton.addEventListener('click', function (event) {
-                var logId;
-              
-                // Traverse the DOM to find the ID of the selected log
-                var row = event.target.closest('tr'); // Find the closest <tr> element
-                if (row) {
-                  logId = row.dataset.logId; // Assuming the ID is stored as a data attribute
-                }
+              alertButton.addEventListener('click', function () {
+                // Fetch the ID of the selected log
+                var logId = item.id; // Assuming the ID is available in the "id" property of the "item" object
               
                 if (logId) {
                   // Send an AJAX request to the server to insert the alert
@@ -231,6 +226,7 @@
                   xhr.send('log_id=' + encodeURIComponent(logId));
                 }
               });
+
 
 
               // LOG NOTES
