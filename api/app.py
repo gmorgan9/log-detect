@@ -176,7 +176,6 @@ def insert_alert():
     cursor = conn.cursor()
 
     log_id = request.form['log_id']
-    print("Received log_id:", log_id)
     select_query = "SELECT priority, msg FROM logs WHERE id = %s"
     cursor.execute(select_query, (log_id,))
     result = cursor.fetchone()
