@@ -19,9 +19,9 @@
 }
 
 .oval-background {
-  border-radius: 50px;
-  background-color: pink;
-  padding: 4px 12px;
+  border-radius: 50px !important;
+  background-color: pink !important;
+  padding: 4px 12px !important;
 }
 
 
