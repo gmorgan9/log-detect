@@ -301,7 +301,6 @@
 
 
               // Alert Creation
-              // Get the alert button element
               var alertButton = document.getElementById('alertButton');
 
               // Add a click event listener to the button
@@ -309,6 +308,7 @@
                 // Fetch the ID of the selected log
                 var logId = item.id; // Assuming the ID is available in the "id" property of the "item" object
 
+                console.log('Selected log ID:', logId);
                 if (logId) {
                   // Print the logId to the console
                   console.log('Selected log ID:', logId);
