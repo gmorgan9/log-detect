@@ -45,6 +45,7 @@ function getBackgroundColor() {
     var htmlElement = document.querySelector('html[data-bs-theme]');
     var currentTheme = htmlElement.dataset.bsTheme;
     var paperBgColor;
+    console.log(currentTheme);
     if (currentTheme === 'dark') {
       // paperBgColor = '#2c3035';
       paperBgColor = '#222529';
