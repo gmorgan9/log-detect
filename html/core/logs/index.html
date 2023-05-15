@@ -264,72 +264,97 @@
                 createPagination(totalPages);
               }
 
+              // function createPagination(totalPages) {
+              //   var paginationContainer = document.querySelector('.pagination');
+              //   paginationContainer.innerHTML = ''; // Clear the pagination container
+              
+              //   var previousLink = document.createElement('a');
+              //   previousLink.href = '#';
+              //   previousLink.textContent = 'Previous';
+              //   previousLink.classList.add('page-link');
+              //   if (currentPage === 1) {
+              //     previousLink.classList.add('disabled');
+              //   } else {
+              //     previousLink.addEventListener('click', function (event) {
+              //       event.preventDefault();
+              //       currentPage -= 1;
+              //       renderTable();
+              //     });
+              //   }
+              
+              //   var previousItem = document.createElement('li');
+              //   previousItem.classList.add('page-item');
+              //   previousItem.appendChild(previousLink);
+              
+              //   paginationContainer.appendChild(previousItem);
+              
+              //   for (var i = 1; i <= totalPages; i++) {
+              //     var pageLink = document.createElement('a');
+              //     pageLink.href = '#';
+              //     pageLink.textContent = i;
+              //     pageLink.classList.add('page-link');
+              //     if (i === currentPage) {
+              //       pageLink.classList.add('active');
+              //     }
+                
+              //     pageLink.addEventListener('click', function (event) {
+              //       event.preventDefault();
+              //       currentPage = parseInt(this.textContent);
+              //       renderTable();
+              //     });
+                
+              //     var pageItem = document.createElement('li');
+              //     pageItem.classList.add('page-item');
+              //     pageItem.appendChild(pageLink);
+                
+              //     paginationContainer.appendChild(pageItem);
+              //   }
+              
+              //   var nextLink = document.createElement('a');
+              //   nextLink.href = '#';
+              //   nextLink.textContent = 'Next';
+              //   nextLink.classList.add('page-link');
+              //   if (currentPage === totalPages) {
+              //     nextLink.classList.add('disabled');
+              //   } else {
+              //     nextLink.addEventListener('click', function (event) {
+              //       event.preventDefault();
+              //       currentPage += 1;
+              //       renderTable();
+              //     });
+              //   }
+              
+              //   var nextItem = document.createElement('li');
+              //   nextItem.classList.add('page-item');
+              //   nextItem.appendChild(nextLink);
+              
+              //   paginationContainer.appendChild(nextItem);
+              // }
               function createPagination(totalPages) {
-                var paginationContainer = document.querySelector('.pagination');
-                paginationContainer.innerHTML = ''; // Clear the pagination container
-              
-                var previousLink = document.createElement('a');
-                previousLink.href = '#';
-                previousLink.textContent = 'Previous';
-                previousLink.classList.add('page-link');
-                if (currentPage === 1) {
-                  previousLink.classList.add('disabled');
-                } else {
-                  previousLink.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    currentPage -= 1;
-                    renderTable();
-                  });
-                }
-              
-                var previousItem = document.createElement('li');
-                previousItem.classList.add('page-item');
-                previousItem.appendChild(previousLink);
-              
-                paginationContainer.appendChild(previousItem);
-              
-                for (var i = 1; i <= totalPages; i++) {
-                  var pageLink = document.createElement('a');
-                  pageLink.href = '#';
-                  pageLink.textContent = i;
-                  pageLink.classList.add('page-link');
-                  if (i === currentPage) {
-                    pageLink.classList.add('active');
-                  }
-                
-                  pageLink.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    currentPage = parseInt(this.textContent);
-                    renderTable();
-                  });
-                
-                  var pageItem = document.createElement('li');
-                  pageItem.classList.add('page-item');
-                  pageItem.appendChild(pageLink);
-                
-                  paginationContainer.appendChild(pageItem);
-                }
-              
-                var nextLink = document.createElement('a');
-                nextLink.href = '#';
-                nextLink.textContent = 'Next';
-                nextLink.classList.add('page-link');
-                if (currentPage === totalPages) {
-                  nextLink.classList.add('disabled');
-                } else {
-                  nextLink.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    currentPage += 1;
-                    renderTable();
-                  });
-                }
-              
-                var nextItem = document.createElement('li');
-                nextItem.classList.add('page-item');
-                nextItem.appendChild(nextLink);
-              
-                paginationContainer.appendChild(nextItem);
-              }
+    var paginationContainer = document.querySelector('.pagination');
+    paginationContainer.innerHTML = ''; // Clear the pagination container
+
+    for (var i = 1; i <= totalPages; i++) {
+      var pageLink = document.createElement('a');
+      pageLink.href = '#';
+      pageLink.textContent = i;
+      pageLink.classList.add('page-link');
+      if (i === currentPage) {
+        pageLink.classList.add('active');
+      }
+
+      pageLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        currentPage = parseInt(this.textContent);
+        renderTable();
+      });
+
+      var pageItem = document.createElement('li');
+      pageItem.appendChild(pageLink);
+
+      paginationContainer.appendChild(pageItem);
+    }
+  }
 
               
 
