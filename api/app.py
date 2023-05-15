@@ -246,21 +246,12 @@ def insert_alert():
             description = result[2]
             status = 2
 
-            # Retrieve the latest idno value from the alerts table
-            get_idno_query = "SELECT MAX(CAST(idno AS INTEGER)) FROM alerts"
-            cursor.execute(get_idno_query)
-            latest_idno = cursor.fetchone()[0]
-
-            if latest_idno:
-                # Increment the idno value
-                new_idno = str(int(latest_idno) + 1).zfill(6)
-            else:
-                # Set the initial idno value
-                new_idno = None
+            # Generate the next idno value
+            next_idno = generate_next_idno(cursor)
 
             # Insert the data into the alerts table
             insert_query = "INSERT INTO alerts (idno, seconds, priority, description, status) VALUES (%s, %s, %s, %s, %s)"
-            cursor.execute(insert_query, (new_idno, seconds, priority, description, status,))
+            cursor.execute(insert_query, (next_idno, seconds, priority, description, status,))
 
             # Commit the changes
             conn.commit()
@@ -289,6 +280,17 @@ def insert_alert():
         cursor.close()
         conn.close()
         return 'Log seconds not found'
+    
+def generate_next_idno(cursor):
+    select_query = "SELECT MAX(idno) FROM alerts"
+    cursor.execute(select_query)
+    result = cursor.fetchone()[0]
+    if result:
+        max_idno = int(result)
+        next_idno = str(max_idno + 1).zfill(6)
+    else:
+        next_idno = '000001'
+    return next_idno
 
 def delete_line_from_file(file_path, log_seconds):
     lines = []
