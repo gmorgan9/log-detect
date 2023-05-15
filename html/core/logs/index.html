@@ -105,33 +105,7 @@
           <button class="btn btn-link text-decoration-none text-secondary" style="margin-top: -7px" onclick="postData()" style="font-size: 16px;">
             <i class="bi bi-arrow-clockwise"></i>
           </button>
-          <div id="count"></div>
-          &nbsp;&nbsp;
-          <!-- Display logs count  -->
-          <script>
-            // fetch('https://ld-api.morganserver.com/api/logs')
-            //   .then(response => {
-            //     if (!response.ok) {
-            //       throw new Error('Network response was not ok');
-            //     }
-            //     return response.json();
-            //   })
-            //   .then(data => {
-            //     console.log('API Data:', data);
-              
-            //     // Count the number of logs
-            //     var logCount = data.length;
-            //     console.log('Number of logs:', logCount);
-              
-            //     // Update the HTML element with the log count
-            //     var rowInfoElement = document.querySelector('.text-secondary');
-            //     rowInfoElement.style.fontSize = '14px';
-            //     rowInfoElement.textContent = logCount + ' logs (Page 1 of 1)';
-            //   })
-            //   .catch(error => {
-            //     console.error('Error:', error);
-            //   });
-          </script>
+          <div id="count" class="text-secondary"></div>
       </div>
 
       <div class="container">
