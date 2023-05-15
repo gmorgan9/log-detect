@@ -230,7 +230,7 @@ def insert_alert():
 
     log_id = request.form['log_id']
     # log_seconds = request.form['log_seconds']
-    select_query = "SELECT seconds, priority, msg, status FROM logs WHERE id = %s"
+    select_query = "SELECT seconds, priority, msg FROM logs WHERE id = %s"
     cursor.execute(select_query, (log_id,))
     result = cursor.fetchone()
 
@@ -244,7 +244,7 @@ def insert_alert():
             seconds = result[0]
             priority = result[1]
             description = result[2]
-            status = result[3]
+            status = 2
 
             # Insert the data into the alerts table
             insert_query = "INSERT INTO alerts (seconds, priority, description, status) VALUES (%s, %s, %s, %s)"
