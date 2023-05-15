@@ -138,7 +138,8 @@ def insert_alert():
     conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
     cursor = conn.cursor()
 
-    log_id = request.form['log_id'] # get the log ID from the AJAX request
+    log_id = request.form['log_id']
+    print("Received log_id:", log_id)
     select_query = "SELECT priority, msg FROM logs WHERE id = %s"
     cursor.execute(select_query, (log_id,))
     result = cursor.fetchone()
