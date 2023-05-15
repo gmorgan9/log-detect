@@ -150,10 +150,12 @@
               row.appendChild(viewCell);
       
               var timeCell = document.createElement('td');
-              timeCell.textContent = item.timestamp;
-              timeCell.classList.add('oval-background');
-              timeCell.document.createElement('span');
+              var timestampSpan = document.createElement('span');
+              timestampSpan.textContent = item.timestamp;
+              timestampSpan.classList.add('oval-background');
+              timeCell.appendChild(timestampSpan);
               row.appendChild(timeCell);
+
 
               // var hrElement = document.createElement('hr');
               //   logNotes.appendChild(hrElement);
