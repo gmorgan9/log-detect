@@ -267,13 +267,11 @@
         }
       }
     } else if (fieldName === 'message') {
-      // Convert the JSON object to a string representation
-      var messageString = JSON.stringify(item[fieldName]);
-
-      // Create a <pre> element to preserve formatting of the JSON string
-      var preElement = document.createElement('pre');
-      preElement.textContent = messageString;
-      valueCell.appendChild(preElement);
+      // Beautify the JSON message
+      var messageValue = JSON.stringify(item[fieldName], null, 2); // Use an indentation level of 2 spaces
+      var pre = document.createElement('pre');
+      pre.textContent = messageValue;
+      valueCell.appendChild(pre);
     } else {
       valueCell.textContent = item[fieldName];
     }
