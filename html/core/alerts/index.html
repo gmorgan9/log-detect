@@ -192,29 +192,21 @@
                 row.appendChild(idCell);
         
                 var statusCell = document.createElement('td');
+                var statusCell = document.createElement('td');
                 statusCell.textContent = item.status;
 
-                // Add class based on status
-                var statusClass = getStatusClass(item.status);
-                statusCell.classList.add(statusClass);
+                if (item.status == "New") {
+                  statusCell.classList.add("badge", "text-bg-info");
+                } else if (item.status == "Open") {
+                  statusCell.classList.add("badge", "text-bg-danger");
+                } else if (item.status == "Pending") {
+                  statusCell.classList.add("badge", "text-bg-primary");
+                } else if (item.status == "Closed") {
+                  statusCell.classList.add("badge", "text-bg-secondary");
+                }
 
                 row.appendChild(statusCell);
 
-                // Function to determine the class based on status
-                function getStatusClass(status) {
-                  switch (status) {
-                    case 'New':
-                      return 'badge text-bg-info';
-                    case 'Open':
-                      return 'badge text-bg-danger';
-                    case 'Pending':
-                      return 'badge text-bg-primary';
-                    case 'Closed':
-                      return 'badge text-bg-secondary';
-                    default:
-                      return '';
-                  }
-                }
         
                 var summaryCell = document.createElement('td');
                 summaryCell.textContent = item.description;
