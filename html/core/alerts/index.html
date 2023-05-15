@@ -199,7 +199,7 @@
                 idLink.setAttribute('data-bs-toggle', 'modal');  // Set the data-bs-toggle attribute
                 idLink.setAttribute('data-bs-target', '#focus' + item.id);  // Set the data-bs-target attribute
                 var element = document.getElementById('focus');
-                element.innerHTML += '_' + item.id;
+                element.innerHTML += item.id;
 
                 idLink.textContent = '#' + item.id;
                 idCell.appendChild(idLink);
