@@ -138,15 +138,30 @@ def insert_alert():
     conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
     cursor = conn.cursor()
 
-    # Get the data from the selected log on the table
     log_id = request.form['log_id'] # get the log ID from the AJAX request
-    select_query = "SELECT status, priority, description FROM logs WHERE id = %s"
+    select_query = "SELECT priority, msg FROM logs WHERE id = %s"
     cursor.execute(select_query, (log_id,))
     result = cursor.fetchone()
 
+    priority_mapping = {
+            1: "Critical",
+            2: "High",
+            3: "Medium",
+            4: "Low"
+        }
+    
+    if result:
+        priority = priority_mapping.get(result[0], "Unknown")
+        description = result[1]
+        status = 2
+    else:
+        priority = None
+        description = None
+        status = 1
+
     # Insert the data into the alerts table
-    insert_query = "INSERT INTO alerts (status, priority, description) VALUES (%s, %s, %s)"
-    cursor.execute(insert_query, result)
+    insert_query = "INSERT INTO alerts (priority, description, status) VALUES (%s, %s, %s)"
+    cursor.execute(insert_query, priority, description, status, )
 
     # Commit the changes and close the cursor and database connection
     conn.commit()
