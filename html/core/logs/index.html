@@ -151,8 +151,12 @@
       
               var timeCell = document.createElement('td');
               timeCell.textContent = item.timestamp;
-              timeCell.classList.add('oval-background'); // Add a CSS class to the cell
+              timeCell.classList.add('oval-background');
+              timeCell.document.createElement('oval-background');
               row.appendChild(timeCell);
+
+              // var hrElement = document.createElement('hr');
+              //   logNotes.appendChild(hrElement);
 
       
               var descriptionCell = document.createElement('td');

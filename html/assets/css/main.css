@@ -19,10 +19,9 @@
 }
 
 .oval-background {
-  position: relative !important;
-  padding: 4px 12px !important; /* Adjust padding as needed */
-  border-radius: 50px !important; /* Use half the height to create an oval shape */
-  background-color: #f0f0f0 !important; /* Specify your desired background color */
+  border-radius: 50px;
+  background-color: #f0f0f0;
+  padding: 4px 12px;
 }
 
 
