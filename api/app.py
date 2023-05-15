@@ -108,7 +108,7 @@ def get_alerts():
             4: "Closed"
         }
         message_string = json.dumps(row[7], indent=4)
-        formatted_timestamp = row[6].strftime('%Y-%m-%dT%H:%M:%S')
+        formatted_timestamp = row[6].strftime('%Y-%m-%dT%H:%M:%SZ')
         priority = priority_mapping.get(row[3], "Unknown")
         status = status_mapping.get(row[2], "Unknown")
         new_description = "[" + priority + "]Alert: " + row[4]
