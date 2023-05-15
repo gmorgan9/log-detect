@@ -65,6 +65,7 @@ def get_alerts():
             3: "Medium",
             4: "Low"
         }
+        message_string = json.dumps(row[39])
         formatted_timestamp = row[38].strftime('%Y-%m-%dT%H:%M:%S')
         priority = priority_mapping.get(row[21], "Unknown")
         result.append({
@@ -72,7 +73,7 @@ def get_alerts():
             'timestamp': formatted_timestamp,
             'target': row[5],
             'priority': priority,
-            'message': row[39]
+            'message': message_string
         })
 
     # Return the data as JSON
