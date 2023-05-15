@@ -209,20 +209,29 @@
               var alertButton = document.getElementById('alertButton');
 
               // Add a click event listener to the button
-              alertButton.addEventListener('click', function () {
-                var logId = item.id; // Get the ID of the selected log
+              alertButton.addEventListener('click', function (event) {
+                var logId;
               
-                // Send an AJAX request to the server to insert the alert
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'https://ld-api.morganserver.com/insert_alert', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onreadystatechange = function() {
-                  if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                    console.log('Alert inserted into the database');
-                  }
-                };
-                xhr.send('log_id=' + encodeURIComponent(logId));
+                // Traverse the DOM to find the ID of the selected log
+                var row = event.target.closest('tr'); // Find the closest <tr> element
+                if (row) {
+                  logId = row.dataset.logId; // Assuming the ID is stored as a data attribute
+                }
+              
+                if (logId) {
+                  // Send an AJAX request to the server to insert the alert
+                  var xhr = new XMLHttpRequest();
+                  xhr.open('POST', 'https://ld-api.morganserver.com/insert_alert', true);
+                  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                  xhr.onreadystatechange = function() {
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                      console.log('Alert inserted into the database');
+                    }
+                  };
+                  xhr.send('log_id=' + encodeURIComponent(logId));
+                }
               });
+
 
               // LOG NOTES
               viewLink.addEventListener('click', function () {
