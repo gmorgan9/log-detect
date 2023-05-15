@@ -238,7 +238,7 @@
 
                 if (minutesDiff < 60) {
                   requestedCell.textContent = minutesDiff + " minutes ago";
-                } else if (hoursDiff < 24) {
+                } else if (hoursDiff < 2) {
                   requestedCell.textContent = "about " + hoursDiff + " hour ago";
                 } else if (daysDiff == 0) {
                   requestedCell.textContent = "Today " + formatTime(requestedTimestamp);
