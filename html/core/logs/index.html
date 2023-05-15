@@ -300,8 +300,7 @@
               });
 
 
-              var id = item.timestamp
-              console.log(id)
+              
 
               var idCell = document.createElement('td');
               idCell.textContent = item.id;
@@ -314,7 +313,8 @@
               // Add a click event listener to the button
               alertButton.addEventListener('click', function () {
                 // Fetch the ID of the selected log
-                var logId = item['id']; // Assuming the log object is assigned to the "item" variable
+                var id = item.id
+                console.log(id)
 
                 if (logId) {
                   // Print the logId to the console
