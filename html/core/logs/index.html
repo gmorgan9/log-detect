@@ -27,23 +27,6 @@
     <title>Logs | LogDetect</title>
 
     <style>
-      .split {
-        display: flex;
-        flex-direction: row;
-        height: 467px;
-        width: 100%;
-      }
-    
-      .gutter {
-        background-color: #ddd;
-        width: 10px;
-        cursor: col-resize;
-      }
-    
-      .split > div {
-        overflow: auto;
-        padding: 5px 14px;
-      }
       .pagination {
         display: flex;
         justify-content: center;
@@ -140,8 +123,6 @@
           <div id="count" class="text-secondary"></div>
       </div>
 
-      <div class="split">
-        <div class="split__column">
       <div class="container">
         <div class="row">
           <div class="col-7">
@@ -158,17 +139,12 @@
               <tbody id="table-body"></tbody>
             </table>
           </div>
-        </div>
-        <div class="gutter"></div>
-        <div class="split__column">
           <div class="col-4 border" style="border-radius: 5px; padding: 5px; height: 467px; width: 545px; overflow: auto; padding: 5px 14px;">
             <h5>Log Notes</h5>
             <div id="log-notes" class="border" style="border-radius: 10px; padding: 5px 14px;">No Log Notes.</div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
       <div class="pagination mt-3">
         <ul class="pagination justify-content-center"></ul>
@@ -176,11 +152,6 @@
       
       
       <script>
-        Split(['.split__column', '.gutter'], {
-  sizes: [70, 30], // Initial sizes of the columns (adjust as needed)
-  minSize: 200, // Minimum size for each column (adjust as needed)
-  gutterSize: 10 // Size of the splitter (adjust as needed)
-});
           var currentPage = 1; // Variable to track the current page
           var rowsPerPage = 10; // Number of rows to display per page
           var data = []; // Array to store the fetched data
