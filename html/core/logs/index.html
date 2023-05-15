@@ -162,26 +162,35 @@
               viewCell.appendChild(viewLink);
               row.appendChild(viewCell);
 
-              function getBackgroundColor() {
-                var theme = document.querySelector('html[data-bs-theme]');
-                var currentTheme = theme.dataset.bsTheme;
-                console.log(currentTheme)
-                if (currentTheme === 'dark') {
-                  return '#242628';
-                } else {
-                  return '#f0f0f0';
-                }
-              }
-      
               var timeCell = document.createElement('td');
-              var timestampSpan = document.createElement('span');
-              timestampSpan.textContent = item.timestamp;
-              timestampSpan.classList.add('oval-background');
-              timestampSpan.style.padding = '4px 12px';
-              timestampSpan.style.borderRadius = '50px';
-              timestampSpan.style.backgroundColor = getBackgroundColor();
-              timeCell.appendChild(timestampSpan);
-              row.appendChild(timeCell);
+var timestampSpan = document.createElement('span');
+timestampSpan.textContent = item.timestamp;
+timestampSpan.classList.add('oval-background');
+timestampSpan.style.padding = '4px 12px';
+timestampSpan.style.borderRadius = '50px';
+timestampSpan.style.backgroundColor = getBackgroundColor();
+timeCell.appendChild(timestampSpan);
+row.appendChild(timeCell);
+
+var observer = new MutationObserver(function (mutationsList) {
+  for (var mutation of mutationsList) {
+    if (mutation.attributeName === 'data-bs-theme') {
+      timestampSpan.style.backgroundColor = getBackgroundColor();
+    }
+  }
+});
+
+observer.observe(document.documentElement, { attributes: true });
+
+function getBackgroundColor() {
+  var theme = document.documentElement.getAttribute('data-bs-theme');
+  if (theme === 'dark') {
+    return '#242628'; // Dark mode background color
+  } else {
+    return '#f0f0f0'; // Light mode background color
+  }
+}
+
 
 
 
