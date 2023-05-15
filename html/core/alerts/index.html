@@ -193,18 +193,15 @@
         
                 var statusCell = document.createElement('td');
                 statusCell.textContent = item.status;
+                var statusSpan = document.createElement('span');
 
                 if (item.status == "New") {
-                  var statusSpan = document.createElement('span');
                   statusSpan.classList.add("badge", "text-bg-info");
                 } else if (item.status == "Open") {
-                  var statusSpan = document.createElement('span');
                   statusSpan.classList.add("badge", "text-bg-danger");
                 } else if (item.status == "Pending") {
-                  var statusSpan = document.createElement('span');
                   statusSpan.classList.add("badge", "text-bg-primary");
                 } else if (item.status == "Closed") {
-                  var statusSpan = document.createElement('span');
                   statusSpan.classList.add("badge", "text-bg-secondary");
                 }
                 statusCell.appendChild(statusSpan);
