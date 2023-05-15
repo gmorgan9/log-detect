@@ -196,88 +196,97 @@
 
               // LOG NOTES
               viewLink.addEventListener('click', function () {
-                logNotes.innerHTML = ''; // Clear any existing content
+  logNotes.innerHTML = ''; // Clear any existing content
 
-                var fieldMapping = {
-                  timestamp: '@timestamp',
-                  description: 'log.description',
-                  priority: 'log.severity',
-                  target: 'log.destination_ip',
-                  message: 'message'
-                };
-              
-                var fieldOrder = ['timestamp', 'description', 'priority', 'target', 'message']; // Specify the desired field order
-              
-                var table = document.createElement('table');
-                table.style.width = '100%';
-                table.classList.add('table', 'table-striped');
-              
-                // Create the table header
-                var thead = document.createElement('thead');
-                var headerRow = document.createElement('tr');
-                var fieldHeader = document.createElement('th');
-                fieldHeader.textContent = 'Field';
-                headerRow.appendChild(fieldHeader);
-                var valueHeader = document.createElement('th');
-                valueHeader.textContent = 'Value';
-                headerRow.appendChild(valueHeader);
-                thead.appendChild(headerRow);
-                table.appendChild(thead);
-              
-                // Create the table body
-                var tbody = document.createElement('tbody');
-              
-                // Create the table rows and cells based on the field order
-                fieldOrder.forEach(function (fieldName) {
-                  var row = document.createElement('tr');
-                
-                  // Create the "Field" cell
-                  var fieldCell = document.createElement('td');
-                  fieldCell.style.fontWeight = 'bold';
-                  fieldCell.textContent = fieldMapping[fieldName] || fieldName; // Use the mapped field name if available, otherwise use the original field name
-                  row.appendChild(fieldCell);
-                
-                  // Create the "Value" cell
-                  var valueCell = document.createElement('td');
-                  if (fieldName === 'timestamp') {
-                    var timestampSpan = document.createElement('span');
-                    timestampSpan.textContent = item[fieldName];
-                    timestampSpan.classList.add('oval-background');
-                    timestampSpan.style.padding = '4px 12px';
-                    timestampSpan.style.borderRadius = '50px';
-                    timestampSpan.style.backgroundColor = getBackgroundColor();
-                    valueCell.appendChild(timestampSpan);
-                  
-                    var observer = new MutationObserver(function (mutationsList) {
-                      for (var mutation of mutationsList) {
-                        if (mutation.attributeName === 'data-bs-theme') {
-                          timestampSpan.style.backgroundColor = getBackgroundColor();
-                        }
-                      }
-                    });
-                  
-                    observer.observe(document.documentElement, { attributes: true });
-                  
-                    function getBackgroundColor() {
-                      var theme = document.documentElement.getAttribute('data-bs-theme');
-                      if (theme === 'light') {
-                        return '#a0a6ad'; // Dark mode background color
-                      } else {
-                        return '#474b4f'; // Light mode background color
-                      }
-                    }
-                  } else {
-                    valueCell.textContent = item[fieldName];
-                  }
-                
-                  row.appendChild(valueCell);
-                  tbody.appendChild(row);
-                });
-              
-                table.appendChild(tbody);
-              
-                logNotes.appendChild(table);
-              });
+  var fieldMapping = {
+    timestamp: '@timestamp',
+    description: 'log.description',
+    priority: 'log.severity',
+    target: 'log.destination_ip',
+    message: 'message'
+  };
+
+  var fieldOrder = ['timestamp', 'description', 'priority', 'target', 'message']; // Specify the desired field order
+
+  var table = document.createElement('table');
+  table.style.width = '100%';
+  table.classList.add('table', 'table-striped');
+
+  // Create the table header
+  var thead = document.createElement('thead');
+  var headerRow = document.createElement('tr');
+  var fieldHeader = document.createElement('th');
+  fieldHeader.textContent = 'Field';
+  headerRow.appendChild(fieldHeader);
+  var valueHeader = document.createElement('th');
+  valueHeader.textContent = 'Value';
+  headerRow.appendChild(valueHeader);
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  // Create the table body
+  var tbody = document.createElement('tbody');
+
+  // Create the table rows and cells based on the field order
+  fieldOrder.forEach(function (fieldName) {
+    var row = document.createElement('tr');
+
+    // Create the "Field" cell
+    var fieldCell = document.createElement('td');
+    fieldCell.style.fontWeight = 'bold';
+    fieldCell.textContent = fieldMapping[fieldName] || fieldName; // Use the mapped field name if available, otherwise use the original field name
+    row.appendChild(fieldCell);
+
+    // Create the "Value" cell
+    var valueCell = document.createElement('td');
+    if (fieldName === 'timestamp') {
+      var timestampSpan = document.createElement('span');
+      timestampSpan.textContent = item[fieldName];
+      timestampSpan.classList.add('oval-background');
+      timestampSpan.style.padding = '4px 12px';
+      timestampSpan.style.borderRadius = '50px';
+      timestampSpan.style.backgroundColor = getBackgroundColor();
+      valueCell.appendChild(timestampSpan);
+
+      var observer = new MutationObserver(function (mutationsList) {
+        for (var mutation of mutationsList) {
+          if (mutation.attributeName === 'data-bs-theme') {
+            timestampSpan.style.backgroundColor = getBackgroundColor();
+          }
+        }
+      });
+
+      observer.observe(document.documentElement, { attributes: true });
+
+      function getBackgroundColor() {
+        var theme = document.documentElement.getAttribute('data-bs-theme');
+        if (theme === 'light') {
+          return '#a0a6ad'; // Dark mode background color
+        } else {
+          return '#474b4f'; // Light mode background color
+        }
+      }
+    } else if (fieldName === 'message') {
+      // Convert the JSON object to a string representation
+      var messageString = JSON.stringify(item[fieldName]);
+
+      // Create a <pre> element to preserve formatting of the JSON string
+      var preElement = document.createElement('pre');
+      preElement.textContent = messageString;
+      valueCell.appendChild(preElement);
+    } else {
+      valueCell.textContent = item[fieldName];
+    }
+
+    row.appendChild(valueCell);
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+
+  logNotes.appendChild(table);
+});
+
 
 
 
