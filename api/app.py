@@ -246,9 +246,21 @@ def insert_alert():
             description = result[2]
             status = 2
 
+            # Retrieve the latest idno value from the alerts table
+            get_idno_query = "SELECT MAX(CAST(idno AS INTEGER)) FROM alerts"
+            cursor.execute(get_idno_query)
+            latest_idno = cursor.fetchone()[0]
+
+            if latest_idno:
+                # Increment the idno value
+                new_idno = str(int(latest_idno) + 1).zfill(6)
+            else:
+                # Set the initial idno value
+                new_idno = None
+
             # Insert the data into the alerts table
-            insert_query = "INSERT INTO alerts (seconds, priority, description, status) VALUES (%s, %s, %s, %s)"
-            cursor.execute(insert_query, (seconds, priority, description, status,))
+            insert_query = "INSERT INTO alerts (idno, seconds, priority, description, status) VALUES (%s, %s, %s, %s, %s)"
+            cursor.execute(insert_query, (new_idno, seconds, priority, description, status,))
 
             # Commit the changes
             conn.commit()
