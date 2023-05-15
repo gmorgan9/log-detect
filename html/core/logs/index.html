@@ -101,8 +101,12 @@
 
 
 
-        <div class="float-start mt-3">
-          <!-- Display logs count -->
+        <div class="float-start d-flex mt-3">
+          <button class="btn btn-link text-decoration-none text-secondary" style="margin-top:-15px; font-size: 16px;" onclick="postData()">
+            <i class="bi bi-arrow-clockwise"></i>
+          </button>
+          &nbsp;&nbsp;
+          <!-- Display logs count  -->
           <script>
             fetch('https://ld-api.morganserver.com/api/logs')
               .then(response => {
@@ -118,42 +122,16 @@
                 var logCount = data.length;
                 console.log('Number of logs:', logCount);
               
-                // Create the button element
-                var button = document.createElement('button');
-                button.className = 'btn btn-link text-decoration-none text-secondary';
-                button.style.marginTop = '-15px';
-                button.style.fontSize = '16px';
-                button.onclick = postData;
-              
-                // Create the button icon
-                var icon = document.createElement('i');
-                icon.className = 'bi bi-arrow-clockwise';
-              
-                // Append the icon to the button
-                button.appendChild(icon);
-              
-                // Create the log count element
-                var logCountElement = document.createElement('span');
-                logCountElement.textContent = logCount + ' logs (Page 1 of 1)';
-              
-                // Create a container for the button and log count
-                var container = document.createElement('div');
-                container.className = 'd-flex';
-                container.appendChild(button);
-                container.appendChild(logCountElement);
-              
+                // Update the HTML element with the log count
                 var rowInfoElement = document.querySelector('.text-secondary');
                 rowInfoElement.style.fontSize = '14px';
-                rowInfoElement.innerHTML = '';
-                rowInfoElement.appendChild(container);
+                rowInfoElement.textContent = logCount + ' logs (Page 1 of 1)';
               })
               .catch(error => {
                 console.error('Error:', error);
               });
           </script>
         </div>
-        
-        
         
 
       <div class="container">
