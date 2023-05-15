@@ -194,9 +194,10 @@
               viewCell.appendChild(viewLink);
               row.appendChild(viewCell);
 
+              // LOG NOTES
               viewLink.addEventListener('click', function () {
                 logNotes.innerHTML = ''; // Clear any existing content
-                            
+
                 var fieldMapping = {
                   timestamp: 'log.timestamp',
                   description: 'log.description',
@@ -242,11 +243,12 @@
                 
                   tbody.appendChild(row);
                 });
-              
-                table.appendChild(tbody);
-              
-                logNotes.appendChild(table);
-              });
+
+                  table.appendChild(tbody);
+                              
+                  logNotes.appendChild(table);
+                });
+
 
 
 
