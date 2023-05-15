@@ -141,8 +141,11 @@
           <div id="count" class="text-secondary"></div>
       </div>
 
+
       <div class="container">
         <div class="row">
+          <div class="splitter">
+            <div id="first">
           <div class="col-7 resizable-column" id="column1">
             <table class="table table-striped" style="margin-left: -45px !important;">
               <thead>
@@ -157,6 +160,9 @@
               <tbody id="table-body"></tbody>
             </table>
           </div>
+        </div>
+        <div id="separator" >
+    <div id="second" >
           <div class="col-4 resizable-column" id="column2">
           <!-- <div class="col-4 border" style="border-radius: 5px; padding: 5px; height: 467px; width: 545px; overflow: auto; padding: 5px 14px;"> -->
             <h5>Log Notes</h5>
@@ -164,33 +170,67 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
 
       <div class="pagination mt-3">
         <ul class="pagination justify-content-center"></ul>
       </div>
+
+
+      <script>
+        // A function is used for dragging and moving
+function dragElement(element, direction)
+{
+    var   md; // remember mouse down info
+    const first  = document.getElementById("first");
+    const second = document.getElementById("second");
+
+    element.onmousedown = onMouseDown;
+
+    function onMouseDown(e)
+    {
+        //console.log("mouse down: " + e.clientX);
+        md = {e,
+              offsetLeft:  element.offsetLeft,
+              offsetTop:   element.offsetTop,
+              firstWidth:  first.offsetWidth,
+              secondWidth: second.offsetWidth
+             };
+
+        document.onmousemove = onMouseMove;
+        document.onmouseup = () => {
+            //console.log("mouse up");
+            document.onmousemove = document.onmouseup = null;
+        }
+    }
+
+    function onMouseMove(e)
+    {
+        //console.log("mouse move: " + e.clientX);
+        var delta = {x: e.clientX - md.e.clientX,
+                     y: e.clientY - md.e.clientY};
+
+        if (direction === "H" ) // Horizontal
+        {
+            // Prevent negative-sized elements
+            delta.x = Math.min(Math.max(delta.x, -md.firstWidth),
+                       md.secondWidth);
+
+            element.style.left = md.offsetLeft + delta.x + "px";
+            first.style.width = (md.firstWidth + delta.x) + "px";
+            second.style.width = (md.secondWidth - delta.x) + "px";
+        }
+    }
+}
+
+
+dragElement( document.getElementById("separator"), "H" );
+      </script>
       
       
       <script>
 
-// var splitContainer = document.getElementById('split-container');
-// var splitInstance = Split(['#split-container .col-7', '#split-container .col-4'], {
-//   sizes: [70, 30],
-//   minSize: [100, 100], // Minimum sizes for each column in pixels
-//   maxSize: [null, null] // Maximum sizes for each column in pixels
-// });
-
-var column1 = document.getElementById('column1');
-var column2 = document.getElementById('column2');
-
-Split([column1, column2], {
-  sizes: [70, 30],
-  elementStyle: function (dimension, size, gutterSize) {
-    return {
-      'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)',
-      'height': 'auto' // Set a fixed height for the columns
-    };
-  },
-});
 
 
 
