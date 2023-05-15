@@ -84,18 +84,18 @@
 const alertId = pathSegments[pathSegments.length - 1];
 
 
-        console.log(pathSegments);
+        // console.log(pathSegments);
 
 
 
-        // fetch('https://ld-api.morganserver.com/api/alerts/' + alertId) // Replace with your API endpoint
-        // .then(response => response.json())
-        // .then(ticket => {
-        //     // Process the ticket data and display it on the page
-        // })
-        // .catch(error => {
-        //     console.error('Error fetching alert:', error);
-        // });
+        fetch('https://ld-api.morganserver.com/api/alerts/' + alertId) // Replace with your API endpoint
+        .then(response => response.json())
+        .then(ticket => {
+            // Process the ticket data and display it on the page
+        })
+        .catch(error => {
+            console.error('Error fetching alert:', error);
+        });
 
     </script>
 
