@@ -197,12 +197,13 @@
               // LOG NOTES
               viewLink.addEventListener('click', function () {
                 logNotes.innerHTML = ''; // Clear any existing content
-                            
+
                 var fieldMapping = {
-                  timestamp: 'log.timestamp',
+                  timestamp: '@timestamp',
                   description: 'log.description',
-                  priority: 'log.priority',
-                  target: 'log.destination_ip'
+                  priority: 'log.severity',
+                  target: 'log.destination_ip',
+                  message: 'message'
                 };
               
                 var fieldOrder = ['timestamp', 'description', 'priority', 'target']; // Specify the desired field order
