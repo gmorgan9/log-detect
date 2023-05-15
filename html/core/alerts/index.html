@@ -114,7 +114,7 @@
           <tbody id="table-body"></tbody>
         </table>
 
-        <div class="modal fade" aria-labelledby="formModal_label" aria-hidden="true" id="focus" tabindex="-1">
+        <div class="modal fade" aria-labelledby="formModal_label" aria-hidden="true" id="focus_" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -198,6 +198,9 @@
                 idLink.href = '#myModal';  // Specify the ID of your Bootstrap modal
                 idLink.setAttribute('data-bs-toggle', 'modal');  // Set the data-bs-toggle attribute
                 idLink.setAttribute('data-bs-target', '#focus' + item.id);  // Set the data-bs-target attribute
+                var another = document.getElementById('focus_');
+                // var moon = document.getElementById('moon');
+                another.id += item.id;
                 idLink.textContent = '#' + item.id;
                 idCell.appendChild(idLink);
                 row.appendChild(idCell);
