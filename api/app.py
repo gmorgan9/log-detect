@@ -143,15 +143,16 @@ def insert_alert():
     cursor.execute(select_query, (log_id,))
     result = cursor.fetchone()
 
-    priority_mapping = {
-            1: "Critical",
-            2: "High",
-            3: "Medium",
-            4: "Low"
-        }
+    # priority_mapping = {
+    #         1: "Critical",
+    #         2: "High",
+    #         3: "Medium",
+    #         4: "Low"
+    #     }
     
     if result:
-        priority = priority_mapping.get(result[0], "Unknown")
+        # priority = priority_mapping.get(result[0], "Unknown")
+        priority = result[0]
         description = result[1]
         status = 2
     else:
