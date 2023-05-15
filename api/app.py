@@ -46,7 +46,7 @@ def get_data():
 
 @app.route('/api/logs', methods=['GET'])
 @cross_origin()
-def get_alerts():
+def get_logs():
     # Fetch data from the database
     conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
     cur = conn.cursor()
@@ -73,6 +73,42 @@ def get_alerts():
             'description': row[16],
             'timestamp': formatted_timestamp,
             'target': row[5],
+            'priority': priority,
+            'message': message_string
+        })
+
+    # Return the data as JSON
+    return jsonify(result)
+
+@app.route('/api/alerts', methods=['GET'])
+@cross_origin()
+def get_alerts():
+    # Fetch data from the database
+    conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM alerts;")
+    data = cur.fetchall()
+    cur.close()
+
+    import datetime
+
+    # Convert the data to a list of dictionaries
+    result = []
+    for row in data:
+        priority_mapping = {
+            1: "Critical",
+            2: "High",
+            3: "Medium",
+            4: "Low"
+        }
+        message_string = json.dumps(row[7], indent=4)
+        formatted_timestamp = row[6].strftime('%Y-%m-%dT%H:%M:%S')
+        priority = priority_mapping.get(row[3], "Unknown")
+        result.append({
+            'id': row[0],
+            'description': row[4],
+            'timestamp': formatted_timestamp,
+            # 'target': row[5],
             'priority': priority,
             'message': message_string
         })
