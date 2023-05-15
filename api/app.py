@@ -177,17 +177,18 @@ def insert_alert():
 
     log_id = request.form['log_id']
     print("Received log_id:", log_id)
-    select_query = "SELECT priority, msg FROM logs WHERE id = %s"
-    cursor.execute(select_query, (log_id,))
-    result = cursor.fetchone()
 
-    if result:
-        # Check if the log ID already exists in the alerts table
-        check_query = "SELECT COUNT(*) FROM alerts WHERE id = %s"
-        cursor.execute(check_query, (log_id,))
-        count = cursor.fetchone()[0]
+    # Check if the log ID already exists in the alerts table
+    check_query = "SELECT COUNT(*) FROM alerts WHERE id = %s"
+    cursor.execute(check_query, (log_id,))
+    count = cursor.fetchone()[0]
 
-        if count == 0:  # Log ID doesn't exist in the alerts table, proceed with insertion
+    if count == 0:  # Log ID doesn't exist in the alerts table, proceed with insertion
+        select_query = "SELECT priority, msg FROM logs WHERE id = %s"
+        cursor.execute(select_query, (log_id,))
+        result = cursor.fetchone()
+
+        if result:
             priority = result[0]
             description = result[1]
             status = 2
@@ -203,14 +204,14 @@ def insert_alert():
 
             return 'Alert inserted into the database'
         else:
-            # Log ID already exists in the alerts table, skip insertion
             cursor.close()
             conn.close()
-            return 'Log ID already exists in the alerts table'
+            return 'Log ID not found'
     else:
         cursor.close()
         conn.close()
-        return 'Log ID not found'
+        return 'Log ID already exists in the alerts table'
+
 
 
 
