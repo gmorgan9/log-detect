@@ -157,12 +157,6 @@
         </table>
         
         <script>
-
-const pathSegments = window.location.pathname.split('/');
-const alertId = pathSegments[pathSegments.length -2];
-
-
-        console.log(alertId);
           // Fetch data from the API
           fetch('https://ld-api.morganserver.com/api/alerts')
             .then(response => {
@@ -192,7 +186,7 @@ const alertId = pathSegments[pathSegments.length -2];
                 var idCell = document.createElement('td');
                 var idLink = document.createElement('a');
                 idLink.className = 'text-decoration-none';
-                idLink.href = '/core/alerts/focus/' + item.id;
+                idLink.href = '/core/alerts/focus/id=' + item.id;
                 idLink.textContent = '#' + item.id;
                 idCell.appendChild(idLink);
                 row.appendChild(idCell);

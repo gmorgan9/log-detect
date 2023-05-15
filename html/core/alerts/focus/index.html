@@ -80,16 +80,8 @@
 
     <script>
         // Get the ticket ID from the URL query string
-//         var url = "https://logdetect.morganserver.com/core/alerts/focus/000001"
-// const pathSegments = url.split('/');
-// const alertId = pathSegments[pathSegments.length - 1];
-
-
-
-//         console.log(pathSegments);
-
-
-        alertID = "000001"
+        const urlParams = new URLSearchParams(window.location.search);
+        const alertId = urlParams.get('id');
 
         fetch('https://ld-api.morganserver.com/api/focus/' + alertId) // Replace with your API endpoint
         .then(response => response.json())
