@@ -200,34 +200,6 @@
               viewCell.appendChild(viewLink);
               row.appendChild(viewCell);
 
-
-              // Event listener for the eye icon click
-              // Event listener for the eye icon click
-              viewLink.addEventListener('click', function () {
-                logNotes.innerHTML = ''; // Clear any existing content
-              
-                var timestampElement = document.createElement('p');
-                timestampElement.textContent = "Time Stamp: " + item.timestamp;
-                logNotes.appendChild(timestampElement);
-
-                var hrElement = document.createElement('hr');
-                logNotes.appendChild(hrElement);
-              
-                var descriptionElement = document.createElement('p');
-                descriptionElement.textContent = "Description: " + item.description;
-                logNotes.appendChild(descriptionElement);
-
-                var hrElement = document.createElement('hr');
-                logNotes.appendChild(hrElement);
-              
-                var priorityElement = document.createElement('p');
-                priorityElement.textContent = "Priority: " + item.priority;
-                logNotes.appendChild(priorityElement);
-              });
-
-
-
-
               var timeCell = document.createElement('td');
               var timestampSpan = document.createElement('span');
               timestampSpan.textContent = item.timestamp;
@@ -256,15 +228,6 @@
                   return '#474b4f'; // Light mode background color
                 }
               }
-
-
-
-
-
-              // var hrElement = document.createElement('hr');
-              //   logNotes.appendChild(hrElement);
-
-      
               var descriptionCell = document.createElement('td');
               descriptionCell.textContent = item.description;
               row.appendChild(descriptionCell);
@@ -359,19 +322,28 @@
               
                 paginationContainer.appendChild(nextItem);
               }
-
+              // Event listener for the eye icon click
+              viewLink.addEventListener('click', function () {
+                logNotes.innerHTML = ''; // Clear any existing content
               
+                var timestampElement = document.createElement('p');
+                timestampElement.textContent = "Time Stamp: " + item.timestamp;
+                logNotes.appendChild(timestampElement);
 
-
-
-      
+                var hrElement = document.createElement('hr');
+                logNotes.appendChild(hrElement);
               
+                var descriptionElement = document.createElement('p');
+                descriptionElement.textContent = "Description: " + item.description;
+                logNotes.appendChild(descriptionElement);
 
-          //   });
-          // })
-          // .catch(error => {
-          //   console.error('Error:', error);
-          // });
+                var hrElement = document.createElement('hr');
+                logNotes.appendChild(hrElement);
+              
+                var priorityElement = document.createElement('p');
+                priorityElement.textContent = "Priority: " + item.priority;
+                logNotes.appendChild(priorityElement);
+              });
       </script>
       
         
