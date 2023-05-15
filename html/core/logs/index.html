@@ -102,39 +102,36 @@
 
 
         <div class="float-start d-flex mt-3">
-          <button class="btn btn-link text-decoration-none text-secondary" style="margin-top:-15px; font-size: 16px;" onclick="postData()">
+          <button class="btn btn-link text-decoration-none text-secondary" style="margin-top:-15px;" onclick="postData()" style="font-size: 16px;">
             <i class="bi bi-arrow-clockwise"></i>
           </button>
           &nbsp;&nbsp;
-          <span id="count"></span>
           <!-- Display logs count  -->
           <script>
-            fetch('https://ld-api.morganserver.com/api/logs')
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error('Network response was not ok');
-                }
-                return response.json();
-              })
-              .then(data => {
-                console.log('API Data:', data);
-          
-                // Count the number of logs
-                var logCount = data.length;
-                console.log('Number of logs:', logCount);
-          
-                // Update the HTML element with the log count
-                var countElement = document.getElementById('count');
-                countElement.style.fontSize = '14px';
-                countElement.textContent = logCount + ' logs (Page 1 of 1)';
-              })
-              .catch(error => {
-                console.error('Error:', error);
-              });
+            // fetch('https://ld-api.morganserver.com/api/logs')
+            //   .then(response => {
+            //     if (!response.ok) {
+            //       throw new Error('Network response was not ok');
+            //     }
+            //     return response.json();
+            //   })
+            //   .then(data => {
+            //     console.log('API Data:', data);
+              
+            //     // Count the number of logs
+            //     var logCount = data.length;
+            //     console.log('Number of logs:', logCount);
+              
+            //     // Update the HTML element with the log count
+            //     var rowInfoElement = document.querySelector('.text-secondary');
+            //     rowInfoElement.style.fontSize = '14px';
+            //     rowInfoElement.textContent = logCount + ' logs (Page 1 of 1)';
+            //   })
+            //   .catch(error => {
+            //     console.error('Error:', error);
+            //   });
           </script>
-          
-        </div>
-        
+      </div>
 
       <div class="container">
         <div class="row">
@@ -265,7 +262,7 @@ function renderTable() {
 function updatePageInfo() {
   var totalPages = Math.ceil(data.length / rowsPerPage); // Calculate the total number of pages
 
-  var rowInfoElement = document.querySelector('.text-secondary');
+  var rowInfoElement = document.querySelector('#count');
   rowInfoElement.style.fontSize = '14px';
   rowInfoElement.textContent = data.length + ' logs (Page ' + currentPage + ' of ' + totalPages + ')';
 
