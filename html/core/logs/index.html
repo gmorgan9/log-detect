@@ -267,10 +267,12 @@
         }
       }
     } else if (fieldName === 'message') {
-      // Beautify the JSON message
-      var messageValue = JSON.stringify(item[fieldName], null, 2); // Use an indentation level of 2 spaces
+      // Create a pre tag to display the formatted JSON
       var pre = document.createElement('pre');
-      pre.textContent = messageValue;
+      pre.style.whiteSpace = 'pre-wrap';
+      pre.style.overflowX = 'auto';
+      pre.style.margin = 0;
+      pre.textContent = JSON.stringify(JSON.parse(item[fieldName]), null, 2);
       valueCell.appendChild(pre);
     } else {
       valueCell.textContent = item[fieldName];
