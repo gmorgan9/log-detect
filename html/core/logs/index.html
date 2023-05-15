@@ -106,6 +106,30 @@
             <i class="bi bi-arrow-clockwise"></i>
           </button>
           &nbsp;&nbsp;
+
+          <script>
+            fetch('https://ld-api.morganserver.com/api/logs')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('API Data:', data);
+
+    // Count the number of logs
+    var logCount = data.length;
+    console.log('Number of logs:', logCount);
+
+    // Update the HTML element with the log count
+    var rowInfoElement = document.querySelector('.text-secondary');
+    rowInfoElement.textContent = logCount + ' logs (Page 1 of 1)';
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+          </script>
           <p class="text-secondary" style="font-size: 14px;">
             5 logs (Page 1 of 1)
           </p>
