@@ -80,9 +80,8 @@
 
     <script>
         // Get the ticket ID from the URL query string
-        const path = window.location.pathname;
-const segments = path.split('/');
-const alertId = segments[segments.length - 1];
+        const pathSegments = window.location.pathname.split('/');
+const alertId = pathSegments[pathSegments.length - 1];
 
 
         console.log(alertId);
