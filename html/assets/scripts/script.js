@@ -25,7 +25,7 @@ function setLightTheme() {
   moon.classList.add('active');
   sun1.classList.add('hide');
   sun1.classList.remove('active');
-  graph.classList.remove('border1');
+  // graph.classList.remove('border1');
   graph.classList.add('border');
 }
             
@@ -36,7 +36,7 @@ function setDarkTheme() {
   moon.classList.remove('active');
   sun1.classList.remove('hide');
   sun1.classList.add('active');
-  graph.classList.remove('border');
+  // graph.classList.remove('border');
   graph.classList.add('border1');
 }
 
