@@ -231,7 +231,7 @@
                 var requestedTimestamp = new Date(item.requested.replace(/-/g, '/').replace('T', ' ').replace('Z', ''));
                 var currentTimestamp = new Date();
 
-                var timeDiff = currentTimestamp - requestedTimestamp;
+                var timeDiff = requestedTimestamp - currentTimestamp;
                 var minutesDiff = Math.floor(timeDiff / (1000 * 60));
                 var hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
                 var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
