@@ -194,28 +194,34 @@
               viewCell.appendChild(viewLink);
               row.appendChild(viewCell);
 
-              // Event listener for the eye icon click
+              // LOG NOTES
               viewLink.addEventListener('click', function () {
                 logNotes.innerHTML = ''; // Clear any existing content
+                            
+                var table = document.createElement('table');
+                table.style.width = '100%';
+                            
+                // Create the table rows and cells
+                for (var key in item) {
+                  var row = document.createElement('tr');
+                
+                  // Create the "Field" cell
+                  var fieldCell = document.createElement('td');
+                  fieldCell.style.fontWeight = 'bold';
+                  fieldCell.textContent = key;
+                  row.appendChild(fieldCell);
+                
+                  // Create the "Value" cell
+                  var valueCell = document.createElement('td');
+                  valueCell.textContent = item[key];
+                  row.appendChild(valueCell);
+                
+                  table.appendChild(row);
+                }
               
-                var timestampElement = document.createElement('p');
-                timestampElement.textContent = "Time Stamp: " + item.timestamp;
-                logNotes.appendChild(timestampElement);
-
-                var hrElement = document.createElement('hr');
-                logNotes.appendChild(hrElement);
-              
-                var descriptionElement = document.createElement('p');
-                descriptionElement.textContent = "Description: " + item.description;
-                logNotes.appendChild(descriptionElement);
-
-                var hrElement = document.createElement('hr');
-                logNotes.appendChild(hrElement);
-              
-                var priorityElement = document.createElement('p');
-                priorityElement.textContent = "Priority: " + item.priority;
-                logNotes.appendChild(priorityElement);
+                logNotes.appendChild(table);
               });
+
 
               var timeCell = document.createElement('td');
               var timestampSpan = document.createElement('span');
