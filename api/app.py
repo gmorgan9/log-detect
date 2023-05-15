@@ -104,6 +104,7 @@ def get_alerts():
         message_string = json.dumps(row[7], indent=4)
         formatted_timestamp = row[6].strftime('%Y-%m-%dT%H:%M:%S')
         priority = priority_mapping.get(row[3], "Unknown")
+        new_description = "[" + priority + "]Alert: " + row[4]
         result.append({
             'id': row[1],
             'description': row[4],
