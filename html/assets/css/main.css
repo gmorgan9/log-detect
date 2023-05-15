@@ -18,11 +18,24 @@
   }
 }
 
-.oval-background {
+/* .oval-background {
   border-radius: 50px !important;
   background-color: pink !important;
   padding: 4px 12px !important;
+} */
+
+/* Light Mode */
+:root {
+  --background-color: #f0f0f0;
 }
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #242628;
+  }
+}
+
 
 
 
