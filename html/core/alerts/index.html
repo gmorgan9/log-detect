@@ -192,15 +192,15 @@
 });
 
 
-                // var idCell = document.createElement('td');
-                // var idLink = document.createElement('a');
-                // idLink.className = 'text-decoration-none';
-                // idLink.href = '#myModal';  // Specify the ID of your Bootstrap modal
-                // idLink.setAttribute('data-bs-toggle', 'modal');  // Set the data-bs-toggle attribute
-                // idLink.setAttribute('data-bs-target', '#focus' + item.id);  // Set the data-bs-target attribute
-                // idLink.textContent = '#' + item.id;
-                // idCell.appendChild(idLink);
-                // row.appendChild(idCell);
+                var idCell = document.createElement('td');
+                var idLink = document.createElement('a');
+                idLink.className = 'text-decoration-none';
+                idLink.href = '#myModal';  // Specify the ID of your Bootstrap modal
+                idLink.setAttribute('data-bs-toggle', 'modal');  // Set the data-bs-toggle attribute
+                idLink.setAttribute('data-bs-target', '#focus' + item.id);  // Set the data-bs-target attribute
+                idLink.textContent = '#' + item.id;
+                idCell.appendChild(idLink);
+                row.appendChild(idCell);
 
         
                 var statusCell = document.createElement('td');
