@@ -84,7 +84,7 @@
         const alertId = urlParams.get('id');
 
         const pathSegments = window.location.pathname.split('/');
-        const another = pathSegments[pathSegments.length - 1];
+        const another = pathSegments[pathSegments.length - 2];
         console.log(another);
 
         fetch('https://ld-api.morganserver.com/api/focus/' + alertId) // Replace with your API endpoint
