@@ -168,9 +168,18 @@
               timestampSpan.classList.add('oval-background');
               timestampSpan.style.padding = '4px 12px';
               timestampSpan.style.borderRadius = '50px';
-              timestampSpan.style.backgroundColor = 'var(--background-color)';
+              timestampSpan.style.backgroundColor = getBackgroundColor();
               timeCell.appendChild(timestampSpan);
               row.appendChild(timeCell);
+                          
+              function getBackgroundColor() {
+                var theme = document.documentElement.getAttribute('data-bs-theme');
+                if (theme === 'dark') {
+                  return '#242628'; // Dark mode background color
+                } else {
+                  return '#f0f0f0'; // Light mode background color
+                }
+              }
 
 
 
