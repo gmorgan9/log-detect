@@ -311,16 +311,16 @@
               // Alert Creation
 var alertButton = document.getElementById('alertButton');
 
-// Define the event listener function
-var handleClick = function () {
-  // Remove the event listener to prevent further clicks
-  alertButton.removeEventListener('click', handleClick);
-
+// Add a click event listener to the button
+alertButton.addEventListener('click', function () {
   // Fetch the ID of the selected log
   var idElement = document.querySelector('.id'); // Assuming there is only one element with the "id" class
   var logId = idElement.textContent; // Retrieve the ID value from the element's text content
 
-  if (logId) { // Check if logId is not empty and the request has not been sent
+  if (logId && !this.disabled) { // Check if logId is not empty and the button is not disabled
+    // Disable the button to prevent multiple clicks
+    this.disabled = true;
+
     // Print the logId to the console
     console.log('Selected log ID:', logId);
 
@@ -331,14 +331,14 @@ var handleClick = function () {
     xhr.onreadystatechange = function() {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         console.log('Alert inserted into the database');
+
+        // Re-enable the button after the request is complete
+        alertButton.disabled = false;
       }
     };
     xhr.send('log_id=' + encodeURIComponent(logId));
   }
-};
-
-// Add the event listener to the button
-alertButton.addEventListener('click', handleClick);
+});
 
 
 
