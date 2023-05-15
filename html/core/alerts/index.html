@@ -223,27 +223,16 @@
                 row.appendChild(updatedCell);
         
                 // REQUESTED
-                // var requestedCell = document.createElement('td');
-                // var requestedTimestamp = new Date(item.requested);
-                // var currentTimestamp = new Date();
-
-                // var timeDiff = currentTimestamp - requestedTimestamp;
-                // var minutesDiff = Math.floor(timeDiff / (1000 * 60));
-                // var hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
-                // var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
                 var requestedCell = document.createElement('td');
-                var requestedParts = item.requested.split(' '); // Split the date and time parts
-                var dateParts = requestedParts[0].split('-'); // Split the date into year, month, and day
-                var timeParts = requestedParts[1].split(':'); // Split the time into hours, minutes, and seconds
+                var requestedTimestamp = new Date(item.requested);
+                // var currentTimestamp = new Date();
+                var currentTimestamp = new Date("YYYY-MM-DDTHH:MM:SS");
 
-                var requestedTimestamp = new Date(
-                  parseInt(dateParts[0]),
-                  parseInt(dateParts[1]) - 1, // Months are zero-based in JavaScript Date object
-                  parseInt(dateParts[2]),
-                  parseInt(timeParts[0]),
-                  parseInt(timeParts[1]),
-                  parseInt(timeParts[2])
-                );
+
+                var timeDiff = currentTimestamp - requestedTimestamp;
+                var minutesDiff = Math.floor(timeDiff / (1000 * 60));
+                var hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
+                var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
                 if (minutesDiff < 60) {
                   requestedCell.textContent = minutesDiff + " minutes ago";
