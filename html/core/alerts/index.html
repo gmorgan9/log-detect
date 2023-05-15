@@ -224,10 +224,13 @@
         
                 // REQUESTED
                 var requestedCell = document.createElement('td');
-                var requestedTimestamp = new Date(item.requested);
-                // var currentTimestamp = new Date();
-                var currentTimestamp = new Date("YYYY-MM-DDTHH:MM:SS");
-
+                // var requestedTimestamp = new Date(item.requested);
+                var requestedTimestamp = new Date(
+                  item.requested.split(/[- :]/).map(function (part) {
+                    return parseInt(part, 10);
+                  })
+                );
+                var currentTimestamp = new Date();
 
                 var timeDiff = currentTimestamp - requestedTimestamp;
                 var minutesDiff = Math.floor(timeDiff / (1000 * 60));
