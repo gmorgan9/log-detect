@@ -311,10 +311,10 @@
               // Alert Creation
 var alertButton = document.getElementById('alertButton');
 
-// Add a click event listener to the button
-alertButton.addEventListener('click', function () {
-  // Disable the button to prevent multiple clicks
-  alertButton.disabled = true;
+// Define the event listener function
+var handleClick = function () {
+  // Remove the event listener to prevent further clicks
+  alertButton.removeEventListener('click', handleClick);
 
   // Fetch the ID of the selected log
   var idElement = document.querySelector('.id'); // Assuming there is only one element with the "id" class
@@ -329,19 +329,16 @@ alertButton.addEventListener('click', function () {
     xhr.open('POST', 'https://ld-api.morganserver.com/insert_alert', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function() {
-      if (this.readyState === XMLHttpRequest.DONE) {
-        if (this.status === 200) {
-          console.log('Alert inserted into the database');
-        } else {
-          console.error('Error inserting the alert:', this.status);
-        }
-        // Enable the button after the request is complete
-        alertButton.disabled = false;
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        console.log('Alert inserted into the database');
       }
     };
     xhr.send('log_id=' + encodeURIComponent(logId));
   }
-});
+};
+
+// Add the event listener to the button
+alertButton.addEventListener('click', handleClick);
 
 
 
