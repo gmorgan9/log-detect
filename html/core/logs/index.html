@@ -164,8 +164,9 @@
 
               function getBackgroundColor() {
                 var theme = document.querySelector('html[data-bs-theme]');
-                console.log(theme)
-                if (theme === 'dark') {
+                var currentTheme = htmlElement.dataset.bsTheme;
+                console.log(currentTheme)
+                if (currentTheme === 'dark') {
                   return '#242628';
                 } else {
                   return '#f0f0f0';
