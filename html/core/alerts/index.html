@@ -214,10 +214,6 @@
                 summaryCell.textContent = item.description;
                 row.appendChild(summaryCell);
         
-                var alertTypeCell = document.createElement('td');
-                alertTypeCell.textContent = item.alert_type;
-                row.appendChild(alertTypeCell);
-        
                 var priorityCell = document.createElement('td');
                 priorityCell.textContent = item.priority;
                 row.appendChild(priorityCell);
@@ -227,7 +223,28 @@
                 row.appendChild(updatedCell);
         
                 var requestedCell = document.createElement('td');
-                requestedCell.textContent = item.requested;
+                var requestedTimestamp = new Date(item.requested);
+                var currentTimestamp = new Date();
+
+                var timeDiff = currentTimestamp - requestedTimestamp;
+                var minutesDiff = Math.floor(timeDiff / (1000 * 60));
+                var hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
+                var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+                if (minutesDiff < 60) {
+                  requestedCell.textContent = minutesDiff + " minutes ago";
+                } else if (hoursDiff < 24) {
+                  requestedCell.textContent = "about " + hoursDiff + " hour ago";
+                } else if (daysDiff == 0) {
+                  requestedCell.textContent = "Today " + formatTime(requestedTimestamp);
+                } else if (daysDiff == 1) {
+                  requestedCell.textContent = "Yesterday " + formatTime(requestedTimestamp);
+                } else if (daysDiff < 7) {
+                  requestedCell.textContent = getWeekdayName(requestedTimestamp) + " " + formatTime(requestedTimestamp);
+                } else {
+                  requestedCell.textContent = formatDate(requestedTimestamp);
+                }
+
                 row.appendChild(requestedCell);
         
                 tableBody.appendChild(row);
