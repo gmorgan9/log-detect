@@ -49,6 +49,23 @@
         pointer-events: none;
         cursor: default;
       }
+      .resizable-column {
+  flex-grow: 1;
+  overflow: auto;
+  position: relative;
+}
+
+.divider {
+  width: 10px;
+  cursor: col-resize;
+  background-color: #ddd;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
     </style>
 </head>
 <body>
@@ -123,9 +140,9 @@
           <div id="count" class="text-secondary"></div>
       </div>
 
-      <div id="split-container" class="container">
+      <div class="container">
         <div class="row">
-          <div class="col-7">
+          <div class="col-7 resizable-column">
             <table class="table table-striped" style="margin-left: -45px !important;">
               <thead>
                 <tr>
@@ -139,7 +156,9 @@
               <tbody id="table-body"></tbody>
             </table>
           </div>
-          <div class="col-4 border" style="border-radius: 5px; padding: 5px; height: 467px; width: 545px; overflow: auto; padding: 5px 14px;">
+          <div class="divider"></div>
+          <div class="col-4 resizable-column">
+          <!-- <div class="col-4 border" style="border-radius: 5px; padding: 5px; height: 467px; width: 545px; overflow: auto; padding: 5px 14px;"> -->
             <h5>Log Notes</h5>
             <div id="log-notes" class="border" style="border-radius: 10px; padding: 5px 14px;">No Log Notes.</div>
           </div>
@@ -153,12 +172,45 @@
       
       <script>
 
-var splitContainer = document.getElementById('split-container');
-var splitInstance = Split(['#split-container .col-7', '#split-container .col-4'], {
-  sizes: [70, 30],
-  minSize: [100, 100], // Minimum sizes for each column in pixels
-  maxSize: [null, null] // Maximum sizes for each column in pixels
-});
+// var splitContainer = document.getElementById('split-container');
+// var splitInstance = Split(['#split-container .col-7', '#split-container .col-4'], {
+//   sizes: [70, 30],
+//   minSize: [100, 100], // Minimum sizes for each column in pixels
+//   maxSize: [null, null] // Maximum sizes for each column in pixels
+// });
+
+const divider = document.querySelector('.divider');
+const resizableColumns = document.querySelectorAll('.resizable-column');
+let startX;
+let startWidth;
+let isDragging = false;
+
+function initDivider() {
+  divider.addEventListener('mousedown', startDragging);
+  document.addEventListener('mousemove', handleDragging);
+  document.addEventListener('mouseup', stopDragging);
+}
+
+function startDragging(e) {
+  isDragging = true;
+  startX = e.pageX;
+  startWidth = parseInt(getComputedStyle(resizableColumns[0]).width);
+}
+
+function handleDragging(e) {
+  if (!isDragging) return;
+  
+  const diffX = e.pageX - startX;
+  const newWidth = startWidth + diffX;
+  resizableColumns[0].style.width = `${newWidth}px`;
+}
+
+function stopDragging() {
+  isDragging = false;
+}
+
+initDivider();
+
 
 
           var currentPage = 1; // Variable to track the current page
