@@ -106,6 +106,7 @@
             <i class="bi bi-arrow-clockwise"></i>
           </button>
           <span>&nbsp;&nbsp;</span>
+          <span id="count"></span>
           <!-- Display logs count  -->
           <script>
             fetch('https://ld-api.morganserver.com/api/logs')
@@ -123,7 +124,7 @@
                 console.log('Number of logs:', logCount);
               
                 // Update the HTML element with the log count
-                var rowInfoElement = document.querySelector('.text-secondary');
+                var rowInfoElement = document.querySelector('#count');
                 rowInfoElement.style.fontSize = '14px';
                 rowInfoElement.innerHTML = ''; // Clear the existing content
                 
