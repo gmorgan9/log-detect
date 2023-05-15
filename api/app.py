@@ -128,7 +128,7 @@ def get_alerts():
     return jsonify(result)
 
 
-@app.route('/api/alerts/<alertId>', methods=['GET'])
+@app.route('/api/focus/<alertId>', methods=['GET'])
 @cross_origin()
 def get_alert_focus(alertId):
     # Fetch data for the specific ticket from the database
