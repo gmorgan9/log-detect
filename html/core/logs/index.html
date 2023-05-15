@@ -101,7 +101,7 @@
 
 
 
-        <div class=" d-flex mt-3">
+        <div class="float-start mt-3">
           <!-- Display logs count -->
           <script>
             fetch('https://ld-api.morganserver.com/api/logs')
@@ -132,11 +132,15 @@
                 // Append the icon to the button
                 button.appendChild(icon);
               
-                // Update the HTML element with the log count and button
+                // Create the log count element
+                var logCountElement = document.createElement('span');
+                logCountElement.textContent = logCount + ' logs (Page 1 of 1)';
+              
+                // Create a container for the button and log count
                 var container = document.createElement('div');
                 container.className = 'd-flex';
                 container.appendChild(button);
-                container.innerHTML += '&nbsp;&nbsp;' + logCount + ' logs (Page 1 of 1)';
+                container.appendChild(logCountElement);
               
                 var rowInfoElement = document.querySelector('.text-secondary');
                 rowInfoElement.style.fontSize = '14px';
@@ -148,6 +152,7 @@
               });
           </script>
         </div>
+        
         
         
 
