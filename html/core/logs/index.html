@@ -286,32 +286,6 @@
                     pre.textContent = JSON.stringify(JSON.parse(item[fieldName]), null, 2);
                     valueCell.appendChild(pre);
 
-                  } else if (fieldName === 'id') {
-                    
-                    // Alert Creation
-                    var alertButton = document.getElementById('alertButton');
-
-                    // Add a click event listener to the button
-                    alertButton.addEventListener('click', function () {
-                      // Fetch the ID of the selected log
-                      var logId = item.id; // Assuming the log object is assigned to the "item" variable
-
-                      if (logId) {
-                        // Print the logId to the console
-                        console.log('Selected log ID:', logId);
-
-                        // Send an AJAX request to the server to insert the alert
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('POST', 'https://ld-api.morganserver.com/insert_alert', true);
-                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                        xhr.onreadystatechange = function() {
-                          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                            console.log('Alert inserted into the database');
-                          }
-                        };
-                        xhr.send('log_id=' + encodeURIComponent(logId));
-                      }
-                    });
                   } else {
                     valueCell.textContent = item[fieldName];
                   }
@@ -327,7 +301,31 @@
 
 
 
-              
+              // Alert Creation
+              var alertButton = document.getElementById('alertButton');
+
+              // Add a click event listener to the button
+              alertButton.addEventListener('click', function () {
+                // Fetch the ID of the selected log
+                var logId = item['id']; // Assuming the log object is assigned to the "item" variable
+
+                if (logId) {
+                  // Print the logId to the console
+                  console.log('Selected log ID:', logId);
+
+                  // Send an AJAX request to the server to insert the alert
+                  var xhr = new XMLHttpRequest();
+                  xhr.open('POST', 'https://ld-api.morganserver.com/insert_alert', true);
+                  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                  xhr.onreadystatechange = function() {
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                      console.log('Alert inserted into the database');
+                    }
+                  };
+                  xhr.send('log_id=' + encodeURIComponent(logId));
+                }
+              });
+
 
 
 
