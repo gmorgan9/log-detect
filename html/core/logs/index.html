@@ -199,11 +199,14 @@
                 logNotes.innerHTML = ''; // Clear any existing content
                             
                 var table = document.createElement('table');
+                table.className = 'table';
                 table.style.width = '100%';
                             
                 // Create the table rows and cells
+                var index = 0;
                 for (var key in item) {
                   var row = document.createElement('tr');
+                  row.className = index % 2 === 0 ? 'table-primary' : ''; // Apply alternate row color class
                 
                   // Create the "Field" cell
                   var fieldCell = document.createElement('td');
@@ -217,10 +220,13 @@
                   row.appendChild(valueCell);
                 
                   table.appendChild(row);
+                
+                  index++;
                 }
               
                 logNotes.appendChild(table);
               });
+
 
 
               var timeCell = document.createElement('td');
