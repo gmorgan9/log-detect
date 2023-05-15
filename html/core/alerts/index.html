@@ -195,15 +195,16 @@
                 statusCell.textContent = item.status;
 
                 if (item.status == "New") {
-                  statusCell.classList.add("badge", "text-bg-info");
+                  var statusSpan = document.createElement('span');
+                  statusSpan.classList.add("badge", "text-bg-info");
                 } else if (item.status == "Open") {
-                  statusCell.classList.add("badge", "text-bg-danger");
+                  statusSpan.classList.add("badge", "text-bg-danger");
                 } else if (item.status == "Pending") {
-                  statusCell.classList.add("badge", "text-bg-primary");
+                  statusSpan.classList.add("badge", "text-bg-primary");
                 } else if (item.status == "Closed") {
-                  statusCell.classList.add("badge", "text-bg-secondary");
+                  statusSpan.classList.add("badge", "text-bg-secondary");
                 }
-
+                statusCell.appendChild(statusSpan);
                 row.appendChild(statusCell);
 
         
