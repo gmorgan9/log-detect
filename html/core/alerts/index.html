@@ -228,7 +228,9 @@
                 // requestedCell.textContent = item.requested;
                 // var currentTimestamp = new Date();
                 var requestedCell = document.createElement('td');
-                var requestedTimestamp = new Date(item.requested.replace(/-/g, '/').replace('T', ' ').replace('Z', ''));
+                var requestedTimestamp = new Date(item.requested.replace(/-/g, '/').replace('T', ' ').replace('Z', '') + ' UTC');
+                requestedTimestamp.toLocaleString('en-US', { timeZone: 'America/Denver' });
+
                 var currentTimestamp = new Date();
 
                 var timeDiff = requestedTimestamp - currentTimestamp;
