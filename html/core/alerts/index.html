@@ -192,9 +192,9 @@
                 row.appendChild(idCell);
         
                 var statusCell = document.createElement('td');
-                statusCell.textContent = item.status;
                 var statusSpan = document.createElement('span');
-
+                statusCell.textContent = item.status;
+                
                 if (item.status == "New") {
                   statusSpan.classList.add("badge", "text-bg-info");
                 } else if (item.status == "Open") {
