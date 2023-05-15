@@ -285,7 +285,6 @@
                     pre.classList.add('json-highlight'); // Add the CSS class
                     pre.textContent = JSON.stringify(JSON.parse(item[fieldName]), null, 2);
                     valueCell.appendChild(pre);
-                    hljs.initHighlightingOnLoad();
 
                   } else {
                     valueCell.textContent = item[fieldName];
