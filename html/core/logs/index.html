@@ -105,7 +105,7 @@
           <button class="btn btn-link text-decoration-none text-secondary" style="margin-top:-15px; font-size: 16px;" onclick="postData()">
             <i class="bi bi-arrow-clockwise"></i>
           </button>
-          &nbsp;&nbsp;
+          <span>&nbsp;&nbsp;</span>
           <!-- Display logs count  -->
           <script>
             fetch('https://ld-api.morganserver.com/api/logs')
@@ -125,7 +125,24 @@
                 // Update the HTML element with the log count
                 var rowInfoElement = document.querySelector('.text-secondary');
                 rowInfoElement.style.fontSize = '14px';
-                rowInfoElement.textContent = logCount + ' logs (Page 1 of 1)';
+                rowInfoElement.innerHTML = ''; // Clear the existing content
+                
+                // Create the button element
+                var button = document.createElement('button');
+                button.className = 'btn btn-link text-decoration-none text-secondary';
+                button.style.fontSize = '16px';
+                button.onclick = postData;
+              
+                // Create the button icon
+                var icon = document.createElement('i');
+                icon.className = 'bi bi-arrow-clockwise';
+              
+                // Append the icon to the button
+                button.appendChild(icon);
+              
+                // Append the button and log count to the row info element
+                rowInfoElement.appendChild(button);
+                rowInfoElement.insertAdjacentHTML('beforeend', '&nbsp;&nbsp;' + logCount + ' logs (Page 1 of 1)');
               })
               .catch(error => {
                 console.error('Error:', error);
