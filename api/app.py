@@ -110,7 +110,8 @@ def get_alerts():
             'timestamp': formatted_timestamp,
             # 'target': row[5],
             'priority': priority,
-            'message': message_string
+            'message': message_string,
+            'log_id': row[10]
         })
 
     # Return the data as JSON
