@@ -154,11 +154,12 @@
       <script>
 
 var splitContainer = document.getElementById('split-container');
-Split(['#split-container .col-7', '#split-container .col-4'], {
-  sizes: [70, 30], // Initial sizes of the columns (percentage values)
-  minSize: [0, 0], // Minimum sizes of the columns (percentage values)
-  gutterSize: 8, // Width of the divider in pixels
+var splitInstance = Split(['#split-container .col-7', '#split-container .col-4'], {
+  sizes: [70, 30],
+  minSize: [100, 100], // Minimum sizes for each column in pixels
+  maxSize: [null, null] // Maximum sizes for each column in pixels
 });
+
 
           var currentPage = 1; // Variable to track the current page
           var rowsPerPage = 10; // Number of rows to display per page
