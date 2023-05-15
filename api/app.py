@@ -139,7 +139,7 @@ def get_alert_focus(alertId):
     cur.close()
 
     if data is None:
-        return jsonify({'error': 'Alert not found'}), 404
+        return jsonify({'error': 'Alert not found'}), 403
 
     priority_mapping = {
         1: "Critical",
