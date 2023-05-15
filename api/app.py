@@ -208,7 +208,7 @@ def insert_alert():
             cursor.close()
             conn.close()
 
-            return 'Alert inserted into the database and log deleted'
+            return redirect('https://logdetect.morganserver.com/core/logs')
         else:
             # Log ID already exists in the alerts table, skip insertion
             cursor.close()
