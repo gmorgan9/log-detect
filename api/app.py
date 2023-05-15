@@ -116,7 +116,7 @@ def get_alerts():
             'id': row[1],
             'status': status,
             'description': new_description,
-            'timestamp': formatted_timestamp,
+            'requested': formatted_timestamp,
             # 'target': row[5],
             'priority': priority,
             'message': message_string,
