@@ -255,6 +255,30 @@
                 updatePageInfo();
               }
 
+              // Event listener for the eye icon click
+              viewLink.addEventListener('click', function () {
+                logNotes.innerHTML = ''; // Clear any existing content
+              
+                var timestampElement = document.createElement('p');
+                timestampElement.textContent = "Time Stamp: " + item.timestamp;
+                logNotes.appendChild(timestampElement);
+              
+                var hrElement1 = document.createElement('hr');
+                logNotes.appendChild(hrElement1);
+              
+                var descriptionElement = document.createElement('p');
+                descriptionElement.textContent = "Description: " + item.description;
+                logNotes.appendChild(descriptionElement);
+              
+                var hrElement2 = document.createElement('hr');
+                logNotes.appendChild(hrElement2);
+              
+                var priorityElement = document.createElement('p');
+                priorityElement.textContent = "Priority: " + item.priority;
+                logNotes.appendChild(priorityElement);
+              });
+
+
               function updatePageInfo() {
                 var totalPages = Math.ceil(data.length / rowsPerPage); // Calculate the total number of pages
               
@@ -331,34 +355,6 @@
               
                 paginationContainer.appendChild(nextItem);
               }
-
-              
-
-
-
-      
-              // Event listener for the eye icon click
-              viewLink.addEventListener('click', function () {
-                logNotes.innerHTML = ''; // Clear any existing content
-              
-                var timestampElement = document.createElement('p');
-                timestampElement.textContent = "Time Stamp: " + item.timestamp;
-                logNotes.appendChild(timestampElement);
-              
-                var hrElement1 = document.createElement('hr');
-                logNotes.appendChild(hrElement1);
-              
-                var descriptionElement = document.createElement('p');
-                descriptionElement.textContent = "Description: " + item.description;
-                logNotes.appendChild(descriptionElement);
-              
-                var hrElement2 = document.createElement('hr');
-                logNotes.appendChild(hrElement2);
-              
-                var priorityElement = document.createElement('p');
-                priorityElement.textContent = "Priority: " + item.priority;
-                logNotes.appendChild(priorityElement);
-              });
 
 
           //   });
