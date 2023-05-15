@@ -163,7 +163,7 @@
               row.appendChild(viewCell);
 
               function getBackgroundColor() {
-                var theme = document.documentElement.getAttribute('data-bs-theme');
+                var theme = document.querySelector('html[data-bs-theme]');
                 if (theme === 'dark') {
                   return '#242628';
                 } else {
