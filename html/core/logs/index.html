@@ -24,16 +24,36 @@
     <title>Logs | LogDetect</title>
 
     <style>
-      :root {
-  --background-color: #f0f0f0;
-}
-
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #242628;
-  }
-}
+      .pagination {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+      }
+    
+      .pagination li {
+        margin: 0 5px;
+      }
+    
+      .pagination li a {
+        color: #000;
+        text-decoration: none;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        background-color: #f5f5f5;
+      }
+    
+      .pagination li a.active {
+        background-color: #007bff;
+        color: #fff;
+      }
+    
+      .pagination li a.disabled {
+        color: #999;
+        pointer-events: none;
+        cursor: default;
+      }
     </style>
 </head>
 <body>
@@ -136,37 +156,37 @@
       
       
       <script>
-        var currentPage = 1; // Variable to track the current page
-var rowsPerPage = 10; // Number of rows to display per page
-var data = []; // Array to store the fetched data
+          var currentPage = 1; // Variable to track the current page
+          var rowsPerPage = 10; // Number of rows to display per page
+          var data = []; // Array to store the fetched data
 
-// Fetch data from the API
-fetch('https://ld-api.morganserver.com/api/logs')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(responseData => {
-    console.log('API Data:', responseData);
-    data = responseData;
-    renderTable(); // Call the function to render the table with initial data
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-
-function renderTable() {
-  var tableBody = document.getElementById('table-body');
-  tableBody.innerHTML = ''; // Clear the table body
-
-  var startIndex = (currentPage - 1) * rowsPerPage; // Calculate the starting index
-  var endIndex = startIndex + rowsPerPage; // Calculate the ending index
-  var currentData = data.slice(startIndex, endIndex); // Get the data for the current page
-
-  currentData.forEach(function (item) {
-    var row = document.createElement('tr');
+          // Fetch data from the API
+          fetch('https://ld-api.morganserver.com/api/logs')
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then(responseData => {
+              console.log('API Data:', responseData);
+              data = responseData;
+              renderTable(); // Call the function to render the table with initial data
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+          
+          function renderTable() {
+            var tableBody = document.getElementById('table-body');
+            tableBody.innerHTML = ''; // Clear the table body
+          
+            var startIndex = (currentPage - 1) * rowsPerPage; // Calculate the starting index
+            var endIndex = startIndex + rowsPerPage; // Calculate the ending index
+            var currentData = data.slice(startIndex, endIndex); // Get the data for the current page
+          
+            currentData.forEach(function (item) {
+              var row = document.createElement('tr');
       
               var viewCell = document.createElement('td');
               viewCell.className = '';
@@ -229,87 +249,87 @@ function renderTable() {
               row.appendChild(priorityCell);
       
               tableBody.appendChild(row);
-  });
+                });
+              
+                updatePageInfo();
+              }
 
-  updatePageInfo();
-}
+              function updatePageInfo() {
+                var totalPages = Math.ceil(data.length / rowsPerPage); // Calculate the total number of pages
+              
+                var rowInfoElement = document.querySelector('#count');
+                rowInfoElement.style.fontSize = '14px';
+                rowInfoElement.textContent = data.length + ' logs (Page ' + currentPage + ' of ' + totalPages + ')';
+              
+                createPagination(totalPages);
+              }
 
-function updatePageInfo() {
-  var totalPages = Math.ceil(data.length / rowsPerPage); // Calculate the total number of pages
-
-  var rowInfoElement = document.querySelector('#count');
-  rowInfoElement.style.fontSize = '14px';
-  rowInfoElement.textContent = data.length + ' logs (Page ' + currentPage + ' of ' + totalPages + ')';
-
-  createPagination(totalPages);
-}
-
-function createPagination(totalPages) {
-  var paginationContainer = document.querySelector('.pagination');
-  paginationContainer.innerHTML = ''; // Clear the pagination container
-
-  var previousLink = document.createElement('a');
-  previousLink.href = '#';
-  previousLink.textContent = 'Previous';
-  previousLink.classList.add('page-link');
-  if (currentPage === 1) {
-    previousLink.classList.add('disabled');
-  } else {
-    previousLink.addEventListener('click', function (event) {
-      event.preventDefault();
-      currentPage -= 1;
-      renderTable();
-    });
-  }
-
-  var previousItem = document.createElement('li');
-  previousItem.classList.add('page-item');
-  previousItem.appendChild(previousLink);
-
-  paginationContainer.appendChild(previousItem);
-
-  for (var i = 1; i <= totalPages; i++) {
-    var pageLink = document.createElement('a');
-    pageLink.href = '#';
-    pageLink.textContent = i;
-    pageLink.classList.add('page-link');
-    if (i === currentPage) {
-      pageLink.classList.add('active');
-    }
-
-    pageLink.addEventListener('click', function (event) {
-      event.preventDefault();
-      currentPage = parseInt(this.textContent);
-      renderTable();
-    });
-
-    var pageItem = document.createElement('li');
-    pageItem.classList.add('page-item');
-    pageItem.appendChild(pageLink);
-
-    paginationContainer.appendChild(pageItem);
-  }
-
-  var nextLink = document.createElement('a');
-  nextLink.href = '#';
-  nextLink.textContent = 'Next';
-  nextLink.classList.add('page-link');
-  if (currentPage === totalPages) {
-    nextLink.classList.add('disabled');
-  } else {
-    nextLink.addEventListener('click', function (event) {
-      event.preventDefault();
-      currentPage += 1;
-      renderTable();
-    });
-  }
-
-  var nextItem = document.createElement('li');
-  nextItem.classList.add('page-item');
-  nextItem.appendChild(nextLink);
-
-  paginationContainer.appendChild(nextItem);
-}
+              function createPagination(totalPages) {
+                var paginationContainer = document.querySelector('.pagination');
+                paginationContainer.innerHTML = ''; // Clear the pagination container
+              
+                var previousLink = document.createElement('a');
+                previousLink.href = '#';
+                previousLink.textContent = 'Previous';
+                previousLink.classList.add('page-link');
+                if (currentPage === 1) {
+                  previousLink.classList.add('disabled');
+                } else {
+                  previousLink.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    currentPage -= 1;
+                    renderTable();
+                  });
+                }
+              
+                var previousItem = document.createElement('li');
+                previousItem.classList.add('page-item');
+                previousItem.appendChild(previousLink);
+              
+                paginationContainer.appendChild(previousItem);
+              
+                for (var i = 1; i <= totalPages; i++) {
+                  var pageLink = document.createElement('a');
+                  pageLink.href = '#';
+                  pageLink.textContent = i;
+                  pageLink.classList.add('page-link');
+                  if (i === currentPage) {
+                    pageLink.classList.add('active');
+                  }
+                
+                  pageLink.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    currentPage = parseInt(this.textContent);
+                    renderTable();
+                  });
+                
+                  var pageItem = document.createElement('li');
+                  pageItem.classList.add('page-item');
+                  pageItem.appendChild(pageLink);
+                
+                  paginationContainer.appendChild(pageItem);
+                }
+              
+                var nextLink = document.createElement('a');
+                nextLink.href = '#';
+                nextLink.textContent = 'Next';
+                nextLink.classList.add('page-link');
+                if (currentPage === totalPages) {
+                  nextLink.classList.add('disabled');
+                } else {
+                  nextLink.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    currentPage += 1;
+                    renderTable();
+                  });
+                }
+              
+                var nextItem = document.createElement('li');
+                nextItem.classList.add('page-item');
+                nextItem.appendChild(nextLink);
+              
+                paginationContainer.appendChild(nextItem);
+              }
 
               
 
