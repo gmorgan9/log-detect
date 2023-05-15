@@ -20,8 +20,7 @@
     <!-- <link rel="stylesheet" href="https://unpkg.com/@adminkit/core@latest/dist/css/app.css"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
-    <script src="https://unpkg.com/split.js@1.6.0/dist/split.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js"></script>
 
 
     <!-- Page Title -->
@@ -50,43 +49,6 @@
         pointer-events: none;
         cursor: default;
       }
-  
-
-.splitter {
-    width: 80%;
-    height: 100px;
-    display: flex;
-}
-
-#separator {
-    cursor: col-resize;
-    background-color: #aaa;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='30'><path d='M2 0 v30 M5 0 v30 M8 0 v30' fill='none' stroke='black'/></svg>");
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 10px;
-    height: 100%;
-
-    /* Prevent the browser's built-in drag from interfering */
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-#first {
-    background-color: #dde;
-    width: 50%;
-    height: 100%;
-    min-width: 50%;
-}
-
-#second {
-    background-color: #eee;
-    width: 50%;
-    height: 100%;
-    min-width: 30%;
-}
-
     </style>
 </head>
 <body>
@@ -161,11 +123,9 @@
           <div id="count" class="text-secondary"></div>
       </div>
 
-
       <div class="container">
         <div class="row">
-          <div class="splitter">
-          <div class="col-7" id="first">
+          <div class="col-7">
             <table class="table table-striped" style="margin-left: -45px !important;">
               <thead>
                 <tr>
@@ -178,80 +138,20 @@
               </thead>
               <tbody id="table-body"></tbody>
             </table>
-            <div class="pagination mt-3">
-              <ul class="pagination justify-content-center"></ul>
-            </div>
           </div>
-        </div>
-        <div id="separator"></div>
-          <div class="col-4 border" id="second" style="border-radius: 5px; padding: 5px; height: 467px; width: 545px; overflow: auto; padding: 5px 14px;">
+          <div class="col-4 border" style="border-radius: 5px; padding: 5px; height: 467px; width: 545px; overflow: auto; padding: 5px 14px;">
             <h5>Log Notes</h5>
             <div id="log-notes" class="border" style="border-radius: 10px; padding: 5px 14px;">No Log Notes.</div>
           </div>
-        
-        
-      </div>
+        </div>
       </div>
 
-
-      <script>
-        // A function is used for dragging and moving
-function dragElement(element, direction)
-{
-    var   md; // remember mouse down info
-    const first  = document.getElementById("first");
-    const second = document.getElementById("second");
-
-    element.onmousedown = onMouseDown;
-
-    function onMouseDown(e)
-    {
-        //console.log("mouse down: " + e.clientX);
-        md = {e,
-              offsetLeft:  element.offsetLeft,
-              offsetTop:   element.offsetTop,
-              firstWidth:  first.offsetWidth,
-              secondWidth: second.offsetWidth
-             };
-
-        document.onmousemove = onMouseMove;
-        document.onmouseup = () => {
-            //console.log("mouse up");
-            document.onmousemove = document.onmouseup = null;
-        }
-    }
-
-    function onMouseMove(e)
-    {
-        //console.log("mouse move: " + e.clientX);
-        var delta = {x: e.clientX - md.e.clientX,
-                     y: e.clientY - md.e.clientY};
-
-        if (direction === "H" ) // Horizontal
-        {
-            // Prevent negative-sized elements
-            delta.x = Math.min(Math.max(delta.x, -md.firstWidth),
-                       md.secondWidth);
-
-            element.style.left = md.offsetLeft + delta.x + "px";
-            first.style.width = (md.firstWidth + delta.x) + "px";
-            second.style.width = (md.secondWidth - delta.x) + "px";
-        }
-    }
-}
-
-
-dragElement( document.getElementById("separator"), "H" );
-      </script>
+      <div class="pagination mt-3">
+        <ul class="pagination justify-content-center"></ul>
+      </div>
       
       
       <script>
-
-
-
-
-
-
           var currentPage = 1; // Variable to track the current page
           var rowsPerPage = 10; // Number of rows to display per page
           var data = []; // Array to store the fetched data
