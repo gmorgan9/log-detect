@@ -240,7 +240,9 @@
 
                 if (minutesDiff == 0) {
                   requestedCell.textContent = "Just now";
-                } else if (minutesDiff < 60) {
+                } else if (minutesDiff == 1) {
+                  requestedCell.textContent = minutesDiff + " minute ago";
+                }else if (minutesDiff < 60) {
                   requestedCell.textContent = minutesDiff + " minutes ago";
                 } else if (hoursDiff < 2) {
                   requestedCell.textContent = "about " + hoursDiff + " hour ago";
