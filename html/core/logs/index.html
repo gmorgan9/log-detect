@@ -286,6 +286,13 @@
                     pre.textContent = JSON.stringify(JSON.parse(item[fieldName]), null, 2);
                     valueCell.appendChild(pre);
 
+                  } else if (fieldName === 'id') {
+                    // Create a pre tag to display the formatted JSON
+                    var idspan = document.createElement('span');
+                    idspan.textContent = item[fieldName];
+                    idspan.classList.add('id');
+                    valueCell.appendChild(timestampSpan);
+
                   } else {
                     valueCell.textContent = item[fieldName];
                   }
