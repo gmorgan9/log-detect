@@ -105,7 +105,7 @@ def get_alerts():
         formatted_timestamp = row[6].strftime('%Y-%m-%dT%H:%M:%S')
         priority = priority_mapping.get(row[3], "Unknown")
         result.append({
-            'id': row[0],
+            'id': row[1],
             'description': row[4],
             'timestamp': formatted_timestamp,
             # 'target': row[5],
