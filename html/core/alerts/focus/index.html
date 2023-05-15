@@ -80,8 +80,9 @@
 
     <script>
         // Get the ticket ID from the URL query string
-        const pathSegments = window.location.pathname;
-        const alertId = pathSegments[pathSegments.length - 1];
+        var url = "https://logdetect.morganserver.com/core/alerts/focus/000001"
+const pathSegments = url.split('/');
+const alertId = pathSegments[pathSegments.length - 1];
 
 
 
