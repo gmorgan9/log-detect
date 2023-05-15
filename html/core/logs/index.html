@@ -303,6 +303,10 @@
               var id = item.timestamp
               console.log(id)
 
+              var idCell = document.createElement('td');
+              idCell.textContent = item.id;
+              row.appendChild(idCell);
+
 
               // Alert Creation
               var alertButton = document.getElementById('alertButton');
