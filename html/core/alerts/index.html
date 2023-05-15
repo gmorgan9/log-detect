@@ -157,6 +157,12 @@
         </table>
         
         <script>
+
+const pathSegments = window.location.href;
+const alertId = pathSegments[pathSegments.length - 1];
+
+
+        console.log(pathSegments);
           // Fetch data from the API
           fetch('https://ld-api.morganserver.com/api/alerts')
             .then(response => {
