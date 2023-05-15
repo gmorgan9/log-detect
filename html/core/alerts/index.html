@@ -183,13 +183,29 @@
                 viewCell.appendChild(viewLink);
                 row.appendChild(viewCell);
         
+                // var idCell = document.createElement('td');
+                // var idLink = document.createElement('a');
+                // idLink.className = 'text-decoration-none';
+                // idLink.href = '/core/alerts/focus/' + item.id;
+                // idLink.textContent = '#' + item.id;
+                // idCell.appendChild(idLink);
+                // row.appendChild(idCell);
+
                 var idCell = document.createElement('td');
                 var idLink = document.createElement('a');
                 idLink.className = 'text-decoration-none';
-                idLink.href = '/core/alerts/focus/' + item.id;
+                idLink.href = '#myModal'; // Set the href to the ID of the modal you want to open
                 idLink.textContent = '#' + item.id;
                 idCell.appendChild(idLink);
                 row.appendChild(idCell);
+
+                // Add event listener to open the modal when the link is clicked
+                idLink.addEventListener('click', function(event) {
+                  event.preventDefault(); // Prevent the default link behavior
+                  var targetModal = document.querySelector(idLink.getAttribute('href'));
+                  var bootstrapModal = new bootstrap.Modal(targetModal);
+                  bootstrapModal.show();
+                });
         
                 var statusCell = document.createElement('td');
                 var statusSpan = document.createElement('span');
