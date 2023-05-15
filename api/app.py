@@ -161,7 +161,7 @@ def insert_alert():
 
     # Insert the data into the alerts table
     insert_query = "INSERT INTO alerts (priority, description, status) VALUES (%s, %s, %s)"
-    cursor.execute(insert_query, priority, description, status, )
+    cursor.execute(insert_query, (priority, description, status,))
 
     # Commit the changes and close the cursor and database connection
     conn.commit()
