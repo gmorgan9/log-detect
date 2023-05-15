@@ -222,6 +222,7 @@
                 updatedCell.textContent = item.updated;
                 row.appendChild(updatedCell);
         
+                // REQUESTED
                 var requestedCell = document.createElement('td');
                 var requestedTimestamp = new Date(item.requested);
                 var currentTimestamp = new Date();
@@ -246,6 +247,23 @@
                 }
 
                 row.appendChild(requestedCell);
+
+                function formatTime(timestamp) {
+                  var options = { hour: 'numeric', minute: 'numeric' };
+                  return timestamp.toLocaleTimeString('en-US', options);
+                }
+
+                function getWeekdayName(timestamp) {
+                  var options = { weekday: 'long' };
+                  return timestamp.toLocaleDateString('en-US', options);
+                }
+
+                function formatDate(timestamp) {
+                  var options = { year: 'numeric', month: 'short', day: 'numeric' };
+                  return timestamp.toLocaleDateString('en-US', options);
+                }
+                // END REQUESTED
+
         
                 tableBody.appendChild(row);
               });
