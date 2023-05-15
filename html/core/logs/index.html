@@ -20,7 +20,7 @@
     <!-- <link rel="stylesheet" href="https://unpkg.com/@adminkit/core@latest/dist/css/app.css"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
-    <script src="https://unpkg.com/split.js@1.6.1/dist/split.min.js"></script>
+    <script src="https://unpkg.com/split.js@1.6.0/dist/split.min.js"></script>
 
 
     <!-- Page Title -->
@@ -49,29 +49,6 @@
         pointer-events: none;
         cursor: default;
       }
-      .splitter {
-  height: 100%;
-  width: 10px;
-  background-color: #6a6a6a;
-  cursor: col-resize;
-  z-index: 1;
-}
-
-.col-7 {
-  position: relative;
-  padding-right: 0;
-}
-
-.col-7:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: -5px;
-  z-index: 2;
-}
-
     </style>
 </head>
 <body>
@@ -146,7 +123,7 @@
           <div id="count" class="text-secondary"></div>
       </div>
 
-      <div class="container">
+      <div id="split-container" class="container">
         <div class="row">
           <div class="col-7">
             <table class="table table-striped" style="margin-left: -45px !important;">
@@ -162,20 +139,27 @@
               <tbody id="table-body"></tbody>
             </table>
           </div>
-          <div class="col-1 splitter"></div>
           <div class="col-4 border" style="border-radius: 5px; padding: 5px; height: 467px; width: 545px; overflow: auto; padding: 5px 14px;">
             <h5>Log Notes</h5>
             <div id="log-notes" class="border" style="border-radius: 10px; padding: 5px 14px;">No Log Notes.</div>
           </div>
         </div>
       </div>
+
       <div class="pagination mt-3">
         <ul class="pagination justify-content-center"></ul>
       </div>
       
       
-      
       <script>
+
+var splitContainer = document.getElementById('split-container');
+Split(['#split-container .col-7', '#split-container .col-4'], {
+  sizes: [70, 30], // Initial sizes of the columns (percentage values)
+  minSize: [0, 0], // Minimum sizes of the columns (percentage values)
+  gutterSize: 8, // Width of the divider in pixels
+});
+
           var currentPage = 1; // Variable to track the current page
           var rowsPerPage = 10; // Number of rows to display per page
           var data = []; // Array to store the fetched data
