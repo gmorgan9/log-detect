@@ -193,7 +193,28 @@
         
                 var statusCell = document.createElement('td');
                 statusCell.textContent = item.status;
+
+                // Add class based on status
+                var statusClass = getStatusClass(item.status);
+                statusCell.classList.add(statusClass);
+
                 row.appendChild(statusCell);
+
+                // Function to determine the class based on status
+                function getStatusClass(status) {
+                  switch (status) {
+                    case 'New':
+                      return 'badge text-bg-info';
+                    case 'Open':
+                      return 'badge text-bg-danger';
+                    case 'Pending':
+                      return 'badge text-bg-primary';
+                    case 'Closed':
+                      return 'badge text-bg-secondary';
+                    default:
+                      return '';
+                  }
+                }
         
                 var summaryCell = document.createElement('td');
                 summaryCell.textContent = item.description;
