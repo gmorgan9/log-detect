@@ -23,6 +23,7 @@
     <script src="https://unpkg.com/split.js@1.6.0/dist/split.min.js"></script>
 
 
+
     <!-- Page Title -->
     <title>Logs | LogDetect</title>
 
@@ -142,7 +143,7 @@
 
       <div class="container">
         <div class="row">
-          <div class="col-7 resizable-column">
+          <div class="col-7 resizable-column" id="column1">
             <table class="table table-striped" style="margin-left: -45px !important;">
               <thead>
                 <tr>
@@ -156,8 +157,7 @@
               <tbody id="table-body"></tbody>
             </table>
           </div>
-          <div class="divider"></div>
-          <div class="col-4 resizable-column">
+          <div class="col-4 resizable-column" id="column2">
           <!-- <div class="col-4 border" style="border-radius: 5px; padding: 5px; height: 467px; width: 545px; overflow: auto; padding: 5px 14px;"> -->
             <h5>Log Notes</h5>
             <div id="log-notes" class="border" style="border-radius: 10px; padding: 5px 14px;">No Log Notes.</div>
@@ -179,37 +179,13 @@
 //   maxSize: [null, null] // Maximum sizes for each column in pixels
 // });
 
-const divider = document.querySelector('.divider');
-const resizableColumns = document.querySelectorAll('.resizable-column');
-let startX;
-let startWidth;
-let isDragging = false;
+var column1 = document.getElementById('column1');
+var column2 = document.getElementById('column2');
 
-function initDivider() {
-  divider.addEventListener('mousedown', startDragging);
-  document.addEventListener('mousemove', handleDragging);
-  document.addEventListener('mouseup', stopDragging);
-}
+Split(['#column1', '#column2'], {
+  sizes: [70, 30], // Initial sizes of the columns
+});
 
-function startDragging(e) {
-  isDragging = true;
-  startX = e.pageX;
-  startWidth = parseInt(getComputedStyle(resizableColumns[0]).width);
-}
-
-function handleDragging(e) {
-  if (!isDragging) return;
-  
-  const diffX = e.pageX - startX;
-  const newWidth = startWidth + diffX;
-  resizableColumns[0].style.width = `${newWidth}px`;
-}
-
-function stopDragging() {
-  isDragging = false;
-}
-
-initDivider();
 
 
 
