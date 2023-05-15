@@ -142,7 +142,7 @@
               
                 // Append the button and log count to the row info element
                 // rowInfoElement.appendChild(button);
-                rowInfoElement.insertAdjacentHTML('beforeend', '&nbsp;&nbsp;' + logCount + ' logs (Page 1 of 1)');
+                rowInfoElement.insertAdjacentHTML(logCount + ' logs (Page 1 of 1)');
               })
               .catch(error => {
                 console.error('Error:', error);
