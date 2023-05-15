@@ -80,8 +80,8 @@
 
     <script>
         // Get the ticket ID from the URL query string
-        const urlParams = new URLSearchParams(window.location.search);
-        const alertId = urlParams.get('id');
+        const pathParts = window.location.pathname.split('/');
+        const alertId = pathParts[pathParts.length - 1];
 
         fetch('https://ld-api.morganserver.com/api/alerts/' + alertId) // Replace with your API endpoint
         .then(response => response.json())
