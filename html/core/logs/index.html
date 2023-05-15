@@ -306,9 +306,8 @@
               // Add a click event listener to the button
               alertButton.addEventListener('click', function () {
                 // Fetch the ID of the selected log
-                var logId = item.id; // Assuming the ID is available in the "id" property of the "item" object
+                var logId = item.id; // Assuming the log object is assigned to the "item" variable
 
-                console.log('Selected log ID:', logId);
                 if (logId) {
                   // Print the logId to the console
                   console.log('Selected log ID:', logId);
@@ -325,6 +324,7 @@
                   xhr.send('log_id=' + encodeURIComponent(logId));
                 }
               });
+
 
 
 
