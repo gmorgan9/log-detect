@@ -80,6 +80,7 @@ def get_logs():
     # Return the data as JSON
     return jsonify(result)
 
+# Get Alerts
 @app.route('/api/alerts', methods=['GET'])
 @cross_origin()
 def get_alerts():
@@ -125,6 +126,54 @@ def get_alerts():
 
     # Return the data as JSON
     return jsonify(result)
+
+
+@app.route('/api/alerts/<alertId>', methods=['GET'])
+@cross_origin()
+def get_alert_focus(alertId):
+    # Fetch data for the specific ticket from the database
+    conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM alerts WHERE idno = %s;", (alertId,))
+    data = cur.fetchone()
+    cur.close()
+
+    if data is None:
+        return jsonify({'error': 'Alert not found'}), 404
+
+    priority_mapping = {
+        1: "Critical",
+        2: "High",
+        3: "Medium",
+        4: "Low"
+    }
+    status_mapping = {
+        1: "New",
+        2: "Open",
+        3: "Pending",
+        4: "Closed"
+    }
+    message_string = json.dumps(data[7], indent=4)
+    formatted_timestamp = data[6].strftime('%Y-%m-%dT%H:%M:%SZ')
+    priority = priority_mapping.get(data[3], "Unknown")
+    status = status_mapping.get(data[2], "Unknown")
+    new_description = "[" + priority + "] Alert: " + data[4]
+
+    alert = {
+        'id': data[1],
+        'status': status,
+        'description': new_description,
+        'requested': formatted_timestamp,
+        'priority': priority,
+        'message': message_string,
+        'log_id': data[10]
+    }
+
+    # Return the ticket data as JSON
+    return jsonify(alert)
+
+
+
 
 
 

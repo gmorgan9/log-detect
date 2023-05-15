@@ -186,7 +186,7 @@
                 var idCell = document.createElement('td');
                 var idLink = document.createElement('a');
                 idLink.className = 'text-decoration-none';
-                idLink.href = ''; // Add the appropriate URL for the ID
+                idLink.href = '/focus/?id=' + item.id;
                 idLink.textContent = '#' + item.id;
                 idCell.appendChild(idLink);
                 row.appendChild(idCell);
@@ -223,10 +223,6 @@
                 // row.appendChild(updatedCell);
         
                 // REQUESTED
-                // var requestedCell = document.createElement('td');
-                // var requestedTimestamp = item.requested;
-                // requestedCell.textContent = item.requested;
-                // var currentTimestamp = new Date();
                 var requestedCell = document.createElement('td');
                 var requestedTimestamp = new Date(item.requested.replace(/-/g, '/').replace('T', ' ').replace('Z', '') + ' UTC');
                 requestedTimestamp.toLocaleString('en-US', { timeZone: 'America/Denver' });
