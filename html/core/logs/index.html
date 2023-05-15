@@ -206,6 +206,9 @@
               viewLink.addEventListener('click', function () {
                 logNotes.innerHTML = ''; // Clear any existing content
 
+                var logId = item.id
+                console.log(logId)
+
 
                 var fieldMapping = {
                   id: 'id',
@@ -304,8 +307,6 @@
                 table.appendChild(tbody);
               
                 logNotes.appendChild(table);
-                var logId = item.id
-                console.log(logId)
               });
 
 
