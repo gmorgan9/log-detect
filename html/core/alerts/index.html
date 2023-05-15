@@ -169,27 +169,27 @@
                 // idCell.appendChild(idLink);
                 // row.appendChild(idCell);
 
-                document.addEventListener('DOMContentLoaded', function() {
-  var alertLink = document.querySelector('[data-bs-toggle="modal"][data-bs-target^="#focus_"]');
-  alertLink.addEventListener('click', function (event) {
-      event.preventDefault();
-      var alertId = this.getAttribute('data-bs-target').substring('#focus_'.length);
-      document.getElementById('alertID').textContent = '#' + alertId;  // Update the alert ID in the modal
-      // Use AJAX or fetch to retrieve the data for the alert based on alertId
-      // Update the modal body with the retrieved data
-      // Example:
-      fetch('/getAlertData?id=' + alertId)
-          .then(function(response) {
-              return response.text();
-          })
-          .then(function(data) {
-              document.getElementById('alertData').innerHTML = data;
-          })
-          .catch(function(error) {
-              console.error('Error:', error);
-          });
-  });
-});
+//                 document.addEventListener('DOMContentLoaded', function() {
+//   var alertLink = document.querySelector('[data-bs-toggle="modal"][data-bs-target^="#focus_"]');
+//   alertLink.addEventListener('click', function (event) {
+//       event.preventDefault();
+//       var alertId = this.getAttribute('data-bs-target').substring('#focus_'.length);
+//       document.getElementById('alertID').textContent = '#' + alertId;  // Update the alert ID in the modal
+//       // Use AJAX or fetch to retrieve the data for the alert based on alertId
+//       // Update the modal body with the retrieved data
+//       // Example:
+//       fetch('/getAlertData?id=' + alertId)
+//           .then(function(response) {
+//               return response.text();
+//           })
+//           .then(function(data) {
+//               document.getElementById('alertData').innerHTML = data;
+//           })
+//           .catch(function(error) {
+//               console.error('Error:', error);
+//           });
+//   });
+// });
 
 
                 var idCell = document.createElement('td');
@@ -198,8 +198,8 @@
                 idLink.href = '#myModal';  // Specify the ID of your Bootstrap modal
                 idLink.setAttribute('data-bs-toggle', 'modal');  // Set the data-bs-toggle attribute
                 idLink.setAttribute('data-bs-target', '#focus' + item.id);  // Set the data-bs-target attribute
-                var another = document.getElementById('focus');
-                another.id += "_" + item.id;
+                var element = document.getElementById('focus');
+                element.innerHTML += '_' + item.id;
 
                 idLink.textContent = '#' + item.id;
                 idCell.appendChild(idLink);
