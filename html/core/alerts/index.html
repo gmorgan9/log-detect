@@ -253,19 +253,20 @@
                 row.appendChild(requestedCell);
 
                 function formatTime(timestamp) {
-                  var options = { hour: 'numeric', minute: 'numeric' };
+                  var options = { hour: 'numeric', minute: 'numeric', timeZone: 'America/Denver' };
                   return timestamp.toLocaleTimeString('en-US', options);
                 }
 
                 function getWeekdayName(timestamp) {
-                  var options = { weekday: 'long' };
+                  var options = { weekday: 'long', timeZone: 'America/Denver' };
                   return timestamp.toLocaleDateString('en-US', options);
                 }
 
                 function formatDate(timestamp) {
-                  var options = { year: 'numeric', month: 'short', day: 'numeric' };
+                  var options = { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'America/Denver' };
                   return timestamp.toLocaleDateString('en-US', options);
                 }
+
                 // END REQUESTED
 
         
