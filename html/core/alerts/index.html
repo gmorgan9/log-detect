@@ -193,8 +193,8 @@
         
                 var statusCell = document.createElement('td');
                 var statusSpan = document.createElement('span');
-                statusCell.textContent = item.status;
-                
+                statusSpan.textContent = item.status;
+
                 if (item.status == "New") {
                   statusSpan.classList.add("badge", "text-bg-info");
                 } else if (item.status == "Open") {
@@ -204,8 +204,10 @@
                 } else if (item.status == "Closed") {
                   statusSpan.classList.add("badge", "text-bg-secondary");
                 }
+
                 statusCell.appendChild(statusSpan);
                 row.appendChild(statusCell);
+
 
         
                 var summaryCell = document.createElement('td');
