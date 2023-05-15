@@ -169,6 +169,59 @@ def logout():
     return redirect('https://logdetect.morganserver.com/core/entry/login')
 
 
+# @app.route('/insert_alert', methods=['POST'])
+# def insert_alert():
+#     # Connect to the database
+#     conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
+#     cursor = conn.cursor()
+
+#     log_id = request.form['log_id']
+#     select_query = "SELECT priority, msg FROM logs WHERE id = %s"
+#     cursor.execute(select_query, (log_id,))
+#     result = cursor.fetchone()
+
+#     if result:
+#         # Check if the log ID already exists in the alerts table
+#         check_query = "SELECT COUNT(*) FROM alerts WHERE log_id = %s"
+#         cursor.execute(check_query, (log_id,))
+#         count = cursor.fetchone()[0]
+
+#         if count == 0:  # Log ID doesn't exist in the alerts table, proceed with insertion
+#             priority = result[0]
+#             description = result[1]
+#             status = 2
+
+#             # Insert the data into the alerts table
+#             insert_query = "INSERT INTO alerts (log_id, priority, description, status) VALUES (%s, %s, %s, %s)"
+#             cursor.execute(insert_query, (log_id, priority, description, status,))
+
+#             # Commit the changes
+#             conn.commit()
+
+#             # Delete the log from the logs table
+#             delete_query = "DELETE FROM logs WHERE id = %s"
+#             cursor.execute(delete_query, (log_id,))
+
+#             # Commit the deletion
+#             conn.commit()
+
+#             cursor.close()
+#             conn.close()
+
+#             return redirect('https://logdetect.morganserver.com/core/logs')
+#         else:
+#             # Log ID already exists in the alerts table, skip insertion
+#             cursor.close()
+#             conn.close()
+#             return 'Log ID already exists in the alerts table'
+#     else:
+#         cursor.close()
+#         conn.close()
+#         return 'Log ID not found'
+
+import os
+import json
+
 @app.route('/insert_alert', methods=['POST'])
 def insert_alert():
     # Connect to the database
@@ -176,48 +229,69 @@ def insert_alert():
     cursor = conn.cursor()
 
     log_id = request.form['log_id']
-    select_query = "SELECT priority, msg FROM logs WHERE id = %s"
+    # log_seconds = request.form['log_seconds']
+    select_query = "SELECT seconds, priority, msg, status FROM logs WHERE id = %s"
     cursor.execute(select_query, (log_id,))
     result = cursor.fetchone()
 
     if result:
-        # Check if the log ID already exists in the alerts table
+        # Check if the log seconds already exist in the alerts table
         check_query = "SELECT COUNT(*) FROM alerts WHERE log_id = %s"
         cursor.execute(check_query, (log_id,))
         count = cursor.fetchone()[0]
 
-        if count == 0:  # Log ID doesn't exist in the alerts table, proceed with insertion
-            priority = result[0]
-            description = result[1]
-            status = 2
+        if count == 0:  # Log seconds doesn't exist in the alerts table, proceed with insertion
+            seconds = result[0]
+            priority = result[1]
+            description = result[2]
+            status = result[3]
 
             # Insert the data into the alerts table
-            insert_query = "INSERT INTO alerts (log_id, priority, description, status) VALUES (%s, %s, %s, %s)"
-            cursor.execute(insert_query, (log_id, priority, description, status,))
+            insert_query = "INSERT INTO alerts (seconds, priority, description, status) VALUES (%s, %s, %s, %s)"
+            cursor.execute(insert_query, (seconds, priority, description, status,))
 
             # Commit the changes
             conn.commit()
 
             # Delete the log from the logs table
-            delete_query = "DELETE FROM logs WHERE id = %s"
-            cursor.execute(delete_query, (log_id,))
+            delete_query = "DELETE FROM logs WHERE seconds = %s"
+            cursor.execute(delete_query, (seconds,))
 
             # Commit the deletion
             conn.commit()
+
+            # Delete the line from the file
+            file_path = '/var/log/snort/alert_json.txt'
+            delete_line_from_file(file_path, seconds)
 
             cursor.close()
             conn.close()
 
             return redirect('https://logdetect.morganserver.com/core/logs')
         else:
-            # Log ID already exists in the alerts table, skip insertion
+            # Log seconds already exist in the alerts table, skip insertion
             cursor.close()
             conn.close()
-            return 'Log ID already exists in the alerts table'
+            return 'Log seconds already exist in the alerts table'
     else:
         cursor.close()
         conn.close()
-        return 'Log ID not found'
+        return 'Log seconds not found'
+
+def delete_line_from_file(file_path, log_seconds):
+    lines = []
+    with open(file_path, 'r') as file:
+        for line in file:
+            try:
+                log_data = json.loads(line)
+                if 'seconds' in log_data and log_data['seconds'] == log_seconds:
+                    continue
+            except json.JSONDecodeError:
+                pass
+            lines.append(line)
+    with open(file_path, 'w') as file:
+        file.writelines(lines)
+
 
 
 
