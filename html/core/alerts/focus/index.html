@@ -85,7 +85,7 @@
 
         const pathSegments = window.location.pathname.split('/');
         const another = pathSegments[pathSegments.length];
-        console.log(another);
+        console.log(pathSegments);
 
         fetch('https://ld-api.morganserver.com/api/focus/' + alertId) // Replace with your API endpoint
         .then(response => response.json())
