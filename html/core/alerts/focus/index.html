@@ -83,7 +83,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const alertId = urlParams.get('id');
 
-        const pathSegments = window.location.pathname.split('/');
+        const pathSegments = window.location.href.split('/');
         const another = pathSegments[pathSegments.length];
         console.log(pathSegments);
 
