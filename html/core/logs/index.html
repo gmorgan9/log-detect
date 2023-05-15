@@ -176,6 +176,11 @@
       
       
       <script>
+        Split(['.split__column', '.gutter'], {
+  sizes: [70, 30], // Initial sizes of the columns (adjust as needed)
+  minSize: 200, // Minimum size for each column (adjust as needed)
+  gutterSize: 10 // Size of the splitter (adjust as needed)
+});
           var currentPage = 1; // Variable to track the current page
           var rowsPerPage = 10; // Number of rows to display per page
           var data = []; // Array to store the fetched data
