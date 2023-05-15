@@ -159,7 +159,7 @@ import json
 
 # Endpoint to handle the JSON data from the file and insert it into the PostgreSQL database
 @app.route('/insert_log', methods=['POST'])
-def insert_alert():
+def insert_log():
     # Read the JSON data from the file
     with open('/var/log/snort/alert_json.txt', 'r') as file:
         for line in file:
