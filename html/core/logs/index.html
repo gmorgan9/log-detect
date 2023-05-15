@@ -208,6 +208,19 @@
               viewLink.addEventListener('click', function () {
                 logNotes.innerHTML = ''; // Clear any existing content
 
+                var logId = item.id; // Get the ID of the selected log
+
+  // Send an AJAX request to the server to insert the alert
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/insert_alert', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onreadystatechange = function() {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      console.log('Alert inserted into the database');
+    }
+  };
+  xhr.send('log_id=' + encodeURIComponent(logId));
+
                 var fieldMapping = {
                   timestamp: '@timestamp',
                   description: 'log.description',

@@ -130,6 +130,31 @@ def logout():
     # Redirect the user to the login page
     return redirect('https://logdetect.morganserver.com/core/entry/login')
 
+
+@app.route('/insert_alert', methods=['POST'])
+def insert_alert():
+    # Connect to the database
+    conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
+    cursor = conn.cursor()
+
+    # Get the data from the selected log on the table
+    log_id = request.form['log_id'] # get the log ID from the AJAX request
+    select_query = "SELECT status, priority, description FROM logs WHERE id = %s"
+    cursor.execute(select_query, (log_id,))
+    result = cursor.fetchone()
+
+    # Insert the data into the alerts table
+    insert_query = "INSERT INTO alerts (status, priority, description) VALUES (%s, %s, %s)"
+    cursor.execute(insert_query, result)
+
+    # Commit the changes and close the cursor and database connection
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    return 'Alert inserted into the database'
+
+
 import json
 
 # Endpoint to handle the JSON data from the file and insert it into the PostgreSQL database
@@ -221,7 +246,7 @@ def insert_alert():
                 # Handle JSON decoding errors if any
                 continue
 
-    return 'Alerts inserted into the database'
+    return 'Logs inserted into the database'
 
 
 
