@@ -106,34 +106,31 @@
             <i class="bi bi-arrow-clockwise"></i>
           </button>
           &nbsp;&nbsp;
-
+          <!-- Display logs count  -->
           <script>
             fetch('https://ld-api.morganserver.com/api/logs')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log('API Data:', data);
-
-    // Count the number of logs
-    var logCount = data.length;
-    console.log('Number of logs:', logCount);
-
-    // Update the HTML element with the log count
-    var rowInfoElement = document.querySelector('.text-secondary');
-    rowInfoElement.style.fontSize = '14px';
-    rowInfoElement.textContent = logCount + ' logs (Page 1 of 1)';
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return response.json();
+              })
+              .then(data => {
+                console.log('API Data:', data);
+              
+                // Count the number of logs
+                var logCount = data.length;
+                console.log('Number of logs:', logCount);
+              
+                // Update the HTML element with the log count
+                var rowInfoElement = document.querySelector('.text-secondary');
+                rowInfoElement.style.fontSize = '14px';
+                rowInfoElement.textContent = logCount + ' logs (Page 1 of 1)';
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
           </script>
-          <!-- <p class="text-secondary" style="font-size: 14px;">
-            5 logs (Page 1 of 1)
-          </p> -->
       </div>
 
       <div class="container">
@@ -159,22 +156,37 @@
       </div>
       
       <script>
-        // Fetch data from the API
-        fetch('https://ld-api.morganserver.com/api/logs')
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then(data => {
-            console.log('API Data:', data);
-      
-            var tableBody = document.getElementById('table-body');
-            var logNotes = document.getElementById('log-notes');
-      
-            data.forEach(function (item) {
-              var row = document.createElement('tr');
+        var currentPage = 1; // Variable to track the current page
+var rowsPerPage = 10; // Number of rows to display per page
+var data = []; // Array to store the fetched data
+
+// Fetch data from the API
+fetch('https://ld-api.morganserver.com/api/logs')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(responseData => {
+    console.log('API Data:', responseData);
+    data = responseData;
+    renderTable(); // Call the function to render the table with initial data
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+function renderTable() {
+  var tableBody = document.getElementById('table-body');
+  tableBody.innerHTML = ''; // Clear the table body
+
+  var startIndex = (currentPage - 1) * rowsPerPage; // Calculate the starting index
+  var endIndex = startIndex + rowsPerPage; // Calculate the ending index
+  var currentData = data.slice(startIndex, endIndex); // Get the data for the current page
+
+  currentData.forEach(function (item) {
+    var row = document.createElement('tr');
       
               var viewCell = document.createElement('td');
               viewCell.className = '';
@@ -237,6 +249,51 @@
               row.appendChild(priorityCell);
       
               tableBody.appendChild(row);
+  });
+
+  updatePageInfo();
+}
+
+function updatePageInfo() {
+  var totalPages = Math.ceil(data.length / rowsPerPage); // Calculate the total number of pages
+
+  var rowInfoElement = document.querySelector('.text-secondary');
+  rowInfoElement.style.fontSize = '14px';
+  rowInfoElement.textContent = data.length + ' logs (Page ' + currentPage + ' of ' + totalPages + ')';
+
+  createPagination(totalPages);
+}
+
+function createPagination(totalPages) {
+  var paginationContainer = document.querySelector('.pagination');
+  paginationContainer.innerHTML = ''; // Clear the pagination container
+
+  for (var i = 1; i <= totalPages; i++) {
+    var pageLink = document.createElement('a');
+    pageLink.href = '#';
+    pageLink.textContent = i;
+    pageLink.classList.add('page-link');
+    if (i === currentPage) {
+      pageLink.classList.add('active');
+    }
+
+    pageLink.addEventListener('click', function (event) {
+      event.preventDefault();
+      currentPage = parseInt(this.textContent);
+      renderTable();
+    });
+
+    var pageItem = document.createElement('li');
+    pageItem.classList.add('page-item');
+    pageItem.appendChild(pageLink);
+
+    paginationContainer.appendChild(pageItem);
+  }
+}
+              
+
+
+
       
               // Event listener for the eye icon click
               // Event listener for the eye icon click
@@ -262,11 +319,11 @@
                 logNotes.appendChild(priorityElement);
               });
 
-            });
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
+          //   });
+          // })
+          // .catch(error => {
+          //   console.error('Error:', error);
+          // });
       </script>
       
         
