@@ -80,14 +80,14 @@
 
     <script>
         // Get the ticket ID from the URL query string
-        const urlParams = new URLSearchParams(window.location.search);
-        const alertId = urlParams.get('id');
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const alertId = urlParams.get('id');
 
         const pathSegments = window.location.href.split('/');
         const another = pathSegments[pathSegments.length - 1];
         console.log(another);
 
-        fetch('https://ld-api.morganserver.com/api/focus/' + alertId) // Replace with your API endpoint
+        fetch('https://ld-api.morganserver.com/api/focus/' + another) // Replace with your API endpoint
         .then(response => response.json())
         .then(ticket => {
             // Process the ticket data and display it on the page
