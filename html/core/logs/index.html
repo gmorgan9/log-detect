@@ -197,11 +197,11 @@
               // LOG NOTES
               viewLink.addEventListener('click', function () {
                 logNotes.innerHTML = ''; // Clear any existing content
-              
+                            
                 var table = document.createElement('table');
                 table.style.width = '100%';
                 table.classList.add('table', 'table-striped');
-              
+                            
                 // Create the table header
                 var thead = document.createElement('thead');
                 var headerRow = document.createElement('tr');
@@ -213,27 +213,38 @@
                 headerRow.appendChild(valueHeader);
                 thead.appendChild(headerRow);
                 table.appendChild(thead);
-              
-                // Create the table rows and cells
-                for (var key in item) {
-                  var row = document.createElement('tr');
-              
-                  // Create the "Field" cell
-                  var fieldCell = document.createElement('td');
-                  fieldCell.style.fontWeight = 'bold';
-                  fieldCell.textContent = key;
-                  row.appendChild(fieldCell);
-              
-                  // Create the "Value" cell
-                  var valueCell = document.createElement('td');
-                  valueCell.textContent = item[key];
-                  row.appendChild(valueCell);
-              
-                  table.appendChild(row);
+                            
+                // Check if there are any log notes
+                if (Object.keys(item).length === 0) {
+                  var noLogNotesRow = document.createElement('tr');
+                  var noLogNotesCell = document.createElement('td');
+                  noLogNotesCell.setAttribute('colspan', '2');
+                  noLogNotesCell.textContent = 'No Log Notes';
+                  noLogNotesRow.appendChild(noLogNotesCell);
+                  table.appendChild(noLogNotesRow);
+                } else {
+                  // Create the table rows and cells
+                  for (var key in item) {
+                    var row = document.createElement('tr');
+                  
+                    // Create the "Field" cell
+                    var fieldCell = document.createElement('td');
+                    fieldCell.style.fontWeight = 'bold';
+                    fieldCell.textContent = key;
+                    row.appendChild(fieldCell);
+                  
+                    // Create the "Value" cell
+                    var valueCell = document.createElement('td');
+                    valueCell.textContent = item[key];
+                    row.appendChild(valueCell);
+                  
+                    table.appendChild(row);
+                  }
                 }
               
                 logNotes.appendChild(table);
               });
+
 
 
 
