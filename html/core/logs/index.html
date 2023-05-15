@@ -105,7 +105,7 @@
           <button class="btn btn-link text-decoration-none text-secondary" style="margin-top:-15px; font-size: 16px;" onclick="postData()">
             <i class="bi bi-arrow-clockwise"></i>
           </button>
-          <span>&nbsp;&nbsp;</span>
+          &nbsp;&nbsp;
           <span id="count"></span>
           <!-- Display logs count  -->
           <script>
@@ -118,37 +118,21 @@
               })
               .then(data => {
                 console.log('API Data:', data);
-              
+          
                 // Count the number of logs
                 var logCount = data.length;
                 console.log('Number of logs:', logCount);
-              
+          
                 // Update the HTML element with the log count
-                var rowInfoElement = document.querySelector('#count');
-                rowInfoElement.style.fontSize = '14px';
-                rowInfoElement.innerHTML = ''; // Clear the existing content
-                
-                // Create the button element
-                // var button = document.createElement('button');
-                // button.className = 'btn btn-link text-decoration-none text-secondary';
-                // button.style.fontSize = '16px';
-                // button.onclick = postData;
-              
-                // Create the button icon
-                // var icon = document.createElement('i');
-                // icon.className = 'bi bi-arrow-clockwise';
-              
-                // // Append the icon to the button
-                // button.appendChild(icon);
-              
-                // Append the button and log count to the row info element
-                // rowInfoElement.appendChild(button);
-                // rowInfoElement.insertAdjacentHTML(logCount + ' logs (Page 1 of 1)');
+                var countElement = document.getElementById('count');
+                countElement.style.fontSize = '14px';
+                countElement.textContent = logCount + ' logs (Page 1 of 1)';
               })
               .catch(error => {
                 console.error('Error:', error);
               });
           </script>
+          
         </div>
         
 
