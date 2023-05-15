@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, redirect, session, require
+from flask import Flask, request, jsonify, redirect, session
 import psycopg2
 from flask_session import Session
 from flask_cors import CORS
