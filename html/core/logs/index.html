@@ -197,11 +197,11 @@
               // LOG NOTES
               viewLink.addEventListener('click', function () {
                 logNotes.innerHTML = ''; // Clear any existing content
-                            
+
                 var table = document.createElement('table');
                 table.style.width = '100%';
                 table.classList.add('table', 'table-striped');
-                            
+
                 // Create the table rows and cells
                 for (var key in item) {
                   var row = document.createElement('tr');
