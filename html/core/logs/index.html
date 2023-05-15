@@ -310,16 +310,15 @@
 
               // Alert Creation
               var alertButton = document.getElementById('alertButton');
+              var isRequestSent = false; // Flag variable to track whether the request has been sent
 
               // Add a click event listener to the button
               alertButton.addEventListener('click', function () {
-                // Disable the button
-                alertButton.disabled = true;
-
                 // Fetch the ID of the selected log
-                var logId = item.id;
+                var idElement = document.querySelector('.id'); // Assuming there is only one element with the "id" class
+                var logId = idElement.textContent; // Retrieve the ID value from the element's text content
 
-                if (logId) {
+                if (logId && !isRequestSent) { // Check if logId is not empty and the request has not been sent
                   // Print the logId to the console
                   console.log('Selected log ID:', logId);
 
@@ -330,12 +329,12 @@
                   xhr.onreadystatechange = function() {
                     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                       console.log('Alert inserted into the database');
+                      isRequestSent = true; // Set the flag to indicate that the request has been sent
                     }
                   };
                   xhr.send('log_id=' + encodeURIComponent(logId));
                 }
               });
-
 
 
 
