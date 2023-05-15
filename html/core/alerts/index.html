@@ -238,7 +238,7 @@
                 var hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
                 var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
-                if (hoursDiff > 1) {
+                if (minutesDiff < 60) {
                   requestedCell.textContent = minutesDiff + " minutes ago";
                 } else if (hoursDiff < 2) {
                   requestedCell.textContent = "about " + hoursDiff + " hour ago";
