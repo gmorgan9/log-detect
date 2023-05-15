@@ -144,33 +144,38 @@ def insert_alert():
     cursor.execute(select_query, (log_id,))
     result = cursor.fetchone()
 
-    # priority_mapping = {
-    #         1: "Critical",
-    #         2: "High",
-    #         3: "Medium",
-    #         4: "Low"
-    #     }
-    
     if result:
-        # priority = priority_mapping.get(result[0], "Unknown")
-        priority = result[0]
-        description = result[1]
-        status = 2
+        # Check if the log ID already exists in the alerts table
+        check_query = "SELECT COUNT(*) FROM alerts WHERE log_id = %s"
+        cursor.execute(check_query, (log_id,))
+        count = cursor.fetchone()[0]
+
+        if count == 0:  # Log ID doesn't exist in the alerts table, proceed with insertion
+            priority = result[0]
+            description = result[1]
+            status = 2
+
+            # Insert the data into the alerts table
+            insert_query = "INSERT INTO alerts (log_id, priority, description, status) VALUES (%s, %s, %s, %s)"
+            cursor.execute(insert_query, (log_id, priority, description, status,))
+
+            # Commit the changes
+            conn.commit()
+            cursor.close()
+            conn.close()
+
+            return 'Alert inserted into the database'
+        else:
+            # Log ID already exists in the alerts table, skip insertion
+            cursor.close()
+            conn.close()
+            return 'Log ID already exists in the alerts table'
     else:
-        priority = None
-        description = None
-        status = 1
+        cursor.close()
+        conn.close()
+        return 'Log ID not found'
 
-    # Insert the data into the alerts table
-    insert_query = "INSERT INTO alerts (priority, description, status) VALUES (%s, %s, %s)"
-    cursor.execute(insert_query, (priority, description, status,))
 
-    # Commit the changes and close the cursor and database connection
-    conn.commit()
-    cursor.close()
-    conn.close()
-
-    return 'Alert inserted into the database'
 
 
 import json
