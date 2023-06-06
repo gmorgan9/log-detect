@@ -37,7 +37,7 @@
       // Function to set the theme based on the user's mode preference
       async function setTheme() {
           var mode = await getUserModePreference();
-          var theme = mode === 1 ? "dark" : "light";
+          var theme = mode === 1 ? "light" : "dark";
           document.documentElement.setAttribute("data-bs-theme", theme);
       }
 
