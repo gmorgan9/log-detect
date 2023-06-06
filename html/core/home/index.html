@@ -253,8 +253,8 @@
         xaxis: { title: "<span style='font-weight: bold; color: " + fontColor + "'>Total Alerts:</span> <span style='color: " + fontColor + "'> " + total + "</span>", tickfont: { color: fontColor } },
         yaxis: { tickfont: { color: fontColor } },
         title: "<span style='color: " + fontColor + "'>Weekly Alert Total</span><br>" + "<span style='font-size: 12px;color: " + fontColor + "'>" + sun + " - " + sat + "</span>",
-        paper_bgcolor: 'black',
-        plot_bgcolor: 'black'
+        paper_bgcolor: fontColor,
+        plot_bgcolor: fontColor
       };
 
       Plotly.react('barGraph', data, layout);
