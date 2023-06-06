@@ -169,10 +169,10 @@ fetch('https://ld-api.morganserver.com/api/data')
 .then(response => response.json())
 .then(data => {
   // Assuming the API response is an array of user objects
-  var user = data[0]; // Assuming you want the mode of the first user in the response
+  // var user = data[0]; // Assuming you want the mode of the first user in the response
 
   // Assuming the user object has a 'mode' property
-  var userMode = user.mode;
+  var userMode = data.mode;
 
   console.log(userMode);
   if (userMode === 1) {
