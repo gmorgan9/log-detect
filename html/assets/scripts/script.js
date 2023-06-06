@@ -41,19 +41,67 @@ function setDarkTheme() {
 }
 
 
+// function getBackgroundColor() {
+//     var htmlElement = document.querySelector('html[data-bs-theme]');
+//     var currentTheme = htmlElement.dataset.bsTheme;
+//     var paperBgColor;
+//     console.log(currentTheme);
+//     if (currentTheme === 'dark') {
+//       // paperBgColor = '#2c3035';
+//       paperBgColor = '#222529';
+//       fontColor = '#aeb5bc';
+//     } else {
+//       paperBgColor = 'white';
+//       fontColor = '#515151';
+//     }
+
+
+
 function getBackgroundColor() {
-    var htmlElement = document.querySelector('html[data-bs-theme]');
-    var currentTheme = htmlElement.dataset.bsTheme;
-    var paperBgColor;
-    console.log(currentTheme);
-    if (currentTheme === 'dark') {
-      // paperBgColor = '#2c3035';
-      paperBgColor = '#222529';
-      fontColor = '#aeb5bc';
-    } else {
-      paperBgColor = 'white';
-      fontColor = '#515151';
-    }
+  var htmlElement = document.querySelector('html[data-bs-theme]');
+  var currentTheme = htmlElement.dataset.bsTheme;
+  var paperBgColor;
+  var fontColor;
+
+  // Make an HTTP GET request to your API endpoint
+  fetch('/api/data')
+    .then(response => response.json())
+    .then(data => {
+      // Assuming the API response is an array of user objects
+      var user = data[0]; // Assuming you want the mode of the first user in the response
+
+      // Assuming the user object has a 'mode' property
+      var userMode = user.mode;
+
+      if (userMode === 1) {
+        paperBgColor = 'dark';
+        fontColor = '#aeb5bc';
+      } else if (userMode === 2) {
+        paperBgColor = 'light';
+        fontColor = '#515151';
+      } else {
+        // Default theme if the user's mode is not recognized
+        paperBgColor = 'light';
+        fontColor = '#515151';
+      }
+
+      if (currentTheme !== paperBgColor) {
+        // Change the theme only if it's different from the user's preference
+        htmlElement.dataset.bsTheme = paperBgColor;
+      }
+
+      // Rest of your code...
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+
+
+
+
+
+
   
     // Update the graph's background color
     var layout = {
