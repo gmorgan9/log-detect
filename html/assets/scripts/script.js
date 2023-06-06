@@ -73,7 +73,7 @@ function getBackgroundColor() {
       // Assuming the user object has a 'mode' property
       var userMode = user.mode;
       
-
+      console.log("userMode");
       if (userMode === 1) {
         paperBgColor = 'dark';
         fontColor = '#aeb5bc';
