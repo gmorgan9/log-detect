@@ -81,15 +81,4 @@
 // });
 // }
 
-// function updateGraphColors(paperBgColor, fontColor) {
-//   // Update the graph's background color
-//   var layout = {
-//     xaxis: { title: "<span style='font-weight: bold; color: " + fontColor + "'>Total Alerts:</span> <span style='color: " + fontColor + "'> " + total + "</span>", tickfont: { color: fontColor } },
-//     yaxis: { tickfont: { color: fontColor } },
-//     title: "<span style='color: " + fontColor + "'>Weekly Alert Total</span><br>" + "<span style='font-size: 12px;color: " + fontColor + "'>" + sun + " - " + sat + "</span>",
-//     paper_bgcolor: paperBgColor,
-//     plot_bgcolor: paperBgColor
-//   };
 
-//   Plotly.react('barGraph', data, layout);
-// }

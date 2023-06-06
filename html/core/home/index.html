@@ -246,13 +246,18 @@
       var sat = saturday.toDateString();
             
       var total = 20 + 14 + 23 + 20 + 14 + 23 + 24;
+      paperBgColor = 'dark';
+      fontColor = '#aeb5bc';
+
       var layout = {
-        xaxis: { title: "<span style='font-weight: bold;'>Total Alerts:</span> " + total },
-        title: "Weekly Alert Total<br>" + "<span style='font-size: 12px;color: #777;'>" + sun + " - " + sat + "</span>",
-        paper_bgcolor: 'white' // Initial background color
+        xaxis: { title: "<span style='font-weight: bold; color: " + fontColor + "'>Total Alerts:</span> <span style='color: " + fontColor + "'> " + total + "</span>", tickfont: { color: fontColor } },
+        yaxis: { tickfont: { color: fontColor } },
+        title: "<span style='color: " + fontColor + "'>Weekly Alert Total</span><br>" + "<span style='font-size: 12px;color: " + fontColor + "'>" + sun + " - " + sat + "</span>",
+        paper_bgcolor: paperBgColor,
+        plot_bgcolor: paperBgColor
       };
 
-      Plotly.newPlot('barGraph', data, layout);
+      Plotly.react('barGraph', data, layout);
 
     </script>
 </body>
