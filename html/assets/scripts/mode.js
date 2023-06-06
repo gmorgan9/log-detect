@@ -41,11 +41,13 @@ fetch('https://ld-api.morganserver.com/api/data')
     console.log(userMode);
     if (userMode === 1) {
       // User mode is 1
+      setDarkTheme()
       console.log("dark");
       paperBgColor = 'dark';
       fontColor = '#aeb5bc';
     } else if (userMode === 2) {
       // User mode is 2
+      setLightTheme()
       console.log("light");
       paperBgColor = 'light';
       fontColor = '#515151';
