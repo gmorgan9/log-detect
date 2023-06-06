@@ -5,25 +5,11 @@ var moon = document.getElementById('moon');
 var graph = document.getElementById('graph');
 
 function setLightTheme() {
-    var htmlElement = document.querySelector('html[data-bs-theme]');
-    htmlElement.dataset.bsTheme = 'light';
-    moon.classList.remove('hide');
-    moon.classList.add('active');
-    sun1.classList.add('hide');
-    sun1.classList.remove('active');
-    // graph.classList.remove('border1');
-    graph.classList.add('border');
+    
   }
 
   function setDarkTheme() {
-    var htmlElement = document.querySelector('html[data-bs-theme]');
-    htmlElement.dataset.bsTheme = 'dark';
-    moon.classList.add('hide');
-    moon.classList.remove('active');
-    sun1.classList.remove('hide');
-    sun1.classList.add('active');
-    // graph.classList.remove('border');
-    graph.classList.add('border1');
+    
   }
 
   
@@ -41,13 +27,25 @@ fetch('https://ld-api.morganserver.com/api/data')
     console.log(userMode);
     if (userMode === 1) {
       // User mode is 1
-      setDarkTheme()
+      var htmlElement = document.querySelector('html[data-bs-theme]');
+      htmlElement.dataset.bsTheme = 'dark';
+      moon.classList.add('hide');
+      moon.classList.remove('active');
+      sun1.classList.remove('hide');
+      sun1.classList.add('active');
+      graph.classList.add('border1');
       console.log("dark");
       paperBgColor = 'dark';
       fontColor = '#aeb5bc';
     } else if (userMode === 2) {
       // User mode is 2
-      setLightTheme()
+      var htmlElement = document.querySelector('html[data-bs-theme]');
+      htmlElement.dataset.bsTheme = 'light';
+      moon.classList.remove('hide');
+      moon.classList.add('active');
+      sun1.classList.add('hide');
+      sun1.classList.remove('active');
+      graph.classList.add('border');
       console.log("light");
       paperBgColor = 'light';
       fontColor = '#515151';
