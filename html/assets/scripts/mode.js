@@ -26,10 +26,7 @@ function setLightTheme() {
     graph.classList.add('border1');
   }
 
-  var htmlElement = document.querySelector('html[data-bs-theme]');
-  var currentTheme = htmlElement.dataset.bsTheme;
-  var paperBgColor;
-  var fontColor;
+  
 
 fetch('https://ld-api.morganserver.com/api/data')
   .then(response => response.json())
@@ -37,6 +34,10 @@ fetch('https://ld-api.morganserver.com/api/data')
     var user = data[0];
     var userMode = user.mode;
 
+    var htmlElement = document.querySelector('html[data-bs-theme]');
+  var currentTheme = htmlElement.dataset.bsTheme;
+  var paperBgColor;
+  var fontColor;
     console.log(userMode);
     if (userMode === 1) {
       // User mode is 1
