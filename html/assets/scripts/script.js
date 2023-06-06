@@ -165,39 +165,39 @@ function getBackgroundColor() {
   var fontColor;
 
   // Make an HTTP GET request to your API endpoint
-  fetch('https://ld-api.morganserver.com/api/data')
-    .then(response => response.json())
-    .then(data => {
-      // Assuming the API response is an array of user objects
-      var user = data[0]; // Assuming you want the mode of the first user in the response
+fetch('https://ld-api.morganserver.com/api/data')
+.then(response => response.json())
+.then(data => {
+  // Assuming the API response is an array of user objects
+  var user = data[0]; // Assuming you want the mode of the first user in the response
 
-      // Assuming the user object has a 'mode' property
-      var userMode = user.mode;
+  // Assuming the user object has a 'mode' property
+  var userMode = user.mode;
 
-      console.log(userMode);
-      if (userMode === 1) {
-        paperBgColor = 'dark';
-        fontColor = '#aeb5bc';
-      } else if (userMode === 2) {
-        paperBgColor = 'light';
-        fontColor = '#515151';
-      } else {
-        // Default theme if the user's mode is not recognized
-        paperBgColor = 'light';
-        fontColor = '#515151';
-      }
+  console.log(userMode);
+  if (userMode === 1) {
+    paperBgColor = 'dark';
+    fontColor = '#aeb5bc';
+  } else if (userMode === 2) {
+    paperBgColor = 'light';
+    fontColor = '#515151';
+  } else {
+    // Default theme if the user's mode is not recognized
+    paperBgColor = 'light';
+    fontColor = '#515151';
+  }
 
-      if (currentTheme !== paperBgColor) {
-        // Change the theme only if it's different from the user's preference
-        htmlElement.dataset.bsTheme = paperBgColor;
-      }
+  if (currentTheme !== paperBgColor) {
+    // Change the theme only if it's different from the user's preference
+    htmlElement.dataset.bsTheme = paperBgColor;
+  }
 
-      // Rest of your code...
-      updateGraphColors(paperBgColor, fontColor);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+  // Rest of your code...
+  updateGraphColors(paperBgColor, fontColor);
+})
+.catch(error => {
+  console.error('Error:', error);
+});
 }
 
 function updateGraphColors(paperBgColor, fontColor) {
