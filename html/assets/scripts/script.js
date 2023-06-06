@@ -165,7 +165,7 @@ function getBackgroundColor() {
   var fontColor;
 
   // Make an HTTP GET request to your API endpoint
-  fetch('/api/data')
+  fetch('https://ld-api.morganserver.com/api/data')
     .then(response => response.json())
     .then(data => {
       // Assuming the API response is an array of user objects
