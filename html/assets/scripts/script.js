@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
 fetch('https://ld-api.morganserver.com/api/data')
   .then(response => response.json())
   .then(data => {
@@ -20,7 +19,6 @@ fetch('https://ld-api.morganserver.com/api/data')
   .catch(error => {
     console.error('Error:', error);
   });
-});
 
 var sunButton = document.getElementById('sunButton');
 var moonButton = document.getElementById('moonButton');
