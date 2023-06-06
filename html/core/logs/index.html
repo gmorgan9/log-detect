@@ -464,7 +464,8 @@
 fetch('https://ld-api.morganserver.com/api/data')
   .then(response => response.json())
   .then(data => {
-    var userMode = data.mode;
+    var user = data[0];
+    var userMode = user.mode;
 
     console.log(userMode);
     if (userMode === 1) {
