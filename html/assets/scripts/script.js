@@ -62,7 +62,7 @@ function getBackgroundColor() {
   var currentTheme = htmlElement.dataset.bsTheme;
   var paperBgColor;
   var fontColor;
-  console.log("userMode");
+  
   // Make an HTTP GET request to your API endpoint
   fetch('/api/data')
     .then(response => response.json())
