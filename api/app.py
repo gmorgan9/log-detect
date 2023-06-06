@@ -38,7 +38,8 @@ def get_data():
             'name': full_name,
             'username': row[2],
             'account_type': account_type,
-            'status': row[9]
+            'status': row[9],
+            'mode': row[10]
         })
 
     # Return the data as JSON
