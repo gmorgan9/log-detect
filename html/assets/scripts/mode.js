@@ -1,79 +1,21 @@
-// var sunButton = document.getElementById('sunButton');
-// var moonButton = document.getElementById('moonButton');
-// var sun1 = document.getElementById('sun1');
-// var moon = document.getElementById('moon');
-// var graph = document.getElementById('graph');
+async function getUserModePreference() {
+    try {
+        const response = await fetch('https://ld-api.morganserver.com/api/data');
+        const data = await response.json();
+        return data.mode;
+    } catch (error) {
+        console.error('Error fetching user mode preference:', error);
+        // Return a default mode value or handle the error as needed
+        return 1; // Default to dark mode
+    }
+}
 
-// function setLightTheme() {
-    
-//   }
+// Function to set the theme based on the user's mode preference
+async function setTheme() {
+    var mode = await getUserModePreference();
+    var theme = mode === 1 ? "light" : "dark";
+    document.documentElement.setAttribute("data-bs-theme", theme);
+}
 
-//   function setDarkTheme() {
-    
-//   }
-
-  
-
-// fetch('https://ld-api.morganserver.com/api/data')
-//   .then(response => response.json())
-//   .then(data => {
-//     var user = data[0];
-//     var userMode = user.mode;
-
-//     var htmlElement = document.querySelector('html[data-bs-theme]');
-//   var currentTheme = htmlElement.dataset.bsTheme;
-//   var paperBgColor;
-//   var fontColor;
-//     console.log(userMode);
-//     if (userMode === 1) {
-//       // User mode is 1
-//       var htmlElement = document.querySelector('html[data-bs-theme]');
-//       htmlElement.dataset.bsTheme = 'dark';
-//       moon.classList.add('hide');
-//       moon.classList.remove('active');
-//       sun1.classList.remove('hide');
-//       sun1.classList.add('active');
-//       graph.classList.add('border1');
-//       console.log("dark");
-//       paperBgColor = 'dark';
-//       fontColor = '#aeb5bc';
-//     } else if (userMode === 2) {
-//       // User mode is 2
-//       var htmlElement = document.querySelector('html[data-bs-theme]');
-//       htmlElement.dataset.bsTheme = 'light';
-//       moon.classList.remove('hide');
-//       moon.classList.add('active');
-//       sun1.classList.add('hide');
-//       sun1.classList.remove('active');
-//       graph.classList.add('border');
-//       console.log("light");
-//       paperBgColor = 'light';
-//       fontColor = '#515151';
-//     } else {
-//       // User mode is neither 1 nor 2
-//       console.log("nothing");
-//     }
-//     if (currentTheme !== paperBgColor) {
-//         // Change the theme only if it's different from the user's preference
-//         htmlElement.dataset.bsTheme = paperBgColor;
-//       }
-//     updateGraphColors(paperBgColor, fontColor);
-//   })
-//   .catch(error => {
-//     console.error('Error:', error);
-//   });
-
-//   function updateGraphColors(paperBgColor, fontColor) {
-//     // Update the graph's background color
-//     var layout = {
-//       xaxis: { title: "<span style='font-weight: bold; color: " + fontColor + "'>Total Alerts:</span> <span style='color: " + fontColor + "'> " + total + "</span>", tickfont: { color: fontColor } },
-//       yaxis: { tickfont: { color: fontColor } },
-//       title: "<span style='color: " + fontColor + "'>Weekly Alert Total</span><br>" + "<span style='font-size: 12px;color: " + fontColor + "'>" + sun + " - " + sat + "</span>",
-//       paper_bgcolor: paperBgColor,
-//       plot_bgcolor: paperBgColor
-//     };
-  
-//     Plotly.react('barGraph', data, layout);
-//   }
-
-  
+// Call the setTheme function when the page loads
+window.onload = setTheme;
