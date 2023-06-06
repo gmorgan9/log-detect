@@ -116,12 +116,6 @@
 //     Plotly.react('barGraph', data, layout);
 //   }
 
-var sunButton = document.getElementById('sunButton');
-var moonButton = document.getElementById('moonButton');
-var sun1 = document.getElementById('sun1');
-var moon = document.getElementById('moon');
-var graph = document.getElementById('graph');
-
 fetch('https://ld-api.morganserver.com/api/data')
   .then(response => response.json())
   .then(data => {
@@ -143,6 +137,14 @@ fetch('https://ld-api.morganserver.com/api/data')
   .catch(error => {
     console.error('Error:', error);
   });
+
+var sunButton = document.getElementById('sunButton');
+var moonButton = document.getElementById('moonButton');
+var sun1 = document.getElementById('sun1');
+var moon = document.getElementById('moon');
+var graph = document.getElementById('graph');
+
+
 
 sunButton.addEventListener('click', function() {
   setLightTheme();
