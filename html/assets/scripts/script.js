@@ -38,33 +38,12 @@ moonButton.addEventListener('click', function() {
   getBackgroundColor();
 });
 
-function setLightTheme() {
-  var htmlElement = document.querySelector('html[data-bs-theme]');
-  htmlElement.dataset.bsTheme = 'light';
-  moon.classList.remove('hide');
-  moon.classList.add('active');
-  sun1.classList.add('hide');
-  sun1.classList.remove('active');
-  // graph.classList.remove('border1');
-  graph.classList.add('border');
-}
 
-function setDarkTheme() {
-  var htmlElement = document.querySelector('html[data-bs-theme]');
-  htmlElement.dataset.bsTheme = 'dark';
-  moon.classList.add('hide');
-  moon.classList.remove('active');
-  sun1.classList.remove('hide');
-  sun1.classList.add('active');
-  // graph.classList.remove('border');
-  graph.classList.add('border1');
-}
+
+
 
 function getBackgroundColor() {
-  var htmlElement = document.querySelector('html[data-bs-theme]');
-  var currentTheme = htmlElement.dataset.bsTheme;
-  var paperBgColor;
-  var fontColor;
+  
 
   // Make an HTTP GET request to your API endpoint
 fetch('https://ld-api.morganserver.com/api/data')
