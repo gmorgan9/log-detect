@@ -14,13 +14,13 @@ app.secret_key = '6d5b6348fad22778e627f12fe5084bab06a4b830804814d1'  # Replace w
 Session(app)
 
 
-conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
+conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="10.147.20.139", port="5432")
 
 @app.route('/api/data', methods=['GET'])
 @cross_origin()
 def get_data():
     # Fetch data from the database
-    conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
+    conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="10.147.20.139", port="5432")
     cur = conn.cursor()
     cur.execute("SELECT * FROM users;")
     data = cur.fetchall()
