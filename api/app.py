@@ -16,17 +16,16 @@ Session(app)
 
 conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
 
+################ UPDATED ##################
 @app.route('/api/data', methods=['GET'])
 @cross_origin()
 def get_data():
-    # Fetch data from the database
     conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183", port="5432")
     cur = conn.cursor()
     cur.execute("SELECT * FROM users;")
     data = cur.fetchall()
     cur.close()
 
-    # Convert the data to a list of dictionaries
     result = []
     for row in data:
         account_type = "Admin" if row[10] == 1 else "Standard"
@@ -40,12 +39,10 @@ def get_data():
             'username': row[5],
             'email': row[4],
             'account_type': account_type,
-            'status': status,
-            # 'mode': row[10]
+            'status': status
         })
-
-    # Return the data as JSON
     return jsonify(result)
+################ CLOSE UPDATED ##################
 
 
 @app.route('/api/logs', methods=['GET'])
