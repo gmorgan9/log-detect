@@ -29,7 +29,8 @@ def get_data():
     # Convert the data to a list of dictionaries
     result = []
     for row in data:
-        account_type = "Admin" if row[6] == 1 else "Standard"
+        account_type = "Admin" if row[10] == 1 else "Standard"
+        status = "Logged In" if row[7] == 1 else "Logged Out"
         capitalized_f_name = row[2].capitalize()
         capitalized_l_name = row[3].capitalize()
         full_name = capitalized_f_name + ' ' + capitalized_l_name
@@ -37,9 +38,9 @@ def get_data():
             'id': row[1],
             'name': full_name,
             'username': row[5],
-            'email': row[4]
-            # 'account_type': account_type,
-            # 'status': row[9],
+            'email': row[4],
+            'account_type': account_type,
+            'status': status,
             # 'mode': row[10]
         })
 
