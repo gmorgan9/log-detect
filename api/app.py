@@ -20,7 +20,7 @@ conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin1
 @cross_origin()
 def get_data():
     # Fetch data from the database
-    conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="10.147.20.139", port="5432")
+    conn = psycopg2.connect(database="logdetect", user="DBadmin", password="DBadmin123!", host="192.168.1.183y", port="5432")
     cur = conn.cursor()
     cur.execute("SELECT * FROM users;")
     data = cur.fetchall()
