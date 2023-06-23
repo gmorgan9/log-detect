@@ -36,10 +36,10 @@ def get_data():
         result.append({
             'id': row[1],
             'name': full_name,
-            'username': row[2],
-            'account_type': account_type,
-            'status': row[9],
-            'mode': row[10]
+            'username': row[2]
+            # 'account_type': account_type,
+            # 'status': row[9],
+            # 'mode': row[10]
         })
 
     # Return the data as JSON
